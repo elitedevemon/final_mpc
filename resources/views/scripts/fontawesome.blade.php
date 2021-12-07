@@ -1,0 +1,1 @@
+<script src="{{ asset('assets/fontawesome/js/all.min.js') }}"></script>

@@ -1,0 +1,1 @@
+<script src="{{ asset('auth-form/js/main.js') }}"></script>

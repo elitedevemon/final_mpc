@@ -1,0 +1,34 @@
+@extends('layouts.master')
+@section('title', 'Latest Post')
+@section('main-content')
+@include('frontend.partials.header')
+@php
+$all_posts = DB::table('posts')->orderBy('id', 'DESC')->paginate(10);
+@endphp
+<div class="container my-2">
+@foreach ($all_posts as $rbppost)
+    <div class="row mb-3 mb-md-2">
+        <div class="col-md-3 mt-2 mb-2 mb-md-0">
+            <a href="/read/more/{{ $rbppost->id }}">
+                <img src="{{ asset('images/post_images') }}/{{ $rbppost->cover_image }}" alt="" class="w-100" style="height: 137px;">
+            </a>
+        </div>
+        <div class="col-md-9 ps-3">
+            <a href="/read/more/{{ $rbppost->id }}">
+                <h3 class="text-dark">{{ $rbppost->title }}</h3>
+            </a>
+            <div class="text-muted blog_recent_post_text" style="text-align: justify">
+                @php
+                    echo Str::words($rbppost->text, 58, '...');
+                @endphp
+            </div>
+            <div><i class="fa fa-calendar-alt text-danger" aria-hidden="true"></i> {{ $rbppost->date }}</div>
+        </div>
+    </div>
+@endforeach
+<div class="text-center pagination_blog_post">
+    {{ $all_posts->links() }}
+</div>
+</div>
+@include('frontend.partials.footer')
+@endsection

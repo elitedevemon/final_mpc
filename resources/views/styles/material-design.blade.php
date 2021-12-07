@@ -1,0 +1,1 @@
+<link rel="stylesheet" href="{{ asset('auth-form/fonts/material-icon/css/material-design-iconic-font.min.css') }}">

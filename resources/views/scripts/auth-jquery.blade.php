@@ -1,0 +1,1 @@
+<script src="{{ asset('auth-form/vendor/jquery/jquery.min.js') }}"></script>
