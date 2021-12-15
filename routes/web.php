@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\adminpanel\SuperAdminLoginController;
+use App\Http\Controllers\adminpanel\update\ContactInfo;
 use App\Http\Controllers\adminpanel\update\MarqueeController;
 use App\Http\Controllers\adminpanel\upload\BlogVideo;
 use App\Http\Controllers\backend\CalendarController;
@@ -164,7 +165,7 @@ Route::prefix('{language}')->group(function () {
        * Dashboard routes
        */
       Route::middleware('superadminauthcheck')->group(function(){
-        
+
         Route::view('/', 'superadmin.pages.dashboard')->name('superadmin.dashboard');
         /**
          * Update related routes
@@ -172,7 +173,7 @@ Route::prefix('{language}')->group(function () {
          * prefix /superadmin/update
          */
         Route::prefix('/update')->group(function () {
-          Route::post('contact-info', [ChangeContactInfoController::class, 'update'])->name('update.contact.info');
+          Route::get('contact-info', [ContactInfo::class, 'index'])->name('update.contact.info');
           Route::get('marquee', [MarqueeController::class, 'index'])->name('show.marquee.page');
           Route::post('marquee/save', [MarqueeController::class, 'update'])->name('update.marquee.text');
         });

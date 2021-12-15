@@ -23,7 +23,7 @@
                   </a>
                   <ul class="sub-menu" aria-expanded="false">
                       <li>
-                          <a href="apps-calendar.html">
+                          <a href="{{ route('update.contact.info', app()->getLocale()) }}">
                               <span data-key="t-calendar">Contact Info</span>
                           </a>
                       </li>
