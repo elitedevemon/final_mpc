@@ -16,6 +16,12 @@
                                     <p class="text-muted mt-2">Sign in to continue to MPC Method Dashboard.</p>
                                 </div>
                                 <form class="mt-4 pt-2" wire:submit.prevent>
+                                  @error('username')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                  @enderror
+                                  @error('password')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                  @enderror
                                     <div class="mb-3">
                                         <label class="form-label">Username</label>
                                         <input type="text" class="form-control" id="username" placeholder="Enter username" wire:model='username'>

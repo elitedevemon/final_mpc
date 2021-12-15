@@ -24,7 +24,7 @@
 <body>
 
 <!-- <body data-layout="horizontal"> -->
-@livewire('adminpanel.login-page')
+@livewire('superadmin.auth.superadmin-login')
 
 
 <!-- JAVASCRIPT -->

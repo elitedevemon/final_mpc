@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Illuminate\Support\Facades\Auth;
 
 class Authenticate extends Middleware
 {
@@ -15,7 +16,11 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
-            return route('login', app()->getLocale());
+          return route('login', app()->getLocale());
+        }elseif (Auth::check()) {
+          if (Auth::user()->active_status == false) {
+            return route('show.lock.screen', app()->getLocale());
+          }
         }
     }
 }

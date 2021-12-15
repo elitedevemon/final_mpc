@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\adminpanel\SuperAdminLoginController;
+use App\Http\Controllers\adminpanel\update\MarqueeController;
+use App\Http\Controllers\adminpanel\upload\BlogVideo;
 use App\Http\Controllers\backend\CalendarController;
 use App\Http\Controllers\backend\ChattingController;
 use App\Http\Controllers\backend\ContactController;
@@ -156,22 +158,31 @@ Route::prefix('{language}')->group(function () {
       /**
        * Login related routes
        */
-      Route::get('login', [SuperAdminLoginController::class, 'index'])->name('superadmin.login');
+      Route::get('login', [SuperAdminLoginController::class, 'index'])->name('superadmin.login')->middleware('superadminauthenticated');
 
       /**
        * Dashboard routes
        */
-      Route::view('/', 'superadmin.pages.dashboard');
-      Route::get('change-marquee-page', [UpdateMarqueeController::class, 'index'])->name('update.marquee.page');
-      Route::get('change-contact-info-page', [ChangeContactInfoController::class, 'index'])->name('change.contact.info');
-      /**
-       * Update related routes
-       * 
-       * prefix /superadmin/update
-       */
-      Route::prefix('/update')->group(function () {
-        Route::post('contact-info', [ChangeContactInfoController::class, 'update'])->name('update.contact.info');
-        Route::post('marquee', [UpdateMarqueeController::class, 'update'])->name('update.marquee');
+      Route::middleware('superadminauthcheck')->group(function(){
+        
+        Route::view('/', 'superadmin.pages.dashboard')->name('superadmin.dashboard');
+        /**
+         * Update related routes
+         * 
+         * prefix /superadmin/update
+         */
+        Route::prefix('/update')->group(function () {
+          Route::post('contact-info', [ChangeContactInfoController::class, 'update'])->name('update.contact.info');
+          Route::get('marquee', [MarqueeController::class, 'index'])->name('show.marquee.page');
+          Route::post('marquee/save', [MarqueeController::class, 'update'])->name('update.marquee.text');
+        });
+
+        /**
+         * Upload related routes
+         */
+        Route::prefix('upload')->group(function(){
+          Route::get('blog-video', [BlogVideo::class, 'index'])->name('upload.blog-video');
+        });
       });
   });
 });

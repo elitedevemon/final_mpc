@@ -66,5 +66,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'languagehandle' => \App\Http\Middleware\LanguageErrorHandler::class,
         'lockscreen' => \App\Http\Middleware\LockScreen::class,
+        'superadminauthcheck' => \App\Http\Middleware\Superadmin\SuperadminAuthCheck::class,
+        'superadminauthenticated' => \App\Http\Middleware\Superadmin\AlreadyAuthenticated::class,
     ];
 }
