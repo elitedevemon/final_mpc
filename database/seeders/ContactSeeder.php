@@ -15,7 +15,6 @@ class ContactSeeder extends Seeder
     public function run()
     {
         $contacts = [
-          'id'=>'1',
           'email'=>'muradprivatecenter@gmail.com',
           'phone'=>'01701297434',
           'address'=>'Khoksha, Thana Para',
