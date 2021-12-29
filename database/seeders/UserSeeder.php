@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
           'level' => '1st',
           'facebook' => 'www.facebook.com',
           'twitter' => 'www.twitter.com',
-          'google+' => 'www.googleplus.com',
+          'google_plus' => 'www.googleplus.com',
           'pinterest' => 'www.pinterest.com',
         ];
         User::create($user);

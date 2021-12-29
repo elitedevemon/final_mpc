@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         \App\Models\frontend\Slider::factory(8)->create();
-        \App\Models\frontend\Post::factory(5)->create();
+        \App\Models\frontend\Post::factory(15)->create();
         \App\Models\frontend\PeopleSay::factory(1)->create();
         \App\Models\frontend\Media::factory(7)->create();
         \App\Models\frontend\Categories::factory(8)->create();
@@ -26,5 +26,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ContactSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(SliderPhotosSeeder::class);
+        $this->call(AdminSeeder::class);
     }
 }
