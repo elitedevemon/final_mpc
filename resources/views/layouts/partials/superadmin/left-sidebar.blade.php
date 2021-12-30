@@ -42,7 +42,7 @@
                       <span data-key="t-authentication">Create</span>
                   </a>
                   <ul class="sub-menu" aria-expanded="false">
-                      <li><a href="auth-login.html" data-key="t-login">Blog Post</a></li>
+                      <li><a href="{{ route('create.blog.post', app()->getLocale()) }}" data-key="t-login">Blog Post</a></li>
                       <li><a href="auth-register.html" data-key="t-register">Exam Question</a></li>
                       <li><a href="auth-recoverpw.html" data-key="t-recover-password">People Says</a></li>
                   </ul>

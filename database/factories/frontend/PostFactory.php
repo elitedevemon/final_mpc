@@ -4,6 +4,7 @@ namespace Database\Factories\frontend;
 
 use App\Models\frontend\Post;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class PostFactory extends Factory
 {
@@ -22,15 +23,15 @@ class PostFactory extends Factory
     public function definition()
     {
       $title = $this->faker->unique()->words($nb=5, $asText = true);
+      $slug = Str::slug($title, '-');
         return [
           'title' => $title,
+          'slug' => $slug,
+          'short_desc' => 'How to generate title slugs in Laravel? - DevDojohttps://devdojo.com › ho...
+          পৃষ্ঠাটি অনুবাদ করুন
+          ১৫ অক্টোবর, ২০২০ — In this tutorial, you will learn how to use the title of your post and',
           'cover_image' => 'mpc ('.$this->faker->numberBetween(1, 6).').png',
           'text' => $this->faker->text(500),
-          'date' => date('d/m/Y', strtotime('today')),
-          'video_1' => 'mpc ('.$this->faker->numberBetween(1, 9).').png',
-          'video_2' => 'mpc ('.$this->faker->numberBetween(1, 9).').png',
-          'video_3' => 'mpc ('.$this->faker->numberBetween(1, 9).').png',
-          'video_4' => 'mpc ('.$this->faker->numberBetween(1, 9).').png',
         ];
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\adminpanel\create\BlogPost;
 use App\Http\Controllers\adminpanel\SuperAdminLoginController;
 use App\Http\Controllers\adminpanel\update\ContactInfo;
 use App\Http\Controllers\adminpanel\update\MarqueeController;
@@ -183,6 +184,14 @@ Route::prefix('{language}')->group(function () {
          */
         Route::prefix('upload')->group(function(){
           Route::get('blog-video', [BlogVideo::class, 'index'])->name('upload.blog-video');
+        });
+
+        /**
+         * Create related routes
+         */
+        Route::prefix('create')->group(function(){
+          Route::get('blog-post', [BlogPost::class, 'index'])->name('create.blog.post');
+          Route::post('blog-post/save', [BlogPost::class, 'save'])->name('save.blog.post');
         });
       });
   });
