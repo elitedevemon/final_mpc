@@ -23,6 +23,7 @@ class PostFactory extends Factory
     public function definition()
     {
       $title = $this->faker->unique()->words($nb=5, $asText = true);
+<<<<<<< HEAD
       $slug = Str::slug($title, '-');
         return [
           'title' => $title,
@@ -33,5 +34,14 @@ class PostFactory extends Factory
           'cover_image' => 'mpc ('.$this->faker->numberBetween(1, 6).').png',
           'text' => $this->faker->text(500),
         ];
+=======
+      $slug = Str::slug($title);
+      return [
+        'title' => $title,
+        'slug' => $slug,
+        'cover_image' => 'mpc ('.$this->faker->numberBetween(1, 6).').png',
+        'text' => $this->faker->text(500)
+      ];
+>>>>>>> 150aa9e46c940d2035e30a74cc3718acf72f2ef5
     }
 }

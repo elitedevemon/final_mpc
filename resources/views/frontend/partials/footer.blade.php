@@ -54,7 +54,11 @@
                             echo Str::words($rbpost->text, 10, '...');
                         @endphp
                       </div>
+<<<<<<< HEAD
                       <div><i class="far fa-calendar-alt"></i> <span>{{ date('d/m/Y', strtotime($rbpost->created_at)) }}</span></div>
+=======
+                      <div><i class="far fa-calendar-alt"></i> <span>{{ date('d-m-Y', strtotime($rbpost->created_at)) }}</span></div>
+>>>>>>> 150aa9e46c940d2035e30a74cc3718acf72f2ef5
                     </div>
                   </div>
                 @endforeach
