@@ -32,14 +32,23 @@
               @csrf
               <div class="row">
                 <div class="col-md-9">
-                  <input type="text" name="title" placeholder="Enter title" class="form-control">
+                  <input type="text" required name="title" placeholder="Enter title" class="form-control">
+                  @error('title')
+                    <small class="text-danger">{{ $message }}</small>
+                  @enderror
                 </div>
                 <div class="col-md-3">
-                  <input type="file" name="cover_photo" class="form-control">
+                  <input type="file" required name="cover_photo" class="form-control">
                 </div>
               </div>
-              <textarea name="short_desc" rows="2" class="form-control my-2" placeholder="Enter your short description"></textarea>
-              <textarea name="edited_text" class="form-control"></textarea>
+              <textarea name="short_desc" required rows="2" class="form-control my-2" placeholder="Enter your short description"></textarea>
+              @error('short_desc')
+                <small class="text-danger">{{ $message }}</small>
+              @enderror
+              <textarea name="edited_text" required class="form-control"></textarea>
+              @error('edited_text')
+                <small class="text-danger">{{ $message }}</small>
+              @enderror
               <input type="submit" value="Save" name="save" class="btn btn-primary mt-2">
               <input type="submit" value="Draft" name="draft" class="btn btn-primary mt-2">
             </form>

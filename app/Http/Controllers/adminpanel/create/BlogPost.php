@@ -31,6 +31,7 @@ class BlogPost extends Controller
       $image_resize->save(public_path('images/post_images/'. $imageNewName));
       $post = new Post();
       $post->title = $request->title;
+      $post->slug = $slug;
       $post->cover_image = $imageNewName;
       $post->short_desc = $request->short_desc;
       $post->text = $request->edited_text;
