@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class LockScreenController extends Controller
 {
-    public function index()
-    {
-      User::where('id', Auth::user()->id)->update([
-        'active_status' => false
-      ]);
-      return view('backend.pages.lock-screen');
-    }
+  public function index()
+  {
+    User::where('id', Auth::user()->id)->update([
+      'active_status' => false
+    ]);
+    return view('backend.pages.lock-screen');
+  }
 }

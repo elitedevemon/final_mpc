@@ -113,16 +113,19 @@
                   </a>
               </li>
               <li>
-                  <a href="layouts-horizontal.html">
+                  <a href="{{ route('show.superadmin.lock-screen.page', app()->getLocale()) }}">
                       <i class="fa fa-user-lock" style="font-size: 17px;"></i>
                       <span data-key="t-horizontal">Lock Screen</span>
                   </a>
               </li>
               <li>
-                  <a href="layouts-horizontal.html">
+                  <a href="{{ route('logout', app()->getLocale()) }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                       <i class="fa fa-sign-out-alt" style="font-size: 17px;"></i>
                       <span data-key="t-horizontal">Log Out</span>
                   </a>
+                  <form id="logout-form" action="{{ route('logout', app()->getLocale()) }}" method="POST" class="d-none">
+                    @csrf
+                  </form>
               </li>
               
 

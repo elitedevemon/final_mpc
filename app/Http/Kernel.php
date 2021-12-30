@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         'lockscreen' => \App\Http\Middleware\LockScreen::class,
         'superadminauthcheck' => \App\Http\Middleware\Superadmin\SuperadminAuthCheck::class,
         'superadminauthenticated' => \App\Http\Middleware\Superadmin\AlreadyAuthenticated::class,
+        'sulockscreen' => \App\Http\Middleware\Superadmin\Lockscreen::class,
     ];
 }

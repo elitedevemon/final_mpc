@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\adminpanel\create\BlogPost;
+use App\Http\Controllers\adminpanel\LockScreenController as AdminpanelLockScreenController;
 use App\Http\Controllers\adminpanel\SuperAdminLoginController;
 use App\Http\Controllers\adminpanel\update\ContactInfo;
 use App\Http\Controllers\adminpanel\update\MarqueeController;
@@ -71,7 +72,7 @@ Route::prefix('{language}')->group(function () {
   Auth::routes();
 
   /**
-   * Lock Screen routes
+   * Lock Screen routes for user
    * 
    * route /lock-screen
    */
@@ -160,43 +161,51 @@ Route::prefix('{language}')->group(function () {
      * 
      * prefix /superadmin
      */
-    Route::prefix('superadmin')->group(function () {
+  Route::prefix('superadmin')->group(function () {
+    
+    /**
+     * Lock screen routes for Superadmin
+     * 
+     * route /superadmin/lock-screen
+     */
+    Route::get('/lock-screen', [AdminpanelLockScreenController::class, 'index'])->name('show.superadmin.lock-screen.page');
+
+    /**
+     * Login related routes
+     */
+    Route::get('login', [SuperAdminLoginController::class, 'index'])->name('superadmin.login')->middleware('superadminauthenticated');
+
+    /**
+     * Dashboard routes
+     */
+    Route::middleware('superadminauthcheck', 'sulockscreen')->group(function(){
+
+      Route::view('/', 'superadmin.pages.dashboard')->name('superadmin.dashboard');
       /**
-       * Login related routes
+       * Update related routes
+       * 
+       * prefix /superadmin/update
        */
-      Route::get('login', [SuperAdminLoginController::class, 'index'])->name('superadmin.login')->middleware('superadminauthenticated');
-
-      /**
-       * Dashboard routes
-       */
-      Route::middleware('superadminauthcheck')->group(function(){
-
-        Route::view('/', 'superadmin.pages.dashboard')->name('superadmin.dashboard');
-        /**
-         * Update related routes
-         * 
-         * prefix /superadmin/update
-         */
-        Route::prefix('/update')->group(function () {
-          Route::get('contact-info', [ContactInfo::class, 'index'])->name('update.contact.info');
-          Route::get('marquee', [MarqueeController::class, 'index'])->name('show.marquee.page');
-          Route::post('marquee/save', [MarqueeController::class, 'update'])->name('update.marquee.text');
-        });
-
-        /**
-         * Upload related routes
-         */
-        Route::prefix('upload')->group(function(){
-          Route::get('blog-video', [BlogVideo::class, 'index'])->name('upload.blog-video');
-        });
-
-        /**
-         * Create related routes
-         */
-        Route::prefix('create')->group(function(){
-          Route::get('blog-post', [BlogPost::class, 'index'])->name('create.blog.post');
-          Route::post('blog-post/save', [BlogPost::class, 'save'])->name('save.blog.post');
-        });
+      Route::prefix('/update')->group(function () {
+        Route::get('contact-info', [ContactInfo::class, 'index'])->name('update.contact.info');
+        Route::get('marquee', [MarqueeController::class, 'index'])->name('show.marquee.page');
+        Route::post('marquee/save', [MarqueeController::class, 'update'])->name('update.marquee.text');
       });
+
+      /**
+       * Upload related routes
+       */
+      Route::prefix('upload')->group(function(){
+        Route::get('blog-video', [BlogVideo::class, 'index'])->name('upload.blog-video');
+      });
+
+      /**
+       * Create related routes
+       */
+      Route::prefix('create')->group(function(){
+        Route::get('blog-post', [BlogPost::class, 'index'])->name('create.blog.post');
+        Route::post('blog-post/save', [BlogPost::class, 'save'])->name('save.blog.post');
+      });
+    });
   });
 });
