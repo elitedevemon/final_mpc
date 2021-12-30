@@ -30,6 +30,11 @@
             <span class="side-menu__label">Email</span><span class="badge bg-warning side-badge">11</span></a>
         </li> --}}
         <li class="slide">
+            <a class="side-menu__item"  href="{{ route('show.exam.page', app()->getLocale()) }}">
+                <i class="fa fa-bell-o side-menu__icon"></i>
+            <span class="side-menu__label">Exam</span><span class="badge bg-danger side-badge">11</span></a>
+        </li>
+        <li class="slide">
             <a class="side-menu__item"  href="{{ route('show.result.page', app()->getLocale()) }}">
                 <i class="fa fa-bar-chart side-menu__icon"></i>
             <span class="side-menu__label">Result</span></a>

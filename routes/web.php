@@ -8,6 +8,7 @@ use App\Http\Controllers\backend\CalendarController;
 use App\Http\Controllers\backend\ChattingController;
 use App\Http\Controllers\backend\ContactController;
 use App\Http\Controllers\backend\EmailController;
+use App\Http\Controllers\backend\ExamController;
 use App\Http\Controllers\backend\FaqsController;
 use App\Http\Controllers\backend\ForumController;
 use App\Http\Controllers\backend\HomeController;
@@ -100,10 +101,13 @@ Route::prefix('{language}')->group(function () {
           Route::get('inbox', [EmailController::class, 'index'])->name('show.email.inbox');
       });
       /**
-       * Result routes
+       * Exam & Result routes
        * 
        * prefix /home/result
        */
+      Route::prefix('exam')->group(function(){
+        Route::get('/', [ExamController::class, 'index'])->name('show.exam.page');
+      });
       Route::prefix('result')->group(function () {
           Route::get('/', [ResultController::class, 'index'])->name('show.result.page');
       });
