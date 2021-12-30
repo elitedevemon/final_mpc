@@ -36,7 +36,12 @@
             </div>
           </div>
         @endforeach
-        {{ $forum_post->links() }}
+        <div class="text-center pb-3 pb-md-0 {{ count($forum_post)<$paginate_page?'d-none':'' }}">
+          <button class="btn btn-primary w-25" wire:click="LoadMore" wire:loading.attr="disabled">
+            <span wire:loading.class="d-none" wire:target="LoadMore">Load More</span>
+            <span wire:loading wire:target="LoadMore">Loading...</span>
+          </button>
+        </div>
       </div>
       <!--End Row-->
   

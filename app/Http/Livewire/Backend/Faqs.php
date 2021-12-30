@@ -7,11 +7,15 @@ use App\Models\Backend\FaqsNotification;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Faqs extends Component
 {
+  use WithPagination;
   #public variables
   public $question, $faq_id;
+  #variable with value
+  public $pagination_page = 15;
 
   #input filter
   protected $rules=[
@@ -58,12 +62,20 @@ class Faqs extends Component
   }
 
   /**
+   * Load more function
+   */
+  public function LoadMore()
+  {
+    $this->pagination_page += 10;
+  }
+
+  /**
    * Render function
    */
   public function render()
   {
     return view('livewire.backend.faqs', [
-      'all_questions' => BackendFaqs::orderBy('id', 'DESC')->paginate(10)
+      'all_questions' => BackendFaqs::orderBy('id', 'DESC')->paginate($this->pagination_page)
     ]);
   }
 }

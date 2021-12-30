@@ -76,6 +76,12 @@
               </div>
             @endforeach
           </div>
+          <div class="text-center {{ count($all_questions)<$pagination_page?'d-none':'' }}">
+            <button class="btn btn-primary w-25" wire:click="LoadMore" wire:loading.attr="disabled">
+              <span wire:loading.class="d-none" wire:target="LoadMore">Load More</span>
+              <span wire:loading wire:target="LoadMore">Loading...</span>
+            </button>
+          </div>
         </div>
       </div>
       <!-- End Row -->

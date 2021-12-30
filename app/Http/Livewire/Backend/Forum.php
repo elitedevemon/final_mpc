@@ -12,7 +12,7 @@ class Forum extends Component
   use WithPagination;
 
   #public variables
-  public $superadmin_info;
+  public $superadmin_info, $paginate_page=9;
 
   /**
    * Mount function
@@ -23,12 +23,20 @@ class Forum extends Component
   }
 
   /**
+   * Load more function
+   */
+  public function LoadMore()
+  {
+    $this->paginate_page += 9;
+  }
+
+  /**
    * Render function
    */
   public function render()
   {
     return view('livewire.backend.forum', [
-      'forum_post' => Post::paginate(9)
+      'forum_post' => Post::paginate($this->paginate_page)
     ]);
   }
 }

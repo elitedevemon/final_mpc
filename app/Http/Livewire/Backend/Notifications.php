@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Backend;
 
 use App\Models\Backend\Faqs;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Notifications extends Component
 {
