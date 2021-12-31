@@ -144,6 +144,7 @@ Route::prefix('{language}')->group(function () {
        */
       Route::prefix('faqs')->group(function () {
           Route::get('/', [FaqsController::class, 'index'])->name('show.faqs.page');
+          Route::get('/{faq_id}', [FaqsController::class, 'viewFaq'])->name('view.selected.faq');
       });
       /**
        * Forum routes

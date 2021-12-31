@@ -51,7 +51,9 @@
                   </div>
                 </div>
                 <div class="mt-4">
-                  <p class="mb-2">{{ $question->question }}</p>
+                  <a href="{{ route('view.selected.faq', ['faq_id'=>$question->id, 'language'=> app()->getLocale()]) }}">
+                    <p class="mb-2">{{ $question->question }}</p>
+                  </a>
                 </div>
                 @php
                   #Like related queries
@@ -61,6 +63,10 @@
                   #Dislike related queries
                   $check_dislike = App\Models\Backend\FaqsLike::where('username', Auth::user()->username)->where('faq_id', $question->id)->where('action', 'dislike')->first();
                   $total_dislike = App\Models\Backend\FaqsLike::where('faq_id', $question->id)->where('action', 'dislike')->get();
+
+                  #Faq comment related queries
+                  $total_comment = App\Models\Backend\FaqComment::where('faq_id', $question->id)->get(); 
+                  $check_comment = App\Models\Backend\FaqComment::where('username', Auth::user()->username)->where('faq_id', $question->id)->first();
                 @endphp
                 <div class="media mg-t-15 profile-footer">
                   <div class=" me-2 mt-1">
@@ -72,7 +78,7 @@
                       <span class="avatar brround" style="background-image: url({{ asset('superadmin/assets//images/users/4.jpg') }})"></span> --}}
                       <span class="avatar brround bg-primary text-light {{ count($total_like)>0?'':'d-none' }}">+{{ count($total_like) }}</span>
                       <span class="avatar brround ms-3 bg-danger text-light {{ count($total_dislike)>0?'':'d-none' }}">+{{ count($total_dislike) }}</span>
-                      <span class="avatar brround ms-3 bg-success text-light">+29</span>
+                      <span class="avatar brround ms-3 bg-success text-light {{ count($total_comment)>0?'':'d-none' }}">+{{ count($total_comment) }}</span>
                     </div>
                   </div>
                   {{-- <div class="media-body">
@@ -81,7 +87,7 @@
                   <div class="ms-auto">
                     <a class="new {{ $check_like?'bg-primary text-light':'' }}" href="JavaScript:void(0);"><i class="fe fe-thumbs-up" title="Like" wire:click="like('{{ $question->id }}')"></i></a>
                     <a class="new {{ $check_dislike?' bg-danger text-light':'' }}" href="JavaScript:void(0);"><i class="fe fe-thumbs-down" title="Dislike" wire:click="dislike('{{ $question->id }}')"></i></a>
-                    <a class="new bg-success text-light" href="JavaScript:void(0);"><i class="fe fe-message-square"></i></a>
+                    <a class="new {{ $check_comment?'bg-success text-light':'' }}" href="{{ route('view.selected.faq', ['faq_id'=>$question->id, 'language'=> app()->getLocale()]) }}"><i class="fe fe-message-square"></i></a>
                     {{-- <a class="new" href="JavaScript:void(0);"><i class="fe fe-share-2"></i></a> --}}
                   </div>
                 </div>
