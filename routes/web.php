@@ -205,6 +205,9 @@ Route::prefix('{language}')->group(function () {
       Route::prefix('create')->group(function(){
         Route::get('blog-post', [BlogPost::class, 'index'])->name('create.blog.post');
         Route::post('blog-post/save', [BlogPost::class, 'save'])->name('save.blog.post');
+        Route::get('drafted', [BlogPost::class, 'drafted'])->name('show.drafted.post');
+        Route::get('drafted/{slug}', [BlogPost::class, 'draftedView'])->name('show.selected.draft.post');
+        Route::post('drafted/save/{slug}', [BlogPost::class, 'saveDraftPost'])->name('save.draft.post');
       });
     });
   });

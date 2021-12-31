@@ -16,7 +16,7 @@ class CreatePostDraftsTable extends Migration
         Schema::create('post_drafts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->string('cover_image')->nullable();
             $table->text('short_desc')->nullable();
             $table->text('text')->nullable();

@@ -11,12 +11,12 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0 font-size-18">Create Blog Post</h4>
+                        <h4 class="mb-sm-0 font-size-18">Selected Draft Post</h4>
 
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">Create</a></li>
-                                <li class="breadcrumb-item active">Blog Post</li>
+                                <li class="breadcrumb-item active">Draft Post</li>
                             </ol>
                         </div>
 
@@ -28,24 +28,24 @@
             @if (Session::has('succ_message'))
               <div class="alert alert-success">{{ session()->get('succ_message') }}</div>
             @endif
-            <form action="{{ route('save.blog.post', app()->getLocale()) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('save.draft.post', ['slug'=>$slug, 'language'=>app()->getLocale()]) }}" method="post" enctype="multipart/form-data">
               @csrf
               <div class="row">
                 <div class="col-md-9">
-                  <input type="text" required name="title" placeholder="Enter title" class="form-control" value="{{ old('title') }}">
+                  <input type="text" required name="title" placeholder="Enter title" class="form-control" value="{{ $title }}">
                   @error('title')
                     <small class="text-danger">{{ $message }}</small>
                   @enderror
                 </div>
                 <div class="col-md-3">
-                  <input type="file" required name="cover_photo" class="form-control" value="{{ old('cover_photo') }}">
+                  <input type="file" required name="cover_photo" class="form-control" value="{{ $cover_photo }}">
                 </div>
               </div>
-              <textarea name="short_desc" required rows="2" class="form-control my-2" placeholder="Enter your short description">{{ old('short_desc') }}</textarea>
+              <textarea name="short_desc" required rows="2" class="form-control my-2" placeholder="Enter your short description">{{ $short_desc }}</textarea>
               @error('short_desc')
                 <small class="text-danger">{{ $message }}</small>
               @enderror
-              <textarea name="edited_text" required class="form-control">{{ old('edited_text') }}</textarea>
+              <textarea name="edited_text" required class="form-control">{{ $edited_text }}</textarea>
               @error('edited_text')
                 <small class="text-danger">{{ $message }}</small>
               @enderror
