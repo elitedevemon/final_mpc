@@ -4,6 +4,7 @@ namespace App\Http\Controllers\adminpanel\create;
 
 use App\Http\Controllers\Controller;
 use App\Models\frontend\Post;
+use App\Models\PostDraft;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
@@ -38,6 +39,27 @@ class BlogPost extends Controller
       $post->save();
       // $id = $post->id;
       return back()->with('succ_message', 'Post has been created successfuly');
+    }elseif ($request->draft) {
+      $request->validate([
+        'title' => 'required|min:15|max:300',
+        'short_desc' => 'required|min: 150|max:350',
+      ]);
+      $slug = Str::slug($request->title);
+      $image = $request->file('cover_photo');
+      $imageName = $image->getClientOriginalName();
+      $imageNewName = $imageName.time().'.'.$image->extension();
+      $image_resize = Image::make($image->getRealPath());
+      $image_resize->resize(500, 150);
+      $image_resize->save(public_path('images/post_images/'. $imageNewName));
+      $post = new PostDraft();
+      $post->title = $request->title;
+      $post->slug = $slug;
+      $post->cover_image = $imageNewName;
+      $post->short_desc = $request->short_desc;
+      $post->text = $request->edited_text;
+      $post->save();
+      // $id = $post->id;
+      return back()->with('succ_message', 'Post has been drafted successfuly');
     }
   }
 }

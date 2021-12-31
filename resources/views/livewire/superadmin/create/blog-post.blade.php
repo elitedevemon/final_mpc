@@ -25,27 +25,27 @@
             </div>
             <!-- end page title -->
             <!--Start content here-->
-            @if (Session::has('success'))
-              <div class="alert alert-success">{{ session()->get('success') }}</div>
+            @if (Session::has('succ_message'))
+              <div class="alert alert-success">{{ session()->get('succ_message') }}</div>
             @endif
             <form action="{{ route('save.blog.post', app()->getLocale()) }}" method="post" enctype="multipart/form-data">
               @csrf
               <div class="row">
                 <div class="col-md-9">
-                  <input type="text" required name="title" placeholder="Enter title" class="form-control">
+                  <input type="text" required name="title" placeholder="Enter title" class="form-control" value="{{ old('title') }}">
                   @error('title')
                     <small class="text-danger">{{ $message }}</small>
                   @enderror
                 </div>
                 <div class="col-md-3">
-                  <input type="file" required name="cover_photo" class="form-control">
+                  <input type="file" required name="cover_photo" class="form-control" value="{{ old('cover_photo') }}">
                 </div>
               </div>
-              <textarea name="short_desc" required rows="2" class="form-control my-2" placeholder="Enter your short description"></textarea>
+              <textarea name="short_desc" required rows="2" class="form-control my-2" placeholder="Enter your short description">{{ old('short_desc') }}</textarea>
               @error('short_desc')
                 <small class="text-danger">{{ $message }}</small>
               @enderror
-              <textarea name="edited_text" required class="form-control"></textarea>
+              <textarea name="edited_text" required class="form-control">{{ old('edited_text') }}</textarea>
               @error('edited_text')
                 <small class="text-danger">{{ $message }}</small>
               @enderror
