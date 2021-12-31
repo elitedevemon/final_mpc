@@ -15,13 +15,14 @@
 <link rel="shortcut icon" href="{{ asset('logo/MPC.png') }}">
 @yield('student-master-styles')
 <link rel="stylesheet" href="{{ asset('assets/style.css') }}">
+@livewireStyles()
 </head>
 <body class="app sidebar-mini">
   @include('backend.partials.switcher-wrapper')
   <!-- PAGE -->
   <div class="page">
     <div class="page-main">
-      @include('backend.partials.left-sidebar')
+      @livewire('backend.left-sidebar')
       @include('backend.partials.header')
 
       {{-- Main content --}}
@@ -39,5 +40,6 @@
   @if (Auth::check())
   <script src="{{ asset('assets/js/activitychecker.js') }}"></script> 
   @endif
+  @livewireScripts()
 </body>
 </html>

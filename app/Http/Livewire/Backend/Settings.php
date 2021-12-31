@@ -6,11 +6,14 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
+use Livewire\WithFileUploads;
+use Intervention\Image\Facades\Image;
 
 class Settings extends Component
 {
+  use WithFileUploads;
   #public variables for changing password
-  public $current_password, $new_password, $confirm_password;
+  public $current_password, $new_password, $confirm_password, $showPass, $profile_image;
 
   #public variables for changing basic information
   public $name, $username, $email, $phone, $address, $city, $post_code, $country, $facebook, $google_plus,  $twitter, $pinterest, $about;
@@ -89,6 +92,32 @@ class Settings extends Component
   public function Cancel()
   {
     
+  }
+
+  /**
+   * Save profile image
+   */
+  public function saveProfileImage()
+  {
+    $image = $this->profile_image;
+    $imageName = $image->getClientOriginalName();
+    $imageNewName = $imageName.time().'.'.$image->extension();
+    $image_resize = Image::make($image->getRealPath());
+    $image_resize->resize(512, 512);
+    $image_resize->save(public_path('images/profile_images/'. $imageNewName));
+    #user
+    User::where('username', Auth::user()->username)->update([
+      'profile_image' => $imageNewName
+    ]);
+    $this->reset('profile_image');
+  }
+
+  /**
+   * Cancel profile Image
+   */
+  public function cancelProfileImage()
+  {
+    $this->reset('profile_image');
   }
 
   /**

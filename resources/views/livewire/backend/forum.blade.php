@@ -22,7 +22,7 @@
               </div>
               <div class="card-body">
                 <div class="d-flex align-items-center mt-auto">
-                  <div class="avatar brround avatar-md me-3" style="background-image: url({{ asset('superadmin/assets/images/users/16.jpg') }})"></div>
+                  <div class="avatar brround avatar-md me-3" style="background-image: url({{ asset('images/Murad.png') }})"></div>
                   <div>
                     <a href="profile-1.html" class="font-weight-semibold">{{ $superadmin_info->name }}</a>
                     <small class="d-block text-muted">{{ $post->created_at->diffForHumans() }}</small>

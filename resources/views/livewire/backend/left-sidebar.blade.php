@@ -1,5 +1,6 @@
-<!--aside open-->
-<aside class="app-sidebar">
+<div>
+  <!--aside open-->
+  <aside class="app-sidebar">
     <div class="app-sidebar__logo">
         <a class="header-brand" href="{{ route('welcome', app()->getLocale()) }}">
             <img src="{{ asset('logo/MPC.png') }}" class="header-brand-img desktop-lgo" alt="Azea logo">
@@ -29,7 +30,7 @@
                 <i class="fa fa-telegram side-menu__icon"></i>
             <span class="side-menu__label">Email</span><span class="badge bg-warning side-badge">11</span></a>
         </li> --}}
-        <li class="slide">
+        {{-- <li class="slide">
             <a class="side-menu__item"  href="{{ route('show.exam.page', app()->getLocale()) }}">
                 <i class="fa fa-bell-o side-menu__icon"></i>
             <span class="side-menu__label">Exam</span><span class="badge bg-danger side-badge">11</span></a>
@@ -38,31 +39,40 @@
             <a class="side-menu__item"  href="{{ route('show.result.page', app()->getLocale()) }}">
                 <i class="fa fa-bar-chart side-menu__icon"></i>
             <span class="side-menu__label">Result</span></a>
-        </li>
-        <li class="slide">
+        </li> --}}
+        {{-- <li class="slide">
             <a class="side-menu__item"  href="{{ route('show.contact-list.page', app()->getLocale()) }}">
                 <i class="mdi mdi-account-multiple side-menu__icon"></i>
             <span class="side-menu__label">Contacts</span></a>
-        </li>
+        </li> --}}
         <li class="slide">
             <a class="side-menu__item"  href="{{ route('show.settings.page', app()->getLocale()) }}">
                 <i class="fa fa-cogs side-menu__icon"></i>
             <span class="side-menu__label">Settings</span></a>
         </li>
-        <li class="slide">
+        <li class="slide" wire:poll.keep-alive>
+          @php
+            $faq_notification = App\Models\Backend\FaqsNotification::where('notification_receiver', Auth::user()->username)->get();
+            $total_notification = count($faq_notification);
+          @endphp
             <a class="side-menu__item"  href="{{ route('show.notifications.page', app()->getLocale()) }}">
                 <i class="fa fa-bell-o side-menu__icon"></i>
-            <span class="side-menu__label">Notifications</span><span class="badge bg-danger side-badge">11</span></a>
+            <span class="side-menu__label">Notifications</span><span class="badge bg-danger side-badge {{ $total_notification>0?'':'d-none' }}">{{ $total_notification }}</span></a>
         </li>
-        <li class="slide">
+        <li class="slide" wire:poll.keep-alive>
+          @php
+            $faq_notification = App\Models\Backend\FaqsNotification::where('notification_receiver', Auth::user()->username)->get();
+          @endphp
             <a class="side-menu__item"  href="{{ route('show.faqs.page', app()->getLocale()) }}">
                 <i class="fa fa-question-circle-o side-menu__icon"></i>
-            <span class="side-menu__label">FAQ</span><span class="badge bg-primary side-badge">11</span></a>
+            <span class="side-menu__label">FAQ</span><span class="badge bg-primary side-badge {{ count($faq_notification)>0?'':'d-none' }}">{{ count($faq_notification) }}</span></a>
         </li>
         <li class="slide">
             <a class="side-menu__item"  href="{{ route('show.blog.post', app()->getLocale()) }}">
                 <i class="fa fa-sellsy side-menu__icon"></i>
-            <span class="side-menu__label">Forum</span><span class="badge bg-info side-badge">11</span></a>
+              <span class="side-menu__label">Forum</span>
+              {{-- <span class="badge bg-info side-badge">11</span> --}}
+            </a>
         </li>
         <li class="slide">
             <a class="side-menu__item"  href="{{ route('contact', app()->getLocale()) }}">
@@ -83,5 +93,6 @@
             </form>
         </li>
     </ul>
-</aside>
-<!--aside closed-->
+  </aside>
+  <!--aside closed-->
+</div>

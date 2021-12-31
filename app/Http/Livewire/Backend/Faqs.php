@@ -52,7 +52,7 @@ class Faqs extends Component
    */
   public function SendFaqsNotification()
   {
-    $users = User::all();
+    $users = User::where('id', '!=', Auth::user()->id)->get();
     foreach ($users as $user ) {
       $notification = new FaqsNotification();
       $notification->questioner = Auth::user()->username;

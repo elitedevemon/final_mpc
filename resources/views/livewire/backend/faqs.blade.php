@@ -38,13 +38,13 @@
               <div class="card-body pb-0 mb-0">
                 <div class="d-flex">
                   <div class="media mt-0">
+                    @php
+                      $questioner_user = App\Models\User::where('username', $question->username)->first();
+                    @endphp
                     <div class="media-user me-2">
-                      <div class=""><img alt="" class="rounded-circle avatar avatar-md" src="{{ asset('superadmin/assets//images/users/2.jpg') }}"></div>
+                      <div class=""><img alt="" class="rounded-circle avatar avatar-md" src="{{ asset('images/profile_images') }}/{{ $questioner_user->profile_image }}"></div>
                     </div>
                     <div class="media-body">
-                      @php
-                        $questioner_user = App\Models\User::where('username', $question->username)->first();
-                      @endphp
                       <h6 class="mb-0 mt-1 font-weight-bold">{{ $questioner_user->name }}</h6>
                       <small class="text-primary">{{ $question->created_at->diffForHumans() }}</small>
                     </div>

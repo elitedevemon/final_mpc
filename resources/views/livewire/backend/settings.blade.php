@@ -16,11 +16,28 @@
       <div class="row">
         <div class="col-xl-3 col-lg-4">
           <div class="card box-widget widget-user">
-            <div class="widget-user-image mx-auto mt-5"><img alt="User Avatar" class="rounded-circle" src="{{ asset('images/profile_images') }}/{{ Auth::user()->profile_image }}"></div>
+            <div class="widget-user-image mx-auto mt-5">
+              <label for="profile_image" style="cursor: pointer;">
+                @if ($profile_image)
+                  <img alt="User Avatar" class="rounded-circle" src="{{ $profile_image->temporaryUrl() }}">
+                @else
+                  <img alt="User Avatar" class="rounded-circle" src="{{ asset('images/profile_images') }}/{{ Auth::user()->profile_image }}">
+                @endif
+              </label>
+              <input type="file" wire:model="profile_image" accept="image/*" style="display: none" id="profile_image">
+            </div>
             <div class="card-body text-center pt-2">
               <div class="pro-user">
                 <h3 class="pro-user-username  mb-1 fs-22">{{ Auth::user()->name }}</h3>
                 <h6 class="pro-user-desc text-muted">{{ auth()->user()->role }}</h6>
+                <div class="text-center">
+                  <button class="btn btn-primary" wire:loading.attr="disabled" wire:loading wire:target="profile_image">Loading...</button>
+                </div>
+                <button class="btn btn-success {{ $profile_image?'':'d-none' }}" wire:click="saveProfileImage" wire:loading.attr="disabled">
+                  <span wire:loading.class="d-none" wire:target="saveProfileImage">Save</span>
+                  <span wire:loading wire:target="saveProfileImage">Saving..</span>
+                </button>
+                <button class="btn btn-danger {{ $profile_image?'':'d-none' }}" wire:click="cancelProfileImage">Cancel</button>
                 <a href="{{ route('show.profile.page', app()->getLocale()) }}" class="btn btn-primary mt-3">View Profile</a>
               </div>
             </div>
@@ -58,8 +75,8 @@
               <div class="form-group">
                 <label class="form-label">Current Password</label>
                 <div class="input-group">
-                  <input type="password" aria-describedby="current_password" class="form-control" wire:model="current_password">
-                  <button class="input-group-text btn btn-primary" id="current_password"><i class="fa fa-eye"></i></button>
+                  <input type="{{ $showPass?'text':'password' }}" aria-describedby="current_password" class="form-control" wire:model="current_password">
+                  <button class="input-group-text btn btn-primary" id="current_password"><i class="fa fa-{{ $showPass?'eye-slash':'eye' }}" wire:click="$toggle('showPass')"></i></button>
                 </div>
                 @error('current_password')
                   <small class="text-danger">{{ $message }}</small>
@@ -68,8 +85,8 @@
               <div class="form-group">
                 <label class="form-label">New Password</label>
                 <div class="input-group">
-                  <input type="password" aria-describedby="new_password" class="form-control" wire:model="new_password">
-                  <button class="input-group-text btn btn-primary" id="new_password"><i class="fa fa-eye"></i></button>
+                  <input type="{{ $showPass?'text':'password' }}" aria-describedby="new_password" class="form-control" wire:model="new_password">
+                  <button class="input-group-text btn btn-primary" id="new_password"><i class="fa fa-{{ $showPass?'eye-slash':'eye' }}" wire:click="$toggle('showPass')"></i></button>
                 </div>
                 @error('new_password')
                   <small class="text-danger">{{ $message }}</small>
@@ -78,8 +95,8 @@
               <div class="form-group">
                 <label class="form-label">Confirm Password</label>
                 <div class="input-group">
-                  <input type="password" aria-describedby="confirm_password" class="form-control" wire:model="confirm_password">
-                  <button class="input-group-text btn btn-primary" id="confirm_password"><i class="fa fa-eye-slash"></i></button>
+                  <input type="{{ $showPass?'text':'password' }}" aria-describedby="confirm_password" class="form-control" wire:model="confirm_password">
+                  <button class="input-group-text btn btn-primary" id="confirm_password"><i class="fa fa-{{ $showPass?'eye-slash':'eye' }}" wire:click="$toggle('showPass')"></i></button>
                 </div>
                 @error('confirm_password')
                   <small class="text-danger">{{ $message }}</small>
@@ -118,7 +135,7 @@
                 <div class="col-sm-6 col-md-6">
                   <div class="form-group">
                     <label class="form-label">Username</label>
-                    <input type="text" class="form-control" placeholder="Username" value="{{ $username }}" wire:model="username">
+                    <input type="text" disabled class="form-control" placeholder="Username" value="{{ $username }}" wire:model="username">
                   </div>
                 </div>
                 <div class="col-sm-6 col-md-6">

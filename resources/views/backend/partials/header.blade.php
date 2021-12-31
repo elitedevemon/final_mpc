@@ -61,7 +61,7 @@
                                         <span class="fs-14 font-weight-semibold"> English</span>
                                     </span>
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow animated">
+                                {{-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow animated">
                                     <a class="dropdown-item d-flex" href="profile1.html">
                                         <img src="{{ asset('superadmin/assets/images/germany_flag.jpg') }}" alt="img" class="me-2 country mt-1">
                                         <span class="fs-13"> Germany</span>
@@ -78,7 +78,7 @@
                                         <img src="{{ asset('superadmin/assets/images/spain_flag.jpg') }}" alt="img" class=" me-2 country mt-1">
                                         <span class="fs-13"> Spain</span>
                                     </a>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="dropdown header-message d-flex">
                                 <a class="nav-link icon" data-bs-toggle="dropdown">
