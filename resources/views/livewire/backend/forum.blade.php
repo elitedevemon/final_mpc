@@ -8,7 +8,7 @@
             <div class="card overflow-hidden">
               <div class="item7-card-img">
                 <a href="javascript:void(0);">
-                <img src="{{ asset('images/post_images') }}/{{ $post->cover_image }}" alt="img" class="cover-image w-100"></a>
+                <img src="{{ asset('images/post_images') }}/{{ $post->cover_image }}" alt="img" class="cover-image w-100" height="150px"></a>
               </div>
               <div class="card-body">
                 <div class="item7-card-desc d-flex mb-5">
@@ -17,8 +17,8 @@
                     <a class="me-0 d-flex" href="javascript:void(0);"><i class="fe fe-message-square fs-16 me-1 p-3 bg-warning-transparent brround text-warning font-weight-bold border-warning"></i><span class="mt-3 ms-1 text-muted font-weight-semibold">12 Comments</span></a>
                   </div>
                 </div>
-                <a href="javascript:void(0);" class="mt-4"><h5 class="font-weight-semibold text-primary">{{ $post->title }}</h5></a>
-                <p>{{ Str::words($post->text, 10) }}</p>
+                <a href="javascript:void(0);" class="mt-4"><h5 class="font-weight-semibold text-primary">{{ Str::words($post->title, 7) }}</h5></a>
+                <p>{{ Str::words($post->short_desc, 18) }}</p>
               </div>
               <div class="card-body">
                 <div class="d-flex align-items-center mt-auto">
@@ -28,8 +28,17 @@
                     <small class="d-block text-muted">{{ $post->created_at->diffForHumans() }}</small>
                   </div>
                   <div class="ms-auto text-muted mt-2">
-                    <a href="javascript:void(0);" class="text-danger icon d-none d-md-inline-block ms-3"><i class="fe fe-heart p-2 fs-20 text-icon text-danger bg-danger-transparent br-7"></i></a>
-                    <a href="javascript:void(0);" class="icon d-none d-md-inline-block ms-3"><i class="fe fe-thumbs-up p-2 fs-20 text-icon text-success bg-success-transparent br-7"></i></a>
+                    @php
+                      #Like related query
+                      $checklike = App\Models\Backend\ForumLike::where('username', Auth::user()->username)->where('slug', $post->slug)->where('action', 'like')->first();
+                      $total_like = App\Models\Backend\ForumLike::where('slug', $post->slug)->where('action', 'like')->get();
+
+                      #Dislike related query
+                      $checkdislike = App\Models\Backend\ForumLike::where('username', Auth::user()->username)->where('slug', $post->slug)->where('action', 'dislike')->first();
+                      $total_dislike = App\Models\Backend\ForumLike::where('slug', $post->slug)->where('action', 'dislike')->get();
+                    @endphp
+                    <a href="javascript:void(0);" class="icon ms-3" title="Like" wire:click="like('{{ $post->slug }}')"><i class="fe fe-thumbs-up p-2 fs-20 text-icon text-{{ $checklike ?'primary':'success' }} bg-{{ $checklike ?'primary':'success' }}-transparent br-7"><small class="text-{{ $checklike ?'primary':'success' }}">{{ count($total_like) }}</small></i></a>
+                    <a href="javascript:void(0);" class="icon ms-3" title="Dislike" wire:click="dislike('{{ $post->slug }}')"><i class="fe fe-thumbs-down p-2 fs-20 text-icon text-{{ $checkdislike?'danger':'success' }} bg-{{ $checkdislike?'danger':'success' }}-transparent br-7"><small class="text-{{ $checkdislike?'danger':'success' }}">{{ count($total_dislike) }}</small></i></a>
                   </div>
                 </div>
               </div>

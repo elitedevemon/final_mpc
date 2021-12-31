@@ -19,11 +19,11 @@
                 <i class="fa fa-calendar side-menu__icon"></i>
             <span class="side-menu__label">Calendar</span><span class="badge bg-info side-badge">11</span></a>
         </li> --}}
-        <li class="slide">
+        {{-- <li class="slide">
             <a class="side-menu__item"  href="{{ route('show.chatting.page', app()->getLocale()) }}">
                 <i class="fa fa-comments-o side-menu__icon"></i>
             <span class="side-menu__label">Chat</span><span class="badge bg-primary side-badge">11</span></a>
-        </li>
+        </li> --}}
         {{-- <li class="slide">
             <a class="side-menu__item"  href="{{ route('show.email.inbox', app()->getLocale()) }}">
                 <i class="fa fa-telegram side-menu__icon"></i>

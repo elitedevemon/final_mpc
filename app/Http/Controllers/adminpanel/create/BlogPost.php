@@ -101,13 +101,12 @@ class BlogPost extends Controller
       $post->save();
       PostDraft::where('slug', $slug)->delete();
       // $id = $post->id;
-      return redirect()->route('create.blog.post', app()->getLocale())->with('succ_message', 'Post has been created successfuly');
+      return redirect()->route('create.blog.post', app()->getLocale())->with('succ_message', 'Post has been saved successfuly');
     }elseif ($request->draft) {
       $request->validate([
         'title' => 'required|min:15|max:300',
         'short_desc' => 'required|min: 150|max:350',
       ]);
-      $title_slug = Str::slug($request->title);
       $image = $request->file('cover_photo');
       $imageName = $image->getClientOriginalName();
       $imageNewName = $imageName.time().'.'.$image->extension();
@@ -116,7 +115,6 @@ class BlogPost extends Controller
       $image_resize->save(public_path('images/post_images/'. $imageNewName));
       $post = PostDraft::where('slug', $slug)->first();
       $post->title = $request->title;
-      $post->slug = $title_slug;
       $post->cover_image = $imageNewName;
       $post->short_desc = $request->short_desc;
       $post->text = $request->edited_text;

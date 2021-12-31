@@ -24,7 +24,7 @@
 @yield('superadmin-scripts')
 
 @if (Auth::guard('admin')->check())
-  <script src="{{ asset('assets/js/activitychecker.js') }}"></script> 
+  <script src="{{ asset('assets/js/superadminactivitychecker.js') }}"></script> 
 @endif
 
 </body>
