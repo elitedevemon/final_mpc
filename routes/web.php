@@ -152,6 +152,7 @@ Route::prefix('{language}')->group(function () {
        */
       Route::prefix('/blog')->group(function () {
           Route::get('/', [ForumController::class, 'index'])->name('show.blog.post');
+          Route::get('/{slug}', [ForumController::class, 'viewPost'])->name('view.selected.post');
       });
     });
   });

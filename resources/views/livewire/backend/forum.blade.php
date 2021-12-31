@@ -7,17 +7,17 @@
           <div class="col-xl-4 col-lg-6 col-md-12">
             <div class="card overflow-hidden">
               <div class="item7-card-img">
-                <a href="javascript:void(0);">
+                <a href="{{ route('view.selected.post', ['slug'=> $post->slug, 'language'=>app()->getLocale()]) }}">
                 <img src="{{ asset('images/post_images') }}/{{ $post->cover_image }}" alt="img" class="cover-image w-100" height="150px"></a>
               </div>
               <div class="card-body">
                 <div class="item7-card-desc d-flex mb-5">
-                  <a href="javascript:void(0);" class="d-flex"><i class="fe fe-calender fs-16 me-1 p-3 bg-secondary-transparent brround text-secondary font-weight-bold border-secondary"></i><span class="mt-3 ms-1 text-muted font-weight-semibold"> {{ date('M-d-Y', strtotime($post->created_at)) }}</span></a>
+                  <a href="{{ route('view.selected.post', ['slug'=> $post->slug, 'language'=>app()->getLocale()]) }}" class="d-flex"><i class="fe fe-calender fs-16 me-1 p-3 bg-secondary-transparent brround text-secondary font-weight-bold border-secondary"></i><span class="mt-3 ms-1 text-muted font-weight-semibold"> {{ date('M-d-Y', strtotime($post->created_at)) }}</span></a>
                   <div class="ms-auto">
-                    <a class="me-0 d-flex" href="javascript:void(0);"><i class="fe fe-message-square fs-16 me-1 p-3 bg-warning-transparent brround text-warning font-weight-bold border-warning"></i><span class="mt-3 ms-1 text-muted font-weight-semibold">12 Comments</span></a>
+                    <a class="me-0 d-flex" href="{{ route('view.selected.post', ['slug'=> $post->slug, 'language'=>app()->getLocale()]) }}"><i class="fe fe-message-square fs-16 me-1 p-3 bg-warning-transparent brround text-warning font-weight-bold border-warning"></i><span class="mt-3 ms-1 text-muted font-weight-semibold">12 Comments</span></a>
                   </div>
                 </div>
-                <a href="javascript:void(0);" class="mt-4"><h5 class="font-weight-semibold text-primary">{{ Str::words($post->title, 7) }}</h5></a>
+                <a href="{{ route('view.selected.post', ['slug'=> $post->slug, 'language'=>app()->getLocale()]) }}" class="mt-4"><h5 class="font-weight-semibold text-primary">{{ Str::words($post->title, 7) }}</h5></a>
                 <p>{{ Str::words($post->short_desc, 18) }}</p>
               </div>
               <div class="card-body">
