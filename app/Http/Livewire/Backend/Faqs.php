@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Backend;
 
 use App\Models\Backend\Faqs as BackendFaqs;
+use App\Models\Backend\FaqsLike;
 use App\Models\Backend\FaqsNotification;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -67,6 +68,56 @@ class Faqs extends Component
   public function LoadMore()
   {
     $this->pagination_page += 10;
+  }
+
+  /**
+   * Forum like function
+   */
+  public function like($faq_id)
+  {
+    $like = new FaqsLike();
+    $checkExist = FaqsLike::where('username', Auth::user()->username)->where('faq_id', $faq_id)->first();
+    if ($checkExist) {
+      if ($checkExist->action == 'dislike') {
+        $checkExist->delete();
+        $like->username = Auth::user()->username;
+        $like->faq_id = $faq_id;
+        $like->action = 'like';
+        $like->save();
+      }elseif ($checkExist->action == 'like') {
+        $checkExist->delete();
+      }
+    }else {
+      $like->username = Auth::user()->username;
+      $like->faq_id = $faq_id;
+      $like->action = 'like';
+      $like->save();
+    }
+  }
+
+  /**
+   * Forum dislike function
+   */
+  public function dislike($faq_id)
+  {
+    $like = new FaqsLike();
+    $checkExist = FaqsLike::where('username', Auth::user()->username)->where('faq_id', $faq_id)->first();
+    if ($checkExist) {
+      if ($checkExist->action == 'like') {
+        $checkExist->delete();
+        $like->username = Auth::user()->username;
+        $like->faq_id = $faq_id;
+        $like->action = 'dislike';
+        $like->save();
+      }elseif ($checkExist->action == 'dislike') {
+        $checkExist->delete();
+      }
+    }else {
+      $like->username = Auth::user()->username;
+      $like->faq_id = $faq_id;
+      $like->action = 'dislike';
+      $like->save();
+    }
   }
 
   /**
