@@ -49,16 +49,8 @@
                   <div class="d-flex mb-1">
                     <div class="col-3 mt-1"><img src="{{ asset('images/post_images') }}/{{ $rbpost->cover_image }}" alt="" style="height: 75px; width: 70px;"></div>
                     <div class="col-9 ps-3 ps-md-4">
-                      <div class="footer_recent_blog">
-                        @php
-                            echo Str::words($rbpost->text, 10, '...');
-                        @endphp
-                      </div>
-<<<<<<< HEAD
+                      <div class="footer_recent_blog">{{ Str::words($rbpost->short_desc, 10) }}</div>
                       <div><i class="far fa-calendar-alt"></i> <span>{{ date('d/m/Y', strtotime($rbpost->created_at)) }}</span></div>
-=======
-                      <div><i class="far fa-calendar-alt"></i> <span>{{ date('d-m-Y', strtotime($rbpost->created_at)) }}</span></div>
->>>>>>> 150aa9e46c940d2035e30a74cc3718acf72f2ef5
                     </div>
                   </div>
                 @endforeach

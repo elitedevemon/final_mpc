@@ -42,7 +42,7 @@
                           </span>
                       @enderror
                   </div>
-                  <div class="form-group">
+                  {{-- <div class="form-group">
                       <label for="reffer_code"><i class="zmdi zmdi-code"></i></label>
                       <input type="text" class="@error('reffer_code') is-invalid @enderror" name="reffer_code" id="reffer_code" placeholder="Refferal Code" value="{{ old('reffer_code') }}" required autocomplete="reffer_code"/>
                       
@@ -51,7 +51,7 @@
                               <strong>{{ $message }}</strong>
                           </span>
                       @enderror
-                  </div>
+                  </div> --}}
                   <div class="form-group">
                       <label for="pass"><i class="zmdi zmdi-lock"></i></label>
                       <input type="password" id="pass"  class="@error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password"/>

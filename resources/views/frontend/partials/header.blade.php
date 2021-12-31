@@ -120,9 +120,9 @@
                       <li class="nav-item">
                         <a class="nav-link" href="{{ route('services', app()->getLocale()) }}">Services</a>
                       </li>
-                      <li class="nav-item">
+                      {{-- <li class="nav-item">
                         <a class="nav-link" href="{{ route('blog', app()->getLocale()) }}">Blog</a>
-                      </li>
+                      </li> --}}
                       <li class="nav-item">
                           <a class="nav-link" href="{{ route('videos', app()->getLocale()) }}">Videos</a>
                         </li>
