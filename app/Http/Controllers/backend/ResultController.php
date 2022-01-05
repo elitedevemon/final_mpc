@@ -7,8 +7,21 @@ use Illuminate\Http\Request;
 
 class ResultController extends Controller
 {
-    public function index()
-    {
-        return view('backend.pages.result');
-    }
+  /**
+   * Construct method for auth
+   */
+  public function __construct()
+  {
+    $this->middleware('auth');
+  }
+
+  /**
+   * Show result page
+   *
+   * @return void
+   */
+  public function index()
+  {
+    return view('backend.pages.result');
+  }
 }

@@ -35,10 +35,10 @@
                               <input class="form-control" wire:model="password" type="password" placeholder="Confirm Password">
                           </div>
                       </div>
-                      <button class="btn btn-primary w-100" wire:click="unlock()" wire:loading.attr="disabled"><i class="fe fe-lock"></i> Unlock 
-                        <div wire:loading wire:target="unlock" style="font-size: 10px; height: 15px; width: 15px; margin-left: 15px; color: #15d9c7!important; " class="spinner-border" role="status">
-                          <span class="visually-hidden">Loading...</span>
-                        </div>
+                      <button class="btn btn-primary w-100" wire:click="unlock" wire:loading.attr="disabled">
+                        <i class="fe fe-lock"></i>
+                        <span wire:loading.class="d-none" wire:target="unlock"> Unlock</span>
+                        <span wire:loading wire:target="unlock"> Processing...</span>
                       </button>
                       <button class="btn btn-danger mt-1 w-100" wire:click="logout()" wire:loading.attr="disabled"><i class="fe fe-lock"></i> Log Out
                         <div wire:loading wire:target="logout" style="font-size: 10px; height: 15px; width: 15px; margin-left: 15px; color: #15d9c7!important; " class="spinner-border" role="status">

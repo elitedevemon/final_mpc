@@ -10,6 +10,19 @@ use Illuminate\Support\Facades\Auth;
 
 class FaqsController extends Controller
 {
+  /**
+   * Construct method for auth
+   */
+  public function __construct()
+  {
+    $this->middleware('auth');
+  }
+
+  /**
+   * Show all frequently asked questions
+   *
+   * @return void
+   */
   public function index()
   {
     FaqsNotification::where('notification_receiver', Auth::user()->username)->delete();

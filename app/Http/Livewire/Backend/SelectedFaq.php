@@ -49,7 +49,7 @@ class SelectedFaq extends Component
       }
     }else {
       $like->username = Auth::user()->username;
-      $like->slug = $faq_id;
+      $like->faq_id = $faq_id;
       $like->action = 'like';
       $like->save();
     }
