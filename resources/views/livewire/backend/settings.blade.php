@@ -15,8 +15,14 @@
       <!-- Row -->
       <div class="row">
         <div class="col-xl-3 col-lg-4">
-          <div class="card box-widget widget-user">
-            <div class="widget-user-image mx-auto mt-5">
+          <div class="card box-widget widget-user" wire:poll.keep-alive>
+            <div class="widget-user-image mx-auto mt-5"
+              x-data="{ isUploading: false, progress: 0 }"
+              x-on:livewire-upload-start="isUploading = true"
+              x-on:livewire-upload-finish="isUploading = false"
+              x-on:livewire-upload-error="isUploading = false"
+              x-on:livewire-upload-progress="progress = $event.detail.progress"
+            >
               <label for="profile_image" style="cursor: pointer;">
                 @if ($profile_image)
                   <img alt="User Avatar" class="rounded-circle" src="{{ $profile_image->temporaryUrl() }}">
@@ -30,15 +36,20 @@
               <div class="pro-user">
                 <h3 class="pro-user-username  mb-1 fs-22">{{ Auth::user()->name }}</h3>
                 <h6 class="pro-user-desc text-muted">{{ auth()->user()->role }}</h6>
-                <div class="text-center">
+                {{-- <div class="text-center">
                   <button class="btn btn-primary" wire:loading.attr="disabled" wire:loading wire:target="profile_image">Loading...</button>
+                </div> --}}
+                <div class="progress" x-show="isUploading">
+                  <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
                 </div>
                 <button class="btn btn-success {{ $profile_image?'':'d-none' }}" wire:click="saveProfileImage" wire:loading.attr="disabled">
                   <span wire:loading.class="d-none" wire:target="saveProfileImage">Save</span>
                   <span wire:loading wire:target="saveProfileImage">Saving..</span>
                 </button>
                 <button class="btn btn-danger {{ $profile_image?'':'d-none' }}" wire:click="cancelProfileImage">Cancel</button>
-                <a href="{{ route('show.profile.page', app()->getLocale()) }}" class="btn btn-primary mt-3">View Profile</a>
+                <div class="text-center">
+                  <a href="{{ route('show.profile.page', app()->getLocale()) }}" class="btn btn-primary mt-3 w-50">View Profile</a>
+                </div>
               </div>
             </div>
             <div class="card-footer p-0">

@@ -18,7 +18,10 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('username')->unique();
             $table->string('email')->unique();
-            $table->string('phone')->nullable();
+            $table->string('phone')->unique()->nullable();
+            $table->string('refer_code')->unique();
+            $table->integer('total_refer')->default('0');
+            $table->date('profile_lock_date');
             $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->string('post_code')->nullable();

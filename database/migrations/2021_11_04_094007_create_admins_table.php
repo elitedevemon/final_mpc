@@ -20,6 +20,7 @@ class CreateAdminsTable extends Migration
             $table->string('username');
             $table->string('password');
             $table->boolean('active_status')->default(true);
+            $table->rememberToken();
             $table->timestamps();
         });
     }

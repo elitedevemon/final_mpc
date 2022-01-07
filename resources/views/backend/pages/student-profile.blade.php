@@ -7,7 +7,7 @@
   <!-- ============================================================== -->
   <!-- Start right Content here -->
   <!-- ============================================================== -->
-  @include('backend.partials.student-profile.student-profile')
+  @livewire('backend.student-profile')
   <!-- end main content-->
 @endsection
 @section('student-master-scripts')
