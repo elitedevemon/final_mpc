@@ -16,7 +16,7 @@
           <div class="card overflow-hidden">
             <div class="item7-card-img px-4 pt-4">
               <a href="javascript:void(0);"></a>
-              <img src="{{ asset('superadmin/assets/images/photos/blog.jpg') }}" height="150px" alt="img" class="cover-image br-7 w-100">
+              <img src="{{ asset('superadmin/assets/images/photos/blog.jpg') }}" height="250px" alt="img" class="cover-image br-7 w-100">
             </div>
             <div class="card-body">
               <a href="javascript:void(0);" class="mt-4"><h4 class="font-weight-semibold">{{ $post->title }}</h4></a>

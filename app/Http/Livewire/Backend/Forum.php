@@ -14,7 +14,7 @@ class Forum extends Component
   use WithPagination;
 
   #public variables
-  public $superadmin_info, $paginate_page=9;
+  public $superadmin_info, $paginate_page=9, $total_comments;
 
   /**
    * Mount function

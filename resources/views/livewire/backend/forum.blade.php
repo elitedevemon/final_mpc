@@ -14,7 +14,12 @@
                 <div class="item7-card-desc d-flex mb-5">
                   <a href="{{ route('view.selected.post', ['slug'=> $post->slug, 'language'=>app()->getLocale()]) }}" class="d-flex"><i class="fe fe-calender fs-16 me-1 p-3 bg-secondary-transparent brround text-secondary font-weight-bold border-secondary"></i><span class="mt-3 ms-1 text-muted font-weight-semibold"> {{ date('M-d-Y', strtotime($post->created_at)) }}</span></a>
                   <div class="ms-auto">
-                    <a class="me-0 d-flex" href="{{ route('view.selected.post', ['slug'=> $post->slug, 'language'=>app()->getLocale()]) }}"><i class="fe fe-message-square fs-16 me-1 p-3 bg-warning-transparent brround text-warning font-weight-bold border-warning"></i><span class="mt-3 ms-1 text-muted font-weight-semibold">12 Comments</span></a>
+                    <!--Comment related PHP code-->
+                    @php
+                      $total_comments = App\Models\Backend\ForumComment::where('post_id', $post->id)->get();
+                    @endphp
+                    <!--end PHP code-->
+                    <a class="me-0 d-flex" href="{{ route('view.selected.post', ['slug'=> $post->slug, 'language'=>app()->getLocale()]) }}"><i class="fe fe-message-square fs-16 me-1 p-3 bg-warning-transparent brround text-warning font-weight-bold border-warning"></i><span class="mt-3 ms-1 text-muted font-weight-semibold">{{ count($total_comments) }} Comments</span></a>
                   </div>
                 </div>
                 <a href="{{ route('view.selected.post', ['slug'=> $post->slug, 'language'=>app()->getLocale()]) }}" class="mt-4"><h5 class="font-weight-semibold text-primary">{{ Str::words($post->title, 7) }}</h5></a>

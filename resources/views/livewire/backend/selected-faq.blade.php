@@ -17,6 +17,38 @@
             <div class="card-body">
               <a href="javascript:void(0);" class="mt-4"><h5 class="font-weight-semibold">{{ $faq_poster->name }} has been posted a question</h5></a>
               <p>{{ $faq->question }}</p>
+              <!--Faq image related PHP code-->
+                @php
+                  $images = App\Models\Backend\FaqImages::with('faqPoster')->where('faq_id', $faq->id)->get()
+                @endphp
+              <!--End PHP code-->
+              @if(count($images)==1)
+                <div class="row">
+                  <div class="col-4"></div>
+                  <div class="col-4 pb-1">
+                    @foreach ($images as $image)
+                      <img src="{{ $image->image_url }}" alt="Question related photo" class="w-100">
+                    @endforeach
+                  </div>
+                  <div class="col-4"></div>
+                </div>
+              @elseif(count($images)==2)
+                <div class="row">
+                  @foreach ($images as $image)
+                    <div class="col-6 col-md-6 p-0 pb-1">
+                      <img src="{{ $image->image_url }}" alt="Question related photo" class="w-100">
+                    </div>
+                  @endforeach
+                </div>
+              @elseif(count($images)===3)
+                <div class="row">
+                  @foreach ($images as $image)
+                    <div class="col-4 col-md-4 p-0 pb-1">
+                      <img src="{{ $image->image_url }}" alt="Question related photo" height="250px" class="w-100">
+                    </div>
+                  @endforeach
+                </div>
+              @endif
               <div class="item7-card-desc d-md-flex mb-5">
                 <a href="javascript:void(0);" class="d-flex me-4 mb-2"><i class="fe fe-calendar fs-16 me-1 p-3 bg-secondary-transparent text-secondary brround border-secondary"></i><div class="mt-0 mt-3 ms-1 text-muted font-weight-semibold">{{ date('M-d-Y', strtotime($faq->created_at)) }}</div></a>
                 <a href="javascript:void(0);" class="d-flex mb-2"><i class="fe fe-user fs-16 me-1 p-3 bg-success-transparent text-success brround border-success"></i><div class="mt-0 mt-3 ms-1 text-muted font-weight-semibold">{{ $faq_poster->name }}</div></a>

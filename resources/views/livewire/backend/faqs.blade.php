@@ -5,29 +5,55 @@
       <div class="row mt-4">
         <div class="col-12">
           <div class="card">
-            <div class="card-body">
+            <div class="card-body"
+              x-data="{ isUploading: false, progress: 5 }"
+              x-on:livewire-upload-start="isUploading = true"
+              x-on:livewire-upload-finish="isUploading = true"
+              x-on:livewire-upload-error="isUploading = false"
+              x-on:livewire-upload-progress="progress = $event.detail.progress"
+            >
               <textarea class="form-control br-br-0 br-bl-0" placeholder="Type your question here...." rows="5" wire:model="question"></textarea>
               <div class="profile-share border border-light2 border-top-0">
                 {{-- <a href="javascript:void(0);" class="me-2" title="" data-bs-toggle="tooltip" data-placement="top" data-original-title="Audio"><i class="fe fe-mic fs-20"></i></a>
-                <a href="javascript:void(0);" class="me-2" title="" data-bs-toggle="tooltip" data-placement="top" data-original-title="Video"><i class="fe fe-video fs-20"></i></a>
-                <a href="javascript:void(0);" class="me-2" title="" data-bs-toggle="tooltip" data-placement="top" data-original-title="Picture"><i class="fe fe-image fs-20"></i></a> --}}
+                <a href="javascript:void(0);" class="me-2" title="" data-bs-toggle="tooltip" data-placement="top" data-original-title="Video"><i class="fe fe-video fs-20"></i></a> --}}
+                <label for="faq_image" style="cursor: pointer">
+                  <a class="me-2" title="" data-bs-toggle="tooltip" data-placement="top" data-original-title="Picture">
+                    <i class="fe fe-image fs-20"></i>
+                  </a>
+                </label>
+                <input type="file" multiple accept="image/*" wire:model="faq_image" style="display: none" id="faq_image">
                 <a href="javascript:void(0);" class="me-2" title="" data-bs-toggle="tooltip" data-placement="top" data-original-title="Picture" wire:click="erase">
                   <i class="fa fa-eraser" wire:loading.class="d-none" wire:target="erase"></i>
                   <div class="spinner-border spinner-border-sm text-info" role="status" wire:loading wire:target="erase">
                     <span class="sr-only">Loading...</span>
                   </div>
                 </a>
-                @if (Session::has('question_posted'))
-                  <small class="text-success">{{ session()->get('question_posted') }}</small>
-                @endif
-                @error('question')
-                  <small class="text-danger">{{ $message }}</small>
-                @enderror
-                <button class="btn btn-outline-success mt-1 pull-right" wire:click="PostQuestion" wire:loading.attr="disabled"><i class="fa fa-share ms-1"></i>
+                <button class="btn btn-outline-success mt-1 pull-right" @click="isUploading=false" wire:click="PostQuestion" wire:target='faq_image' wire:loading.attr="disabled"><i class="fa fa-share ms-1"></i>
                   <span wire:loading.class="d-none" wire:target="PostQuestion"> Share</span>
                   <span wire:loading wire:target="PostQuestion"> Processing</span>
                 </button>
               </div>
+
+              <div class="row" x-show="isUploading">
+                <div class="col-11">
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" x-bind:style="`width: ${progress}%`" x-text="`${progress}%`"></div>
+                  </div>
+                </div>
+                <div class="col-1" @click="isUploading = false" wire:click="cancelPhoto">
+                  <span class="text-danger" style="cursor: pointer">X</span>
+                </div>
+              </div>
+              
+              @if (Session::has('question_posted'))
+                <small class="text-success">{{ session()->get('question_posted') }}</small>
+              @endif
+              @error('question')
+                <small class="text-danger">{{ $message }}</small>
+              @enderror
+              @error('faq_image_more')
+                <small class="text-danger">{{ $message }}</small>
+              @enderror
             </div>
           </div>
           <div class="card">
@@ -54,6 +80,38 @@
                   <a href="{{ route('view.selected.faq', ['faq_id'=>$question->id, 'language'=> app()->getLocale()]) }}">
                     <p class="mb-2">{{ $question->question }}</p>
                   </a>
+                  <!--Faq image related PHP code-->
+                    @php
+                      $images = App\Models\Backend\FaqImages::where('faq_id', $question->id)->get()
+                    @endphp
+                  <!--End PHP code-->
+                  @if(count($images)==1)
+                    <div class="row">
+                      <div class="col-4"></div>
+                      <div class="col-4 pb-1">
+                        @foreach ($images as $image)
+                          <img src="{{ $image->image_url }}" alt="Question related photo" class="w-100">
+                        @endforeach
+                      </div>
+                      <div class="col-4"></div>
+                    </div>
+                  @elseif(count($images)==2)
+                    <div class="row">
+                      @foreach ($images as $image)
+                        <div class="col-6 col-md-6 p-0 pb-1">
+                          <img src="{{ $image->image_url }}" alt="Question related photo" class="w-100">
+                        </div>
+                      @endforeach
+                    </div>
+                  @elseif(count($images)===3)
+                    <div class="row">
+                      @foreach ($images as $image)
+                        <div class="col-4 col-md-4 p-0 pb-1">
+                          <img src="{{ $image->image_url }}" height="200px" alt="Question related photo" class="w-100">
+                        </div>
+                      @endforeach
+                    </div>
+                  @endif
                 </div>
                 @php
                   #Like related queries
@@ -85,8 +143,8 @@
                     <h6 class="mb-0 mt-4 ms-2">28 people like your photo</h6>
                   </div> --}}
                   <div class="ms-auto">
-                    <a class="new {{ $check_like?'bg-primary text-light':'' }}" href="JavaScript:void(0);"><i class="fe fe-thumbs-up" title="Like" wire:click="like('{{ $question->id }}')"></i></a>
-                    <a class="new {{ $check_dislike?' bg-danger text-light':'' }}" href="JavaScript:void(0);"><i class="fe fe-thumbs-down" title="Dislike" wire:click="dislike('{{ $question->id }}')"></i></a>
+                    <a class="new {{ $check_like?'bg-primary text-light':'' }}" href="JavaScript:void(0);" wire:click="like('{{ $question->id }}')"><i class="fe fe-thumbs-up" title="Like"></i></a>
+                    <a class="new {{ $check_dislike?' bg-danger text-light':'' }}" href="JavaScript:void(0);" wire:click="dislike('{{ $question->id }}')"><i class="fe fe-thumbs-down" title="Dislike"></i></a>
                     <a class="new {{ $check_comment?'bg-success text-light':'' }}" href="{{ route('view.selected.faq', ['faq_id'=>$question->id, 'language'=> app()->getLocale()]) }}"><i class="fe fe-message-square"></i></a>
                     {{-- <a class="new" href="JavaScript:void(0);"><i class="fe fe-share-2"></i></a> --}}
                   </div>

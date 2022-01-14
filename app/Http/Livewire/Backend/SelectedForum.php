@@ -93,6 +93,7 @@ class SelectedForum extends Component
     $comment->username = Auth::user()->username;
     $comment->comment = $this->comment;
     $comment->save();
+    $this->reset('comment');
   }
 
   /**

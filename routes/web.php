@@ -19,10 +19,12 @@ use App\Http\Controllers\backend\ProfileController;
 use App\Http\Controllers\backend\ResultController;
 use App\Http\Controllers\backend\SettingsController;
 use App\Http\Controllers\LockScreenController;
+use App\Http\Controllers\TestController;
 use App\Http\Livewire\LockScreen;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +53,9 @@ Route::prefix('{language}')->group(function () {
   Route::view('contact', 'frontend.pages.contact')->name('contact');
   Route::view('services', 'frontend.pages.services')->name('services');
   Route::view('community', 'frontend.pages.community')->name('community');
+  # Test controller files for GoogleDrive as LaravelFilesystem
+  // Route::get('test' , [TestController::class, 'index']);
+  // Route::post('upload' , [TestController::class, 'upload'])->name('upload.file');
   //Route::view('/custom/login', 'auth.custom-login')->name('custom.login');
   //Route::view('/custom/register', 'auth.custom-register')->name('custom.register');
 
