@@ -241,7 +241,7 @@
                             <div class="dropdown profile-dropdown d-flex">
                                 <a href="javascript:void(0);" class="nav-link pe-0 leading-none" data-bs-toggle="dropdown">
                                     <span class="header-avatar1">
-                                        <img src="{{ asset('images/profile_images') }}/{{ Auth::user()->profile_image }}" alt="profile image" class="avatar avatar-md brround">
+                                        <img src="{{ Auth::user()->profile_image }}" alt="profile image" class="avatar avatar-md brround">
                                     </span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow animated">

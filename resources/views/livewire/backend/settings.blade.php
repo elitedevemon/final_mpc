@@ -12,22 +12,34 @@
       </div>
       <!--End Page header-->
   
+      <div class="row {{ Auth::user()->email_verified_at?'d-none':'' }}">
+        <div class="col-md-3 d-none d-md-inline"></div>
+        <div class="col-md-6">
+          <p class="lead text-center bg-white p-3">
+            Verify your email address <button class="btn btn-info">Verify Email Address</button>
+          </p>
+        </div>
+        <div class="col-md-3 d-none d-md-inline"></div>
+      </div>
       <!-- Row -->
       <div class="row">
         <div class="col-xl-3 col-lg-4">
-          <div class="card box-widget widget-user" wire:poll.keep-alive>
-            <div class="widget-user-image mx-auto mt-5"
-              x-data="{ isUploading: false, progress: 0 }"
-              x-on:livewire-upload-start="isUploading = true"
-              x-on:livewire-upload-finish="isUploading = false"
-              x-on:livewire-upload-error="isUploading = false"
-              x-on:livewire-upload-progress="progress = $event.detail.progress"
-            >
+          <div class="card box-widget widget-user" wire:poll.keep-alive
+            x-data="{ isUploading: false, progress: 0 }"
+            x-on:livewire-upload-start="isUploading = true"
+            x-on:livewire-upload-finish="isUploading = false"
+            x-on:livewire-upload-error="isUploading = false"
+            x-on:livewire-upload-progress="progress = $event.detail.progress"
+          >
+            <div class="widget-user-image mx-auto mt-5">
               <label for="profile_image" style="cursor: pointer;">
                 @if ($profile_image)
+                <div class="spinner-border text-danger bg-primary" role="status" wire:loading wire:target='profile_image'>
+                  <span class="visually-hidden">Loading...</span>
+                </div>
                   <img alt="User Avatar" class="rounded-circle" src="{{ $profile_image->temporaryUrl() }}">
                 @else
-                  <img alt="User Avatar" class="rounded-circle" src="{{ asset('images/profile_images') }}/{{ Auth::user()->profile_image }}">
+                  <img alt="User Avatar" class="rounded-circle" src="{{ Auth::user()->profile_image }}">
                 @endif
               </label>
               <input type="file" wire:model="profile_image" accept="image/*" style="display: none" id="profile_image">
@@ -40,13 +52,16 @@
                   <button class="btn btn-primary" wire:loading.attr="disabled" wire:loading wire:target="profile_image">Loading...</button>
                 </div> --}}
                 <div class="progress" x-show="isUploading">
-                  <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                  <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" x-bind:style="`width: ${progress}%`" x-text="`${progress}%`"></div>
                 </div>
                 <button class="btn btn-success {{ $profile_image?'':'d-none' }}" wire:click="saveProfileImage" wire:loading.attr="disabled">
                   <span wire:loading.class="d-none" wire:target="saveProfileImage">Save</span>
                   <span wire:loading wire:target="saveProfileImage">Saving..</span>
                 </button>
-                <button class="btn btn-danger {{ $profile_image?'':'d-none' }}" wire:click="cancelProfileImage">Cancel</button>
+                <button class="btn btn-danger {{ $profile_image?'':'d-none' }}" wire:click="cancelProfileImage">
+                  <span wire:loading.class='d-none' wire:target='cancelProfileImage'>Cancel</span>
+                  <span wire:loading wire:target='cancelProfileImage'>Loading</span>
+                </button>
                 <div class="text-center">
                   <a href="{{ route('show.profile.page', app()->getLocale()) }}" class="btn btn-primary mt-3 w-50">View Profile</a>
                 </div>
@@ -76,7 +91,7 @@
             <div class="card-body">
               <div class="text-center mb-5">
                 <div class="widget-user-image">
-                  <img alt="User Avatar" class="rounded-circle  me-3" src="{{ asset('images/profile_images') }}/{{ Auth::user()->profile_image }}">
+                  <img alt="User Avatar" class="rounded-circle  me-3" src="{{ Auth::user()->profile_image }}">
                 </div>
               </div>
               {{-- <div class="input-group mb-3">
@@ -87,7 +102,7 @@
                 <label class="form-label">Current Password</label>
                 <div class="input-group">
                   <input type="{{ $showPass?'text':'password' }}" aria-describedby="current_password" class="form-control" wire:model="current_password">
-                  <button class="input-group-text btn btn-primary" id="current_password"><i class="fa fa-{{ $showPass?'eye-slash':'eye' }}" wire:click="$toggle('showPass')"></i></button>
+                  <button class="input-group-text btn btn-primary" id="current_password" wire:click="$toggle('showPass')"><i class="fa fa-{{ $showPass?'eye-slash':'eye' }}"></i></button>
                 </div>
                 @error('current_password')
                   <small class="text-danger">{{ $message }}</small>
@@ -97,7 +112,7 @@
                 <label class="form-label">New Password</label>
                 <div class="input-group">
                   <input type="{{ $showPass?'text':'password' }}" aria-describedby="new_password" class="form-control" wire:model="new_password">
-                  <button class="input-group-text btn btn-primary" id="new_password"><i class="fa fa-{{ $showPass?'eye-slash':'eye' }}" wire:click="$toggle('showPass')"></i></button>
+                  <button class="input-group-text btn btn-primary" id="new_password" wire:click="$toggle('showPass')"><i class="fa fa-{{ $showPass?'eye-slash':'eye' }}"></i></button>
                 </div>
                 @error('new_password')
                   <small class="text-danger">{{ $message }}</small>
@@ -107,7 +122,7 @@
                 <label class="form-label">Confirm Password</label>
                 <div class="input-group">
                   <input type="{{ $showPass?'text':'password' }}" aria-describedby="confirm_password" class="form-control" wire:model="confirm_password">
-                  <button class="input-group-text btn btn-primary" id="confirm_password"><i class="fa fa-{{ $showPass?'eye-slash':'eye' }}" wire:click="$toggle('showPass')"></i></button>
+                  <button class="input-group-text btn btn-primary" id="confirm_password" wire:click="$toggle('showPass')"><i class="fa fa-{{ $showPass?'eye-slash':'eye' }}"></i></button>
                 </div>
                 @error('confirm_password')
                   <small class="text-danger">{{ $message }}</small>

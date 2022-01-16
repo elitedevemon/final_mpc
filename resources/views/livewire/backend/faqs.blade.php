@@ -68,7 +68,7 @@
                       $questioner_user = App\Models\User::where('username', $question->username)->first();
                     @endphp
                     <div class="media-user me-2">
-                      <div class=""><img alt="" class="rounded-circle avatar avatar-md" src="{{ asset('images/profile_images') }}/{{ $questioner_user->profile_image }}"></div>
+                      <div class=""><img alt="" class="rounded-circle avatar avatar-md" src="{{ $questioner_user->profile_image }}"></div>
                     </div>
                     <div class="media-body">
                       <h6 class="mb-0 mt-1 font-weight-bold">{{ $questioner_user->name }}</h6>

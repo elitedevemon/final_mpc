@@ -3,8 +3,10 @@
 namespace App\Http\Livewire\Backend;
 
 use App\Models\User;
+use Illuminate\Http\File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Intervention\Image\Facades\Image;
@@ -102,12 +104,13 @@ class Settings extends Component
     $image = $this->profile_image;
     $imageName = $image->getClientOriginalName();
     $imageNewName = $imageName.time().'.'.$image->extension();
-    $image_resize = Image::make($image->getRealPath());
-    $image_resize->resize(512, 512);
-    $image_resize->save(public_path('images/profile_images/'. $imageNewName));
+    $photo = Image::make($image)->fit(512);
+    Storage::disk('google')->put('1myDlAY82eriNIvEV11SaiknvWWq6LfEA/'.$imageNewName, (string) $photo->encode());
+    $url = Storage::disk('google')->url('1myDlAY82eriNIvEV11SaiknvWWq6LfEA/'.$imageNewName);
+    
     #user
     User::where('username', Auth::user()->username)->update([
-      'profile_image' => $imageNewName
+      'profile_image' => $url
     ]);
     $this->reset('profile_image');
   }
