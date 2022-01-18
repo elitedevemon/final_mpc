@@ -16,7 +16,14 @@
         <div class="col-md-3 d-none d-md-inline"></div>
         <div class="col-md-6">
           <p class="lead text-center bg-white p-3">
-            Verify your email address <button class="btn btn-info">Verify Email Address</button>
+            Verify your email address <button class="btn btn-info {{ $codeSent?'d-none':'' }}" wire:click="verifyEmail" wire:loading.attr='disabled'>
+              <span wire:target='verifyEmail' wire:loading.class='d-none'>Verify Email Address</span>
+              <span wire:target='verifyEmail' wire:loading>Sending Email...</span>
+            </button>
+            {{-- <h3 wire:poll.1000ms='timer()'>{{ $minutes }}<span class="{{ $endTimer?'':'d-none' }}">:</span>{{ $second }}</h3> --}}
+            <span wire:poll.1000ms.keep-alive="{{ $codeSent?'timer()':'' }}" class="{{ $codeSent?'':'d-none' }}">{{ $minutes }} : {{ $second }}</span>
+            <small style="text-decoration: underline; color: blue; cursor: pointer" wire:click='verifyEmail' class="{{ $codeSent?'':'d-none' }} {{ $endTimer?'d-none':'' }}"><span wire:target='verifyEmail' wire:loading.class='d-none'>Send email again</span><span wire:target='verifyEmail' wire:loading>Sending...</span></small>
+            <div class="{{ $codeSent?'':'d-none' }}"><small class="text-success">A verification mail has been sent to your email: {{ Auth::user()->email }}</small></div>
           </p>
         </div>
         <div class="col-md-3 d-none d-md-inline"></div>

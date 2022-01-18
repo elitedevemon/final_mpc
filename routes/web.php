@@ -6,6 +6,8 @@ use App\Http\Controllers\adminpanel\SuperAdminLoginController;
 use App\Http\Controllers\adminpanel\update\ContactInfo;
 use App\Http\Controllers\adminpanel\update\MarqueeController;
 use App\Http\Controllers\adminpanel\upload\BlogVideo;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\backend\CalendarController;
 use App\Http\Controllers\backend\ChattingController;
 use App\Http\Controllers\backend\ContactController;
@@ -53,11 +55,15 @@ Route::prefix('{language}')->group(function () {
   Route::view('contact', 'frontend.pages.contact')->name('contact');
   Route::view('services', 'frontend.pages.services')->name('services');
   Route::view('community', 'frontend.pages.community')->name('community');
-  # Test controller files for GoogleDrive as LaravelFilesystem
-  // Route::get('test' , [TestController::class, 'index']);
-  // Route::post('upload' , [TestController::class, 'upload'])->name('upload.file');
-  //Route::view('/custom/login', 'auth.custom-login')->name('custom.login');
-  //Route::view('/custom/register', 'auth.custom-register')->name('custom.register');
+
+  /**
+   * Override routes
+   */
+  Route::get('verify/email-address/{username}', [VerifyEmailController::class, 'index'])->name('verify.email.address');
+  Route::prefix('password')->group(function () {
+    Route::get('/forget/{username}', [ForgotPasswordController::class, 'index'])->name('show.forgot.password');
+    Route::get('/reset/{username}', [ForgotPasswordController::class, 'forgot'])->name('show.reset.password');
+  });
 
   /**
    * Logout GET URI

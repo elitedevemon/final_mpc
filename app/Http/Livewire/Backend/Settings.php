@@ -2,10 +2,11 @@
 
 namespace App\Http\Livewire\Backend;
 
+use App\Mail\EmailVerifyMail;
 use App\Models\User;
-use Illuminate\Http\File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -15,7 +16,7 @@ class Settings extends Component
 {
   use WithFileUploads;
   #public variables for changing password
-  public $current_password, $new_password, $confirm_password, $showPass, $profile_image;
+  public $current_password, $new_password, $confirm_password, $showPass, $profile_image, $time;
 
   #public variables for changing basic information
   public $name, $username, $email, $phone, $address, $city, $post_code, $country, $facebook, $google_plus,  $twitter, $pinterest, $about;
@@ -121,6 +122,61 @@ class Settings extends Component
   public function cancelProfileImage()
   {
     $this->reset('profile_image');
+  }
+
+  /**
+   * Send email verification mail
+   */
+  public function SendVerifyMail()
+  {
+    $details = [
+      'title' => 'Verify Your Email Address',
+      'body' => 'Please click the following link and follow the next instructions. Thank you.'
+    ];
+    Mail::to(Auth::user()->email)->send(new EmailVerifyMail($details));
+  }
+
+  /**
+   * Verify Email address
+   */
+  #public variable for timer function
+  public $minutes, $second, $endTimer;
+
+  #public variables
+  public $codeSent;
+
+  #verify email function
+  public function verifyEmail()
+  {
+    $this->SendVerifyMail();
+    $this->codeSent = true;
+    $this->minutes = 2;
+    $this->second  = 60;
+    $this->endTimer = true;
+  }
+
+  /**
+   * Timer function
+   */
+
+  #timer function
+  public function timer()
+  {
+    $this->second--;
+    if ($this->second<10) {
+      $this->second = "0$this->second";
+    }
+    if ($this->second == 0) {
+      if ($this->minutes>0) {
+        $this->minutes--;
+        $this->second = 59;
+      }else{
+        $this->minutes = false;
+        $this->second = false;
+        $this->codeSent = true;
+        $this->endTimer = false;
+      }
+    }
   }
 
   /**
