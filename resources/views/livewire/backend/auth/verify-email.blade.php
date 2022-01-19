@@ -25,6 +25,15 @@
                                     </div> --}}
                                     {{-- <hr class="divider my-6 text-primary"> --}}
                                     <form>
+                                      @error('username')
+                                        <small class="text-danger"><li>{{ $message }}</li></small>
+                                      @enderror
+                                      @error('password')
+                                        <small class="text-danger"><li>{{ $message }}</li></small>
+                                      @enderror
+                                      @error('wrongCredential')
+                                        <small class="text-danger"><li>{{ $message }}</li></small>
+                                      @enderror
                                         <div class="input-group mb-4">
                                                 <div class="input-group-text">
                                                     <i class="fe fe-user"></i>
@@ -61,12 +70,6 @@
                                               <span wire:target='login' wire:loading.class='d-none'>Log In</span>
                                               <span wire:target='login' wire:loading>Processing...</span>
                                             </button>
-                                            @error('username')
-                                              <small class="text-light">{{ $message }}</small>
-                                            @enderror
-                                            @error('password')
-                                              <small class="text-light">{{ $message }}</small>
-                                            @enderror
                                         </div>
                                     </div>
                                     </div>

@@ -31,7 +31,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('role')->default('Student');
             $table->string('profile_image')->default('https://drive.google.com/uc?id=1zMMFYFXy5lUyiDaHHC9i8Gxq0Z-v_mSs&export=media');
-            $table->string('level')->nullable();
+            $table->string('level')->default('new');
             $table->string('facebook')->nullable();
             $table->string('twitter')->nullable();
             $table->string('google_plus')->nullable();

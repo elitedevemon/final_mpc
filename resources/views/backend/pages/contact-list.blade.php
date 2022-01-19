@@ -1,7 +1,7 @@
 @extends('layouts.student-master')
 @section('student-title', 'Student Dashboard')
 @section('student-master-styles')
-  @include('backend.partials.contact.partials.contact-list-styles')
+  @include('backend.partials.result.partials.result-styles')
   @livewireStyles()
 @endsection
 @section('student-content')
@@ -10,8 +10,8 @@
   <!-- ============================================================== -->
   @livewire('backend.contact-list')
   <!-- end main content-->
-@endsection
-@section('student-master-scripts')
-  @include('backend.partials.contact.partials.contact-list-scripts')
-  @livewireScripts()
-@endsection
+  @endsection
+  @section('student-master-scripts')
+    @include('backend.partials.result.partials.result-scripts')
+    @livewireScripts()
+  @endsection

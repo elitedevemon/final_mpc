@@ -24,4 +24,13 @@ class ContactController extends Controller
   {
     return view('backend.pages.contact-list');
   }
+
+  /**
+   * Show selected profile
+   */
+  public function contactUserInfo($laungage, $username)
+  {
+    $auth_user = $username;
+    return view('backend.pages.selected-profile', compact('auth_user'));
+  }
 }

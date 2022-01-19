@@ -15,7 +15,7 @@
                   <div class="row mt-xl-5">
                     <div class="col-10 d-block mx-auto">
                       <div class="text-center mb-4 ">
-                          <span class="avatar avatar-xxl  brround" style="background-image: url({{ asset('superadmin/assets/images/users/2.jpg') }})"></span>
+                          <span class="avatar avatar-xxl  brround" style="background-image: url({{ Auth::user()->profile_image }})"></span>
                       </div>
                       <span class="m-4 d-none d-lg-block text-center">
                           <span class="fs-20"><strong>{{ Auth::user()->name }}</strong></span>

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Backend\Auth;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 
@@ -44,12 +45,13 @@ class VerifyEmail extends Component
         User::where('username', $this->auth_username)->update([
           'email_verified_at' => now()
         ]);
-        dd('done');
+        Auth::login($this->authDetails);
+        return redirect()->route('welcome', app()->getLocale());
       }else {
-        dd('password wrong');
+        $this->addError('wrongCredential', "Your credentials doesn't match our records");
       }
     }else {
-      dd('username wrong');
+      $this->addError('wrongCredential', "Your credentials doesn't match our records");
     }
   }
 

@@ -21,6 +21,9 @@ use App\Http\Controllers\backend\ProfileController;
 use App\Http\Controllers\backend\ResultController;
 use App\Http\Controllers\backend\SettingsController;
 use App\Http\Controllers\LockScreenController;
+use App\Http\Controllers\Socialite\GetInfo\FacebookController;
+use App\Http\Controllers\Socialite\GetInfo\GoogleController;
+use App\Http\Controllers\Socialite\GetInfo\LinkedinController;
 use App\Http\Controllers\TestController;
 use App\Http\Livewire\LockScreen;
 use Illuminate\Support\Facades\Auth;
@@ -55,6 +58,8 @@ Route::prefix('{language}')->group(function () {
   Route::view('contact', 'frontend.pages.contact')->name('contact');
   Route::view('services', 'frontend.pages.services')->name('services');
   Route::view('community', 'frontend.pages.community')->name('community');
+  Route::view('privacy-policy', 'frontend.pages.privacy_policy')->name('privacy.policy');
+  Route::view('terms-of-use', 'frontend.pages.terms_of_use')->name('terms.of.use');
 
   /**
    * Override routes
@@ -64,6 +69,20 @@ Route::prefix('{language}')->group(function () {
     Route::get('/forget/{username}', [ForgotPasswordController::class, 'index'])->name('show.forgot.password');
     Route::get('/reset/{username}', [ForgotPasswordController::class, 'forgot'])->name('show.reset.password');
   });
+
+  /**
+   * Adding Social info using socialite
+   */
+  # Get google related information
+  // Route::get('/login/google', [GoogleController::class, 'redirectToGoogle'])->name('login.google');
+  // Route::get('/login/google/callback', [GoogleController::class, 'handleGoogleCallback'])->name('google.callback');
+  // # Get facebook related information
+  // Route::get('/login/facebook', [FacebookController::class, 'redirectToFacebook'])->name('login.facebook');
+  // Route::get('/login/facebook/callback', [FacebookController::class, 'handleFacebookCallback'])->name('facebook.callback');
+  // # Get LinkedIn related information
+  // Route::get('/login/linkedin', [LinkedinController::class, 'redirectToLinkedin'])->name('login.linkedin');
+  // Route::get('/login/linkedin/callback', [LinkedinController::class, 'handleLinkedinCallback'])->name('facebook.callback');
+
 
   /**
    * Logout GET URI
@@ -131,6 +150,7 @@ Route::prefix('{language}')->group(function () {
        */
       Route::prefix('/contact')->group(function () {
           Route::get('/', [ContactController::class, 'index'])->name('show.contact-list.page');
+          Route::get('/user/{username}', [ContactController::class, 'contactUserInfo'])->name('show.selected.profile');
       });
       /**
        * Settings routes

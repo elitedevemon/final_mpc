@@ -62,7 +62,7 @@
                     My Account
                   </button>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="{{ route('home', app()->getLocale()) }}">Profile</a></li>
+                    <li><a class="dropdown-item" href="{{ route('home', app()->getLocale()) }}">Dashboard</a></li>
                     <li><a class="dropdown-item" href="#">Notification &nbsp; <span class="badge bg-primary">1</span></a></li>
                     <li><a class="dropdown-item" href="#">Messages &nbsp; <span class="badge bg-danger">1</span></a></li>
                     <li><a class="dropdown-item text-primary" href="{{ route('logout', app()->getLocale()) }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
@@ -131,6 +131,12 @@
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="{{ route('community', app()->getLocale()) }}">Community</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="{{ route('privacy.policy', app()->getLocale()) }}">Privacy Policy</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="{{ route('terms.of.use', app()->getLocale()) }}">Terms of Use</a>
                       </li>
 
                       {{-- <!--Google translator-->
