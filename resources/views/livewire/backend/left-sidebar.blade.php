@@ -20,15 +20,16 @@
                 <i class="fa fa-calendar side-menu__icon"></i>
             <span class="side-menu__label">Calendar</span><span class="badge bg-info side-badge {{ Auth::user()->email_verified_at?'':'d-none' }}">11</span><small class="text-danger text-sm {{ Auth::user()->email_verified_at?'d-none':'' }} side-badge">Disabled</small></a>
         </li>
-        <li class="slide" wire:poll.keep-alive>
+        {{-- <li class="slide" wire:poll.keep-alive>
           @php
             $faq_notification = App\Models\Backend\FaqsNotification::where('notification_receiver', Auth::user()->username)->get();
-            $total_notification = count($faq_notification);
+            $friend_request_notification = App\Models\Backend\Notification\FriendRequestNotification::where('receiver_username', Auth::user()->username)->where('action', 'sent')->get();
+            $total_notification = count($faq_notification)+count($friend_request_notification);
           @endphp
             <a class="side-menu__item"  href="{{ route('show.notifications.page', app()->getLocale()) }}">
                 <i class="fa fa-bell-o side-menu__icon"></i>
             <span class="side-menu__label">Notifications</span><span class="badge bg-danger side-badge {{ $total_notification>0?'':'d-none' }}">{{ $total_notification }}</span></a>
-        </li>
+        </li> --}}
         <li class="slide">
           <a class="side-menu__item" data-bs-toggle="{{ $toggle_name }}" data-bs-target="{{ $toggle_target }}" wire:click='modalId("chat")'  href="{{ Auth::user()->email_verified_at?route('show.chatting.page', app()->getLocale()):'javascript:void(0);' }}">
             <i class="fa fa-comments-o side-menu__icon"></i>
@@ -64,6 +65,18 @@
           <a class="side-menu__item" data-bs-toggle="{{ $toggle_name }}" data-bs-target="{{ $toggle_target }}" wire:click='modalId("contacts")'  href="{{ Auth::user()->email_verified_at?route('show.contact-list.page', app()->getLocale()):'javascript:void(0);' }}">
             <i class="mdi mdi-account-multiple side-menu__icon"></i>
             <span class="side-menu__label">Contacts</span>
+            <small class="text-danger text-sm {{ Auth::user()->email_verified_at?'d-none':'' }} side-badge">Disabled</small>
+          </a>
+        </li>
+        <li class="slide">
+          @php
+            $friend_request_notification = App\Models\Backend\Notification\FriendRequestNotification::where('receiver_username', Auth::user()->username)->where('action', 'sent')->get();
+            $total_friend_request_notification = count($friend_request_notification);
+          @endphp
+          <a class="side-menu__item" data-bs-toggle="{{ $toggle_name }}" data-bs-target="{{ $toggle_target }}" wire:click='modalId("Friend Request")' href="{{ Auth::user()->email_verified_at?route('show.friend.request.page', app()->getLocale()):'javascript:void(0);' }}">
+            <i class="mdi mdi-account side-menu__icon"></i>
+            <span class="side-menu__label">Friend Request</span>
+            <span class="badge bg-danger side-badge {{ Auth::user()->email_verified_at?'':'d-none' }}{{ $total_friend_request_notification!=0?'':'d-none' }}">{{ $total_friend_request_notification }}</span>
             <small class="text-danger text-sm {{ Auth::user()->email_verified_at?'d-none':'' }} side-badge">Disabled</small>
           </a>
         </li>
@@ -112,12 +125,10 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">{{ $modal_title }}</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Enable {{ $modal_title }}</h5>
         </div>
         <div class="modal-body">
-          @php
-            echo $modal_message;
-          @endphp
+          To enable {{ $modal_message }} tab, please <a href="{{ route('show.settings.page', app()->getLocale()) }}" class='text-success'>verify your email</a> address.
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>

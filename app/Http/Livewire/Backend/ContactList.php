@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Backend;
 
+use App\Models\Backend\FriendRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -14,7 +15,7 @@ class ContactList extends Component
   public function render()
   {
     return view('livewire.backend.contact-list', [
-      'contacts' => User::orderBy('name', 'ASC')->where('id', '!=', Auth::user()->id)->get(),
+      'contacts' => FriendRequest::orderBy('sender_username', 'ASC')->where('receiver_username', Auth::user()->username)->where('action', 'success')->orWhere('sender_username', Auth::user()->username)->where('action', 'success')->get(),
     ]);
   }
 }

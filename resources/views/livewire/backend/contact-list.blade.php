@@ -23,7 +23,14 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($contacts as $friend)
+                @foreach ($contacts as $contact)
+                  @php
+                    if (Auth::user()->username == $contact->sender_username) {
+                      $friend = App\Models\User::where('username', $contact->receiver_username)->first();
+                    }else {
+                      $friend = App\Models\User::where('username', $contact->sender_username)->first();
+                    }
+                  @endphp
                   <tr>
                     <td>{{ $friend->name }}</td>
                     <td>{{ $friend->email }}</td>

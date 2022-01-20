@@ -15,6 +15,7 @@ use App\Http\Controllers\backend\EmailController;
 use App\Http\Controllers\backend\ExamController;
 use App\Http\Controllers\backend\FaqsController;
 use App\Http\Controllers\backend\ForumController;
+use App\Http\Controllers\backend\FriendRequestController;
 use App\Http\Controllers\backend\HomeController;
 use App\Http\Controllers\backend\NotificationController;
 use App\Http\Controllers\backend\ProfileController;
@@ -151,6 +152,14 @@ Route::prefix('{language}')->group(function () {
       Route::prefix('/contact')->group(function () {
           Route::get('/', [ContactController::class, 'index'])->name('show.contact-list.page');
           Route::get('/user/{username}', [ContactController::class, 'contactUserInfo'])->name('show.selected.profile');
+      });
+      /**
+       * Friend request related routes
+       * 
+       * prefix /home/friend-request
+       */
+      Route::prefix('/friend-request')->group(function () {
+        Route::get('/', [FriendRequestController::class, 'index'])->name('show.friend.request.page');
       });
       /**
        * Settings routes

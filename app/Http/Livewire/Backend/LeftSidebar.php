@@ -28,8 +28,8 @@ class LeftSidebar extends Component
    */
   public function modalId($modal_target)
   {
-    $this->modal_title = "Enable $modal_target";
-    $this->modal_message = "To enable $modal_target tab, please <a href='#' class='text-success'>verify your email</a> address";
+    $this->modal_title = $modal_target;
+    $this->modal_message = $modal_target;
   }
 
   /**
