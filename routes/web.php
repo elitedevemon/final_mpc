@@ -124,7 +124,10 @@ Route::prefix('{language}')->group(function () {
       Route::get('/', [HomeController::class, 'index'])->name('home');
       Route::get('profile-page', [ProfileController::class, 'index'])->name('show.profile.page');
       Route::get('chatting-page', [ChattingController::class, 'index'])->name('show.chatting.page');
-      Route::get('calendar-page', [CalendarController::class, 'index'])->name('show.calendar.page');
+
+      Route::prefix('/calender-page')->group(function () {
+        Route::get('/', [CalendarController::class, 'index'])->name('show.calendar.page');
+      });
       /**
        * Email routes
        * 

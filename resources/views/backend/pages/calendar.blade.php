@@ -12,4 +12,12 @@
 @endsection
 @section('student-master-scripts')
   @include('backend.partials.calendar.partials.calendar-scripts')
+  <script>
+    window.addEventListener('TaskListModal', event => {
+        $("#taskModal").modal('hide');                
+    });
+    window.addEventListener('TaskEditModal', event => {
+        $("#TaskEditModal").modal('hide');                
+    })
+  </script>
 @endsection

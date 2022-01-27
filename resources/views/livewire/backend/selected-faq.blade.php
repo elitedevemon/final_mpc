@@ -15,7 +15,7 @@
         <div class="col-xl-12 col-lg-12 col-md-12">
           <div class="card overflow-hidden">
             <div class="card-body">
-              <a href="javascript:void(0);" class="mt-4"><h5 class="font-weight-semibold">{{ $faq_poster->name }} has been posted a question</h5></a>
+              <a href="javascript:void(0);" class="mt-4"><h5 class="font-weight-semibold">{{ $faq_poster->name }} has posted a question</h5></a>
               <p>{{ $faq->question }}</p>
               <!--Faq image related PHP code-->
                 @php
@@ -51,9 +51,9 @@
               @endif
               <div class="item7-card-desc d-md-flex mb-5">
                 <a href="javascript:void(0);" class="d-flex me-4 mb-2"><i class="fe fe-calendar fs-16 me-1 p-3 bg-secondary-transparent text-secondary brround border-secondary"></i><div class="mt-0 mt-3 ms-1 text-muted font-weight-semibold">{{ date('M-d-Y', strtotime($faq->created_at)) }}</div></a>
-                <a href="javascript:void(0);" class="d-flex mb-2"><i class="fe fe-user fs-16 me-1 p-3 bg-success-transparent text-success brround border-success"></i><div class="mt-0 mt-3 ms-1 text-muted font-weight-semibold">{{ $faq_poster->name }}</div></a>
+                <a href="{{ route('show.selected.profile', ['language'=>app()->getLocale(), 'username'=>$faq_poster->username]) }}" class="d-flex mb-2"><i class="fe fe-user fs-16 me-1 p-3 bg-success-transparent text-success brround border-success"></i><div class="mt-0 mt-3 ms-1 text-muted font-weight-semibold">{{ $faq_poster->name }}</div></a>
                 <div class="ms-auto mb-2">
-                  <a class="me-0 d-flex" href="javascript:void(0);"><i class="fe fe-message-square fs-16 me-1 p-3 bg-warning-transparent text-warning brround border-warning"></i><div class="mt-0 mt-3 ms-1 text-muted font-weight-semibold">{{ count($total_comments) }} Comments</div></a>
+                  <a class="me-0 d-flex" href="#firstComment"><i class="fe fe-message-square fs-16 me-1 p-3 bg-warning-transparent text-warning brround border-warning"></i><div class="mt-0 mt-3 ms-1 text-muted font-weight-semibold">{{ count($total_comments) }} Comments</div></a>
                 </div>
               </div>
               <div class="media py-3 mt-0 border-top">
@@ -81,15 +81,15 @@
             </div>
             <div class="card-body">
               @foreach ($comments as $comment)
-                <div class="d-sm-flex p-5 sub-review-section border subsection-color br-tl-0 br-tr-0">
+                <div class="d-sm-flex p-5 sub-review-section border subsection-color br-tl-0 br-tr-0" id="{{ $loop->first?'firstComment':'' }}">
+                  @php
+                    $user = App\Models\User::where('username', $comment->username)->first();
+                  @endphp
                   <div class="d-flex me-3">
-                    <a href="javascript:void(0);"><img class="media-object brround avatar-md" alt="64x64" src="{{ asset('superadmin/assets/images/users/2.jpg') }}"> </a>
+                    <a href="{{ route('show.selected.profile', ['language'=>app()->getLocale(), 'username'=>$user->username]) }}"><img class="media-object brround avatar-md" alt="64x64" src="{{ $user->profile_image }}"> </a>
                   </div>
                   <div class="media-body Comments1">
-                    @php
-                      $user = App\Models\User::where('username', $comment->username)->first();
-                    @endphp
-                    <h5 class="mt-0 mb-1 font-weight-semibold">{{ $user->name }} <span class="fs-14 ms-0" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success {{ $user->email_verified_at?'':'d-none' }}"></i></span></h5>
+                    <h5 class="mt-0 mb-1 font-weight-semibold"><a href="{{ route('show.selected.profile', ['language'=>app()->getLocale(), 'username'=>$user->username]) }}">{{ $user->name }}</a> <span class="fs-14 ms-0" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success {{ $user->email_verified_at?'':'d-none' }}"></i></span></h5>
                     <p class="font-13  mb-2 mt-2">
                       {{ $comment->comment }}
                     </p>

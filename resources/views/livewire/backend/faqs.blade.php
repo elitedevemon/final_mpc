@@ -68,10 +68,12 @@
                       $questioner_user = App\Models\User::where('username', $question->username)->first();
                     @endphp
                     <div class="media-user me-2">
-                      <div class=""><img alt="" class="rounded-circle avatar avatar-md" src="{{ $questioner_user->profile_image }}"></div>
+                      <a href="{{ route('show.selected.profile', ['language'=> app()->getLocale(), 'username'=>$questioner_user->username]) }}" class=""><img alt="" class="rounded-circle avatar avatar-md" src="{{ $questioner_user->profile_image }}"></a>
                     </div>
                     <div class="media-body">
-                      <h6 class="mb-0 mt-1 font-weight-bold">{{ $questioner_user->name }}</h6>
+                      <a href="{{ route('show.selected.profile', ['language'=> app()->getLocale(), 'username'=>$questioner_user->username]) }}">
+                        <h6 class="mb-0 mt-1 font-weight-bold">{{ $questioner_user->name }}</h6>
+                      </a>
                       <small class="text-primary">{{ $question->created_at->diffForHumans() }}</small>
                     </div>
                   </div>

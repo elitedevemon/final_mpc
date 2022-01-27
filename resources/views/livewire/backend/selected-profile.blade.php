@@ -9,7 +9,7 @@
                 <div class="text-center">
                   <img alt="User Avatar" class="avatar brround p-0" src="{{ $user->profile_image }}">
                   <div class="mt-1 ms-xl-5">
-                    <h4 class="pro-user-username mb-3 font-weight-bold">{{ $user->name }} <i class="fa fa-check-circle text-success"></i></h4>
+                    <h4 class="pro-user-username mb-3 font-weight-bold">{{ $user->name }} <i class="fa fa-check-circle text-success {{ $user->email_verified_at?'':'d-none' }}"></i></h4>
                   </div>
 
                   <!--PHP related query-->
@@ -28,7 +28,7 @@
                   @endphp
                   <!--end PHP query-->
 
-                  <div class="text-xl-right text-left btn-list mt-4 mt-lg-0">
+                  <div class="text-xl-right text-left btn-list mt-4 mt-lg-0 {{ Auth::user()->username == $user->username?'d-none':'' }}">
                     <!--All Send friend request buttons-->
                       <button wire:click="addFriend('{{ $user->username }}')" class="btn btn-outline-info {{ $existsSendRequest?'d-none':'' }} {{ $alreadyFriend?'d-none':'' }} {{ $existsReceivedRequest?'d-none':'' }}" wire:loading.attr='disabled'>
                         <span wire:target='addFriend' wire:loading.class='d-none'>Add Friend</span>
@@ -120,7 +120,7 @@
               <div class="widget-user-image1 d-xl-flex d-block">
                 <img alt="User Avatar" class="avatar brround p-0" src="{{ $user->profile_image }}">
                 <div class="mt-1 ms-xl-5">
-                  <h4 class="pro-user-username mb-3 font-weight-bold">{{ $user->name }} <i class="fa fa-check-circle text-success"></i></h4>
+                  <h4 class="pro-user-username mb-3 font-weight-bold">{{ $user->name }} <i class="fa fa-check-circle text-success {{ $user->email_verified_at?'':'d-none' }}"></i></h4>
                   <ul class="mb-0 pro-details">
                     <li><span class="profile-icon bg-danger-transparent text-danger"><i class="fe fe-globe"></i></span><span class="h6 mt-3">www.mpcmethod.com</span></li>
                     <li><span class="profile-icon bg-success-transparent text-success"><i class="fe fe-mail"></i></span><span class="h6 mt-3">{{ $user->email }}</span></li>
@@ -132,7 +132,7 @@
             </div>
           </div>
           <div class="col-lg-12 col-md-auto col-xl-4">
-            <div class="text-xl-right text-left btn-list mt-4 mt-lg-0">
+            <div class="text-xl-right text-left btn-list mt-4 mt-lg-0 {{ Auth::user()->username == $user->username?'d-none':'' }}">
               <!--All Send friend request buttons-->
               <button wire:click="addFriend('{{ $user->username }}')" class="btn btn-outline-info {{ $existsSendRequest?'d-none':'' }} {{ $alreadyFriend?'d-none':'' }} {{ $existsReceivedRequest?'d-none':'' }}" wire:loading.attr='disabled'>
                 <span wire:target='addFriend' wire:loading.class='d-none'>Add Friend</span>
