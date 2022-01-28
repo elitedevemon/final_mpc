@@ -3,14 +3,13 @@
 namespace App\Http\Livewire\Backend\Calendar;
 
 use App\Models\Backend\TaskList;
-use App\Models\Backend\TaskListTrash;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
-class AllTask extends Component
+class ImportantTask extends Component
 {
   #public variables
-  public $title, $date, $description, $test, $tab = 'all-task';
+  public $title, $date, $description, $test, $tab = 'important-task', $checkbox;
   protected $queryString = ['tab'];
 
 
@@ -20,7 +19,7 @@ class AllTask extends Component
   public function saveTask()
   {
     $this->validate([
-      'title'=>'required|max:25',
+      'title'=>'required|max:150',
       'date'=>'required',
       'description'=>'required|max:255'
     ]);
@@ -31,7 +30,7 @@ class AllTask extends Component
     $task->description = $this->description;
     $task->save();
     $this->dispatchBrowserEvent('TaskListModal');
-    $this->tab = 'all-task';
+    $this->tab = 'important-task';
     //return redirect()->route('show.calendar.page', app()->getLocale());
   }
 
@@ -46,7 +45,7 @@ class AllTask extends Component
   public function taskDetailsView($taskId)
   {
     $this->taskItemDetails = TaskList::where('id', $taskId)->first();
-    $this->tab = 'all-task';
+    $this->tab = 'important-task';
   }
 
   /**
@@ -62,7 +61,7 @@ class AllTask extends Component
     $this->TaskEditTitle = $this->taskEditItemDetails->title;
     $this->TaskEditDate = $this->taskEditItemDetails->date;
     $this->TaskEditDescription = $this->taskEditItemDetails->description;
-    $this->tab = 'all-task';
+    $this->tab = 'important-task';
   }
 
   # save function
@@ -76,7 +75,7 @@ class AllTask extends Component
     $task->description = $this->TaskEditDescription;
     $task->update();
     $this->dispatchBrowserEvent('TaskEditModal');
-    $this->tab = 'all-task';
+    $this->tab = 'important-task';
   }
 
   /**
@@ -84,43 +83,28 @@ class AllTask extends Component
    */
   public function TaskItemDelete($taskId)
   {
-    $taskList = TaskList::where('id', $taskId)->first();
-    $trash = new TaskListTrash();
-    $trash->username = $taskList->username;
-    $trash->title = $taskList->title;
-    $trash->date = $taskList->date;
-    $trash->description = $taskList->description;
-    $trash->save();
-    $taskList->delete();
-    $this->tab = 'all-task';
+    TaskList::where('id', $taskId)->delete();
+    $this->tab = 'important-task';
   }
 
   /**
    * Render function
    */
   # public varable
-  public $paginationPage = 5, $searchTerm;
+  public $paginationPage = 6;
 
   # Load more function
   public function loadMore()
   {
     $this->paginationPage += 5;
-    $this->tab = 'all-task';
+    $this->tab = 'important-task';
   }
 
   public function render()
   {
-    $this->tab = 'all-task';
-    return view('livewire.backend.calendar.all-task',[
+    $this->tab = 'important-task';
+    return view('livewire.backend.calendar.important-task',[
       'taskList' => TaskList::where('username', Auth::user()->username)->orderBy('id', 'DESC')->paginate($this->paginationPage),
-      'searchResult' => TaskList::where('title', 'like', "%$this->searchTerm%")
-                      ->where('username', Auth::user()->username)
-                      ->orWhere('description', 'like', "%$this->searchTerm%")
-                      ->where('username', Auth::user()->username)
-                      ->orWhere('date', 'like', "%$this->searchTerm%")
-                      ->where('username', Auth::user()->username)
-                      ->orderBy('id', 'DESC')
-                      ->paginate($this->paginationPage),
     ]);
   }
 }

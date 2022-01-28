@@ -7,11 +7,26 @@ use App\Models\Backend\TaskListTrash;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
-class AllTask extends Component
+class PendingTask extends Component
 {
   #public variables
-  public $title, $date, $description, $test, $tab = 'all-task';
+  public $title, $date, $description, $test, $tab="pending-task";
   protected $queryString = ['tab'];
+
+  /**
+   * Mount function
+   */
+  public function mount()
+  {
+    # delete task which is older than 2 months
+    $afterTwoMonths = date('Y-m-d', strtotime('+2 month ago'));
+    $taskList = TaskList::all();
+    foreach ($taskList as $taskItem ) {
+      if ($taskItem->date <= $afterTwoMonths) {
+        $taskItem->delete();
+      }
+    }
+  }
 
 
   /**
@@ -20,7 +35,7 @@ class AllTask extends Component
   public function saveTask()
   {
     $this->validate([
-      'title'=>'required|max:25',
+      'title'=>'required|max:150',
       'date'=>'required',
       'description'=>'required|max:255'
     ]);
@@ -31,7 +46,7 @@ class AllTask extends Component
     $task->description = $this->description;
     $task->save();
     $this->dispatchBrowserEvent('TaskListModal');
-    $this->tab = 'all-task';
+    $this->tab = 'pending-task';
     //return redirect()->route('show.calendar.page', app()->getLocale());
   }
 
@@ -46,7 +61,7 @@ class AllTask extends Component
   public function taskDetailsView($taskId)
   {
     $this->taskItemDetails = TaskList::where('id', $taskId)->first();
-    $this->tab = 'all-task';
+    $this->tab = 'pending-task';
   }
 
   /**
@@ -62,7 +77,7 @@ class AllTask extends Component
     $this->TaskEditTitle = $this->taskEditItemDetails->title;
     $this->TaskEditDate = $this->taskEditItemDetails->date;
     $this->TaskEditDescription = $this->taskEditItemDetails->description;
-    $this->tab = 'all-task';
+    $this->tab = 'pending-task';
   }
 
   # save function
@@ -76,7 +91,7 @@ class AllTask extends Component
     $task->description = $this->TaskEditDescription;
     $task->update();
     $this->dispatchBrowserEvent('TaskEditModal');
-    $this->tab = 'all-task';
+    $this->tab = 'pending-task';
   }
 
   /**
@@ -92,32 +107,35 @@ class AllTask extends Component
     $trash->description = $taskList->description;
     $trash->save();
     $taskList->delete();
-    $this->tab = 'all-task';
+    $this->tab = 'pending-task';
   }
 
   /**
    * Render function
    */
   # public varable
-  public $paginationPage = 5, $searchTerm;
+  public $paginationPage = 4, $searchTerm;
 
   # Load more function
   public function loadMore()
   {
     $this->paginationPage += 5;
-    $this->tab = 'all-task';
+    $this->tab = 'pending-task';
   }
-
   public function render()
   {
-    $this->tab = 'all-task';
-    return view('livewire.backend.calendar.all-task',[
-      'taskList' => TaskList::where('username', Auth::user()->username)->orderBy('id', 'DESC')->paginate($this->paginationPage),
-      'searchResult' => TaskList::where('title', 'like', "%$this->searchTerm%")
-                      ->where('username', Auth::user()->username)
+    $this->tab = 'pending-task';
+    $today = date('Y-m-d');
+    return view('livewire.backend.calendar.pending-task',[
+      'taskList' => TaskList::where('username', Auth::user()->username)->where('date', '<', $today)->orderBy('id', 'DESC')->paginate($this->paginationPage),
+      'searchResult' => TaskList::where('username', Auth::user()->username)
+                      ->where('date', '<', $today)
+                      ->where('title', 'like', "%$this->searchTerm%")
                       ->orWhere('description', 'like', "%$this->searchTerm%")
                       ->where('username', Auth::user()->username)
+                      ->where('date', '<', $today)
                       ->orWhere('date', 'like', "%$this->searchTerm%")
+                      ->where('date', '<', $today)
                       ->where('username', Auth::user()->username)
                       ->orderBy('id', 'DESC')
                       ->paginate($this->paginationPage),

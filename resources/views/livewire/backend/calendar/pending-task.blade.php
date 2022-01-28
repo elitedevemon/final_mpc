@@ -96,7 +96,7 @@
                   </tr>
                 @endforeach
               @else
-                <h5 class="text-center">There have no tasks.</h5>
+                <h5 class="text-center">There have no pending tasks</h5>
               @endif
             </tbody>
           </table>

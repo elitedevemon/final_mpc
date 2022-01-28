@@ -38,14 +38,14 @@
             <small class="text-danger text-sm {{ Auth::user()->email_verified_at?'d-none':'' }} side-badge">Disabled</small>
           </a>
         </li>
-        <li class="slide">
+        {{-- <li class="slide">
           <a class="side-menu__item" data-bs-toggle="{{ $toggle_name }}" data-bs-target="{{ $toggle_target }}" wire:click='modalId("e-mail")'  href="{{ Auth::user()->email_verified_at?route('show.email.inbox', app()->getLocale()):'javascript:void(0);' }}">
             <i class="fa fa-telegram side-menu__icon"></i>
             <span class="side-menu__label">Email</span>
             <span class="badge bg-warning side-badge {{ Auth::user()->email_verified_at?'':'d-none' }}">11</span>
             <small class="text-danger text-sm {{ Auth::user()->email_verified_at?'d-none':'' }} side-badge">Disabled</small>
           </a>
-        </li>
+        </li> --}}
         <li class="slide">
           <a class="side-menu__item" data-bs-toggle="{{ $toggle_name }}" data-bs-target="{{ $toggle_target }}" wire:click='modalId("exam")'  href="{{ Auth::user()->email_verified_at?route('show.exam.page', app()->getLocale()):'javascript:void(0);' }}">
             <i class="fa fa-bell-o side-menu__icon"></i>
@@ -71,12 +71,11 @@
         <li class="slide">
           @php
             $friend_request_notification = App\Models\Backend\Notification\FriendRequestNotification::where('receiver_username', Auth::user()->username)->where('action', 'sent')->get();
-            $total_friend_request_notification = count($friend_request_notification);
           @endphp
           <a class="side-menu__item" data-bs-toggle="{{ $toggle_name }}" data-bs-target="{{ $toggle_target }}" wire:click='modalId("Friend Request")' href="{{ Auth::user()->email_verified_at?route('show.friend.request.page', app()->getLocale()):'javascript:void(0);' }}">
             <i class="mdi mdi-account side-menu__icon"></i>
             <span class="side-menu__label">Friend Request</span>
-            <span class="badge bg-danger side-badge {{ Auth::user()->email_verified_at?'':'d-none' }}{{ $total_friend_request_notification!=0?'':'d-none' }}">{{ $total_friend_request_notification }}</span>
+            <span class="badge bg-danger side-badge {{ Auth::user()->email_verified_at?'':'d-none' }} {{ count($friend_request_notification) > 0 ?'':'d-none' }}">{{ count($friend_request_notification) }}</span>
             <small class="text-danger text-sm {{ Auth::user()->email_verified_at?'d-none':'' }} side-badge">Disabled</small>
           </a>
         </li>
