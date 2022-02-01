@@ -17,6 +17,17 @@
 
     <!--Insider section-->
     <div class="row">
+      <div class="col-4"></div>
+      <div class="col-4"></div>
+      <div class="col-4">
+        <div class="text-end">
+          <div class="position-fixed" wire:poll.1000ms='examTimer'>
+            <h5 class="bg-light text-secondary p-1">{{ $minutes.":".$second }}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
       @foreach ($questions as $question)
         <div class="col-md-6 mt-2">
           <h5>{{ $loop->index+1 }}) {{ $question->question }}</h5>
@@ -46,8 +57,18 @@
         </div>
       @endforeach
     </div>
-    <div class="text-center">
-      <button class="btn btn-primary w-50" wire:click='submitAnswer'>Submit</button>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="text-center d-md-none">
+          <button class="btn btn-primary w-100" wire:click='submitAnswer' wire:loading.attr='disabled'>Submit <i class="fa fa-spinner fa-spin" wire:target='submitAnswer' wire:loading></i></button>
+        </div>
+      </div>
+      <div class="col-md-4 d-none d-md-block">
+        <div class="text-center">
+          <button class="btn btn-primary w-75" wire:click='submitAnswer' wire:loading.attr='disabled'>Submit <i class="fa fa-spinner fa-spin" wire:target='submitAnswer' wire:loading></i></button>
+        </div>
+      </div>
+      <div class="col-md-4"></div>
     </div>
     <!--end insider section-->
   </section>

@@ -18,7 +18,9 @@
         <li class="slide">
             <a class="side-menu__item" data-bs-toggle="{{ $toggle_name }}" data-bs-target="{{ $toggle_target }}" wire:click='modalId("calender")' href="{{ Auth::user()->email_verified_at?route('show.calendar.page', ['language'=>app()->getLocale(), 'tab'=>'all-task']):'javescript:void(0);' }}">
                 <i class="fa fa-calendar side-menu__icon"></i>
-            <span class="side-menu__label">Calendar</span><span class="badge bg-info side-badge {{ Auth::user()->email_verified_at?'':'d-none' }}">11</span><small class="text-danger text-sm {{ Auth::user()->email_verified_at?'d-none':'' }} side-badge">Disabled</small></a>
+            <span class="side-menu__label">Calendar</span>
+            {{-- <span class="badge bg-info side-badge {{ Auth::user()->email_verified_at?'':'d-none' }}">11</span> --}}
+            <small class="text-danger text-sm {{ Auth::user()->email_verified_at?'d-none':'' }} side-badge">Disabled</small></a>
         </li>
         {{-- <li class="slide" wire:poll.keep-alive>
           @php
@@ -30,14 +32,14 @@
                 <i class="fa fa-bell-o side-menu__icon"></i>
             <span class="side-menu__label">Notifications</span><span class="badge bg-danger side-badge {{ $total_notification>0?'':'d-none' }}">{{ $total_notification }}</span></a>
         </li> --}}
-        <li class="slide">
+        {{-- <li class="slide">
           <a class="side-menu__item" data-bs-toggle="{{ $toggle_name }}" data-bs-target="{{ $toggle_target }}" wire:click='modalId("chat")'  href="{{ Auth::user()->email_verified_at?route('show.chatting.page', app()->getLocale()):'javascript:void(0);' }}">
             <i class="fa fa-comments-o side-menu__icon"></i>
             <span class="side-menu__label">Chat</span>
             <span class="badge bg-primary side-badge {{ Auth::user()->email_verified_at?'':'d-none' }}">11</span>
             <small class="text-danger text-sm {{ Auth::user()->email_verified_at?'d-none':'' }} side-badge">Disabled</small>
           </a>
-        </li>
+        </li> --}}
         {{-- <li class="slide">
           <a class="side-menu__item" data-bs-toggle="{{ $toggle_name }}" data-bs-target="{{ $toggle_target }}" wire:click='modalId("e-mail")'  href="{{ Auth::user()->email_verified_at?route('show.email.inbox', app()->getLocale()):'javascript:void(0);' }}">
             <i class="fa fa-telegram side-menu__icon"></i>
@@ -50,7 +52,7 @@
           <a class="side-menu__item" data-bs-toggle="{{ $toggle_name }}" data-bs-target="{{ $toggle_target }}" wire:click='modalId("exam")'  href="{{ Auth::user()->email_verified_at?route('show.exam.page', ['language'=>app()->getLocale(), 'examTopicId'=>'all']):'javascript:void(0);' }}">
             <i class="fa fa-bell-o side-menu__icon"></i>
             <span class="side-menu__label">Exam</span>
-            <span class="badge bg-danger side-badge {{ Auth::user()->email_verified_at?'':'d-none' }}">11</span>
+            {{-- <span class="badge bg-danger side-badge {{ Auth::user()->email_verified_at?'':'d-none' }}">11</span> --}}
             <small class="text-danger text-sm {{ Auth::user()->email_verified_at?'d-none':'' }} side-badge">Disabled</small>
           </a>
         </li>
@@ -96,7 +98,7 @@
             <a class="side-menu__item"  href="{{ route('show.blog.post', app()->getLocale()) }}">
                 <i class="fa fa-sellsy side-menu__icon"></i>
               <span class="side-menu__label">Forum</span>
-              <span class="badge bg-info side-badge">11</span>
+              {{-- <span class="badge bg-info side-badge">11</span> --}}
             </a>
         </li>
         <li class="slide">
