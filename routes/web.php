@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\adminpanel\create\BlogPost;
+use App\Http\Controllers\adminpanel\create\ExamQuestionController;
 use App\Http\Controllers\adminpanel\LockScreenController as AdminpanelLockScreenController;
 use App\Http\Controllers\adminpanel\SuperAdminLoginController;
 use App\Http\Controllers\adminpanel\update\ContactInfo;
@@ -253,6 +254,7 @@ Route::prefix('{language}')->group(function () {
         Route::get('drafted', [BlogPost::class, 'drafted'])->name('show.drafted.post');
         Route::get('drafted/{slug}', [BlogPost::class, 'draftedView'])->name('show.selected.draft.post');
         Route::post('drafted/save/{slug}', [BlogPost::class, 'saveDraftPost'])->name('save.draft.post');
+        Route::get('exam-question', [ExamQuestionController::class, 'examQuestion'])->name('show.exam.question');
       });
     });
   });

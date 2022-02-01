@@ -47,7 +47,7 @@
           </a>
         </li> --}}
         <li class="slide">
-          <a class="side-menu__item" data-bs-toggle="{{ $toggle_name }}" data-bs-target="{{ $toggle_target }}" wire:click='modalId("exam")'  href="{{ Auth::user()->email_verified_at?route('show.exam.page', app()->getLocale()):'javascript:void(0);' }}">
+          <a class="side-menu__item" data-bs-toggle="{{ $toggle_name }}" data-bs-target="{{ $toggle_target }}" wire:click='modalId("exam")'  href="{{ Auth::user()->email_verified_at?route('show.exam.page', ['language'=>app()->getLocale(), 'examTopicId'=>'all']):'javascript:void(0);' }}">
             <i class="fa fa-bell-o side-menu__icon"></i>
             <span class="side-menu__label">Exam</span>
             <span class="badge bg-danger side-badge {{ Auth::user()->email_verified_at?'':'d-none' }}">11</span>

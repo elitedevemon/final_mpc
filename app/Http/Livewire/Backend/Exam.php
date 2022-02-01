@@ -2,12 +2,36 @@
 
 namespace App\Http\Livewire\Backend;
 
+use App\Models\Superadmin\Exam\ExamTopic;
 use Livewire\Component;
 
 class Exam extends Component
 {
-    public function render()
-    {
-        return view('livewire.backend.exam');
-    }
+  # query string variable
+  protected $queryString = ['examTopicId'];
+  public $examTopicId;
+
+  # listeners
+  protected $listeners = [
+    'queryId'
+  ];
+
+
+  /**
+   * Listeners function
+   */
+  # queryId listener function
+  public function queryId($value)
+  {
+    $this->examTopicId = $value;
+  }
+
+
+  /**
+   * Render function
+   */
+  public function render()
+  {
+    return view('livewire.backend.exam');
+  }
 }

@@ -1,4 +1,4 @@
-<div wire:poll>
+<div wire:poll></div>
   <div class="overflow-hidden mb-0 mb-lg-0">
     <div class="card-body p-0">
       <div class="main-content-left main-content-left-chat">
