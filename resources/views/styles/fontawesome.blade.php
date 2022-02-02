@@ -1,1 +1,1 @@
-<link rel="stylesheet" href="{{ asset('assets/css/icons.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.min.css') }}">

@@ -27,16 +27,15 @@
                 <td>{{ date('d-m-Y', strtotime($question->date)) }}</td>
                 <td>
                   <!-- Start exam button-->
-                  <button class="btn btn-primary {{ $question->getResult?($question->getResult->username == Auth::user()->username?'d-none':''):'' }}" wire:click='startExam({{ $question->id }})' wire:loading.attr='disabled'>
+                  <button class="btn btn-primary {{ $question->getResult?'d-none':'' }}" wire:click='startExam({{ $question->id }})' wire:loading.attr='disabled'>
                     <span wire:target="startExam({{ $question->id }})" wire:loading.class='d-none'>Start Exam</span>
                     <span wire:target="startExam({{ $question->id }})" wire:loading>Starting <i class="fa fa-spinner fa-spin"></i></span>
                   </button>
 
                   <!--View result button-->
-                  <button class="btn btn-info {{ $question->getResult?($question->getResult->username == Auth::user()->username?'':'d-none'):'d-none' }}" wire:click='startExam({{ $question->id }})' wire:loading.attr='disabled'>
-                    <span wire:target="startExam({{ $question->id }})" wire:loading.class='d-none'>View Result</span>
-                    <span wire:target="startExam({{ $question->id }})" wire:loading>Starting <i class="fa fa-spinner fa-spin"></i></span>
-                  </button>
+                  <a class="btn btn-info {{ $question->getResult?'':'d-none' }}" href="{{ route('show.result.page', ['language'=>app()->getLocale(), 'resultId'=>$question->getResult?$question->getResult->id:'']) }}"  wire:loading.attr='disabled'>
+                    <span>View Result <i class="fa fa-spinner fa-spin" wire:loading></i></span>
+                  </a>
                 </td>
               </tr>
             @endforeach

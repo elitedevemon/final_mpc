@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\adminpanel\create\BlogPost;
 use App\Http\Controllers\adminpanel\create\ExamQuestionController;
+use App\Http\Controllers\adminpanel\EmailMarketingController;
 use App\Http\Controllers\adminpanel\LockScreenController as AdminpanelLockScreenController;
 use App\Http\Controllers\adminpanel\SuperAdminLoginController;
 use App\Http\Controllers\adminpanel\update\ContactInfo;
@@ -256,6 +257,11 @@ Route::prefix('{language}')->group(function () {
         Route::post('drafted/save/{slug}', [BlogPost::class, 'saveDraftPost'])->name('save.draft.post');
         Route::get('exam-question', [ExamQuestionController::class, 'examQuestion'])->name('show.exam.question');
       });
+
+      /**
+       * Email marketing route
+       */
+      Route::get('/email-marketing', [EmailMarketingController::class, 'index'])->name('show.email.marketing.page');
     });
   });
 });

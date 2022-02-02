@@ -17,13 +17,26 @@
 <link rel="stylesheet" href="{{ asset('assets/style.css') }}">
 @livewireStyles()
 </head>
-<body class="app sidebar-mini">
-  @include('backend.partials.switcher-wrapper')
+
+<!--PHP code-->
+@php
+  $settings = App\Models\Settings::where('username', Auth::user()->username)->first();
+@endphp
+<!--end PHP-->
+
+
+<body class="app sidebar-mini {{ $settings->is_night == true?'dark-mode':'' }} {{ $settings->header_color }} {{ $settings->menu_color }}">
+  @livewire('backend.docker-setting')
+  <!---Global-loader-->
+  <div id="global-loader" >
+      <img src="{{ asset('superadmin/assets/images/svgs/loader.svg') }}" alt="loader">
+  </div>
+  <!--- End Global-loader-->
   <!-- PAGE -->
   <div class="page">
     <div class="page-main">
       @livewire('backend.left-sidebar')
-      @include('backend.partials.header')
+      @livewire('backend.header')
 
       {{-- Main content --}}
       @yield('student-content')

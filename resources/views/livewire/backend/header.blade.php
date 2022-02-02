@@ -1,5 +1,6 @@
-<!--app header-->
-<div class="app-header header main-header1">
+<div>
+  <!--app header-->
+  <div class="app-header header main-header1">
     <div class="container-fluid">
         <div class="d-flex">
             <a class="header-brand" href="{{ route('welcome', app()->getLocale()) }}">
@@ -91,7 +92,16 @@
                                         <span class="badge fs-10 bg-secondary br-7 ms-auto">New</span>
                                     </div>
                                     <div class="header-dropdown-list message-menu">
-                                        <a class="dropdown-item border-bottom" href="chat.html">
+                                      <a class="dropdown-item border-bottom" href="javascript:void(0);">
+                                        <div class="d-flex align-items-center">
+                                          <div class="d-flex mt-1 mb-1">
+                                            <div class="ps-3">
+                                              <span class="mb-1 fs-13">Coming soon....</span>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </a>
+                                        {{-- <a class="dropdown-item border-bottom" href="chat.html">
                                             <div class="d-flex align-items-center">
                                                 <div class="">
                                                     <span class="avatar avatar-md brround align-self-center cover-image" data-image-src="{{ asset('superadmin/assets/images/users/1.jpg') }}"></span>
@@ -106,90 +116,10 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </a>
-                                        <a class="dropdown-item border-bottom" href="chat.html">
-                                            <div class="d-flex align-items-center">
-                                                <div class="">
-                                                    <span class="avatar avatar-md brround align-self-center cover-image" data-image-src="{{ asset('superadmin/assets/images/users/2.jpg') }}"></span>
-                                                </div>
-                                                <div class="d-flex mt-1 mb-1">
-                                                    <div class="ps-3">
-                                                        <span class="mb-1 s-13">Gavin Sibson</span>
-                                                        <p class="fs-12 mb-1">Hey! there I'm available</p>
-                                                        <div class="fs-11 text-muted">
-                                                            5 hour ago
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <a class="dropdown-item border-bottom" href="chat.html">
-                                            <div class="d-flex align-items-center">
-                                                <div class="">
-                                                    <span class="avatar avatar-md brround align-self-center cover-image" data-image-src="{{ asset('superadmin/assets/images/users/3.jpg') }}"></span>
-                                                </div>
-                                                <div class="d-flex mt-1 mb-1">
-                                                    <div class="ps-3">
-                                                        <span class="mb-1">Julian Kerr</span>
-                                                        <p class="fs-12 mb-1">Just created a new blog post</p>
-                                                        <div class="fs-11 text-muted">
-                                                            45 mintues ago
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <a class="dropdown-item border-bottom" href="chat.html">
-                                            <div class="d-flex align-items-center">
-                                                <div class="">
-                                                    <span class="avatar avatar-md brround align-self-center cover-image" data-image-src="{{ asset('superadmin/assets/images/users/4.jpg') }}"></span>
-                                                </div>
-                                                <div class="d-flex mt-1 mb-1">
-                                                    <div class="ps-3">
-                                                        <span class=" fs-13 mb-1">Cedric Kelly</span>
-                                                        <p class="fs-12 mb-1">Added new comment on your photo</p>
-                                                        <div class="fs-11 text-muted">
-                                                            2 days ago
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <a class="dropdown-item border-bottom"  href="chat.html">
-                                            <div class="d-flex align-items-center">
-                                                <div class="">
-                                                    <span class="avatar avatar-md brround align-self-center cover-image" data-image-src="{{ asset('superadmin/assets/images/users/6.jpg') }}"></span>
-                                                </div>
-                                                <div class="d-flex mt-1 mb-1">
-                                                    <div class="ps-3">
-                                                        <span class="mb-1 fs-13">Julian Kerr</span>
-                                                        <p class="fs-12 mb-1">Your payment invoice is generated</p>
-                                                        <div class="fs-11 text-muted">
-                                                            3 days ago
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <a class="dropdown-item" href="chat.html">
-                                            <div class="d-flex align-items-center">
-                                                <div class="">
-                                                    <span class="avatar avatar-md brround align-self-center cover-image" data-image-src="{{ asset('superadmin/assets/images/users/7.jpg') }}"></span>
-                                                </div>
-                                                <div class="d-flex mt-1 mb-1">
-                                                    <div class="ps-3">
-                                                        <span class="mb-1 fs-13">Faith Dickens</span>
-                                                        <p class="fs-12 mb-1">Please check your mail....</p>
-                                                        <div class="fs-11 text-muted">
-                                                            4 days ago
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
+                                        </a> --}}
                                     </div>
                                     <div class=" text-center p-2 pt-3 border-top">
-                                        <a href="chat.html" class="fs-13 btn btn-primary btn-md btn-block">See More</a>
+                                        <a href="javascript:void(0);" class="fs-13 btn btn-primary btn-md btn-block">See More</a>
                                     </div>
                                 </div>
                             </div>
@@ -203,7 +133,12 @@
                                         <span class="badge fs-10 bg-secondary br-7 ms-auto">New</span>
                                     </div>
                                     <div class="notify-menu">
-                                        <a href="email-inbox.html" class="dropdown-item border-bottom d-flex ps-4">
+                                      <a href="javascript:void(0);" class="dropdown-item border-bottom d-flex ps-4 mb-2">
+                                          <div>
+                                              <span class="fs-13">Coming soon..</span>
+                                          </div>
+                                      </a>
+                                        {{-- <a href="email-inbox.html" class="dropdown-item border-bottom d-flex ps-4">
                                             <div class="notifyimg  text-primary bg-primary-transparent border-primary"> <i class="fa fa-envelope"></i> </div>
                                             <div>
                                                 <span class="fs-13">Message Sent.</span>
@@ -230,10 +165,10 @@
                                                 <span class="fs-13">Your Admin lanuched</span>
                                                 <div class="small text-muted">1 daya ago</div>
                                             </div>
-                                        </a>
+                                        </a> --}}
                                     </div>
                                     <div class=" text-center p-2">
-                                        <a href="email-inbox.html" class="btn btn-primary btn-md fs-13 btn-block">View All</a>
+                                        <a href="javascript:void(0);" class="btn btn-primary btn-md fs-13 btn-block">View All</a>
                                     </div>
                                 </div>
                             </div>
@@ -266,13 +201,10 @@
                                         <i class="fa fa-lock side-menu__icon" style="font-size: 20px"></i>
                                         <div class="fs-13">Lock Screen</div>
                                     </a>
-                                    <a class="dropdown-item d-flex" href="{{ route('logout', app()->getLocale()) }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <a class="dropdown-item d-flex" href="javascript:void(0);" wire:click='logout'>
                                         <svg class="header-icon me-2" xmlns="" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24"><g><rect fill="none" height="24" width="24"/></g><g><path d="M11,7L9.6,8.4l2.6,2.6H2v2h10.2l-2.6,2.6L11,17l5-5L11,7z M20,19h-8v2h8c1.1,0,2-0.9,2-2V5c0-1.1-0.9-2-2-2h-8v2h8V19z"/></g></svg>
                                         <div class="fs-13">Sign Out</div>
                                     </a>
-                                    <form id="logout-form" action="{{ route('logout', app()->getLocale()) }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -286,5 +218,6 @@
             </div>
         </div>
     </div>
+  </div>
+  <!--/app header-->
 </div>
-<!--/app header-->

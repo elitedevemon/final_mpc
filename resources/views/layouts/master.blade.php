@@ -22,8 +22,8 @@
   <title>@yield('title')</title>
   @include('styles.bootstrap')
   @include('styles.fontawesome')
-  @yield('styles')
   <link rel="stylesheet" href="{{ url('assets/style.css') }}">
+  @yield('styles')
 </head>
 <body>
   

@@ -95,7 +95,7 @@
                   </a>
               </li>
               <li>
-                  <a href="layouts-horizontal.html">
+                  <a href="{{ route('show.email.marketing.page', app()->getLocale()) }}">
                       <i class="fa fa-paper-plane" style="font-size: 17px;"></i>
                       <span data-key="t-horizontal">Email Marketing</span>
                   </a>

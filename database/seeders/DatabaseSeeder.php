@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\frontend\VideosInformation::factory(20)->create();
         $this->call(MarqueeSeeder::class);
         $this->call(ContactSeeder::class);
-        $this->call(UserSeeder::class);
+        //$this->call(UserSeeder::class);
         $this->call(SliderPhotosSeeder::class);
         $this->call(AdminSeeder::class);
     }
