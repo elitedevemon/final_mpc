@@ -26,22 +26,28 @@
             <!-- end page title -->
             <!--Start content here-->
             <div class="row">
-              <div class="col-4">
+              <div class="col-3">
                 <div class="form-check">
                   <input type="radio" {{ $topic == 'gearlaunch'?'checked':'' }} name="marketing_topic" id="gearlaunch" class="form-check-input" wire:click="setTopic('gearlaunch')">
                   <label for="gearlaunch" class="form-check-label">Gearlaunch</label>
                 </div>
               </div>
-              <div class="col-4">
+              <div class="col-3">
                 <div class="form-check">
                   <input type="radio" {{ $topic == 'youtube'?'checked':'' }} name="marketing_topic" id="youtube" class="form-check-input" wire:click="setTopic('youtube')">
                   <label for="youtube" class="form-check-label">YouTube</label>
                 </div>
               </div>
-              <div class="col-4">
+              <div class="col-3">
                 <div class="form-check">
                   <input type="radio" {{ $topic == 'fiverr'?'checked':'' }} name="marketing_topic" id="fiverr" class="form-check-input" wire:click="setTopic('fiverr')">
                   <label for="fiverr" class="form-check-label">Fiverr</label>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-check">
+                  <input type="radio" {{ $topic == 'fiverr'?'checked':'' }} name="marketing_topic" id="fiverr" class="form-check-input" wire:click="setTopic('fiverr')">
+                  <label for="fiverr" class="form-check-label">Info</label>
                 </div>
               </div>
             </div>

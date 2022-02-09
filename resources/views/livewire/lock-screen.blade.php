@@ -21,7 +21,7 @@
                           <span class="fs-20"><strong>{{ Auth::user()->name }}</strong></span>
                       </span>
                       <div class="input-group mb-4">
-                        
+
                           @error('wrong_pass')
                             <div class="error text-danger">{{ $message }}</div>
                           @enderror
