@@ -2,7 +2,9 @@
 
 namespace App\Http\Livewire\Superadmin\EmailMarketing;
 
+use App\Mail\EmailMarketing\Fiverr as MailEmailMarketingFiverr;
 use App\Models\Superadmin\EmailMarketing\Fiverr as EmailMarketingFiverr;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
 class Fiverr extends Component
@@ -31,15 +33,47 @@ class Fiverr extends Component
   }
 
   /**
+   * Add input field for share gig information
+   */
+  public $inputs = [], $i = 0;
+  public $imageLink, $gigLink, $gigTitle, $gigPrice;
+
+  public function addGigInputField($i)
+  {
+    $i = $i+1;
+    $this->i = $i;
+    array_push($this->inputs ,$i);
+  }
+
+  # remove input field
+  public function removeInputField($i)
+  {
+    unset($this->inputs[$i]);
+  }
+
+  /**
    * Send Fiverr email
    */
   # variable
-  public $title, $subject, $message;
+  public $subject, $message;
 
   #function
   public function sendFiverrMail()
   {
-    
+    $fiverrReceiver = EmailMarketingFiverr::all();
+    foreach ($fiverrReceiver as $receiver ) {
+      $subject = $this->subject;
+      $imageLink = $this->imageLink;
+      $gigLink = $this->gigLink;
+      $gigTitle = $this->gigTitle;
+      $gigPrice = $this->gigPrice;
+      $details = [
+        'message' => $this->message,
+        'name' => $receiver->name,
+      ];
+      Mail::mailer('fiverr')->to($receiver->email)->send(new MailEmailMarketingFiverr($details, $subject, $imageLink, $gigLink, $gigTitle, $gigPrice));
+      session()->flash($receiver->name, 'Mail has been sent');
+    }
   }
 
   /**

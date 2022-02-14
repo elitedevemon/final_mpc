@@ -13,10 +13,30 @@
       </div>
     </div>
     <label for="">Send Email:</label>
-    <input type="text" placeholder="Enter title" class="form-control">
-    <input type="text" placeholder="Enter subject" class="form-control mt-2">
-    <textarea cols="30" rows="10" placeholder="Enter your message" class="form-control mt-2"></textarea>
-    <button class="btn btn-primary mt-2">Send</button>
+    <input type="text" placeholder="Enter subject" class="form-control mt-2" wire:model.defer='subject'>
+    <textarea cols="30" rows="10" placeholder="Enter your message" class="form-control mt-2" wire:model.defer='message'></textarea>
+
+    <!--Adding input field-->
+    @foreach ($inputs as $key => $value)
+      <div class="row mt-2">
+        <div class="col-4">
+          <input type="text" class="form-control" placeholder="Enter video title" wire:model.defer='yotubeTitle.{{ $value }}'>
+        </div>
+        <div class="col-4">
+          <input type="text" class="form-control" placeholder="Enter video link" wire:model.defer='yotubeLink.{{ $value }}'>
+        </div>
+        <div class="col-3">
+          <input type="text" class="form-control" placeholder="Enter video embed code" wire:model.defer='youtubeEmbedCode.{{ $value }}'>
+        </div>
+        <div class="col-1">
+          <button class="btn btn-danger" wire:click='removeInputField({{ $key }})' wire:loading.attr='disabled'><span wire:loading.class='d-none' wire:target='removeInputField({{ $key }})'>Remove</span> <i class="fa fa-spinner fa-spin" wire:loading wire:target='removeInputField({{ $key }})'></i></button>
+        </div>
+      </div>
+    @endforeach
+    <!--end adding input field-->
+
+    <button class="btn btn-success mt-2" wire:click='addYoutubeInputField({{ $i }})' wire:loading.attr='disabled'>Add video <i class="fa fa-spinner fa-spin" wire:loading wire:target='addYoutubeInputField'></i></button>
+    <button class="btn btn-primary mt-2" wire:click='sendYoutubeMail' wire:loading.attr='disabled'>Send <i class="fa fa-spinner fa-spin" wire:loading wire:target='sendYoutubeMail'></i></button>
   </div>
 </div>
 
