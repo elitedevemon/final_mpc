@@ -20,7 +20,7 @@ class SuperadminLogin extends Component
   #validate input
   protected $rules= [
     'username' => 'required|min:6',
-    'password' => 'required|min:6|max:10',
+    'password' => 'required|min:6|max:20',
   ];
 
   public function login()
