@@ -32,6 +32,12 @@ class LeftSidebar extends Component
     $this->modal_message = $modal_target;
   }
 
+  public function studentLogout()
+  {
+    Auth::logout();
+    return redirect()->route('login', app()->getLocale());
+  }
+
   /**
    * Render function
    *

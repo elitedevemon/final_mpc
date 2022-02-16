@@ -16,7 +16,6 @@ class Exam extends Component
     'queryId'
   ];
 
-
   /**
    * Listeners function
    */
@@ -25,7 +24,6 @@ class Exam extends Component
   {
     $this->examTopicId = $value;
   }
-
 
   /**
    * Render function

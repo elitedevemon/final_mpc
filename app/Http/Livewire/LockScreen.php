@@ -40,7 +40,11 @@ class LockScreen extends Component
         User::where('id', Auth::user()->id)->update([
           'active_status' => true
         ]);
-        return redirect()->route('home', app()->getLocale());
+        if (Auth::user()->role == 'Teacher') {
+          return redirect()->route('teacher.home', app()->getLocale());
+        }elseif(Auth::user()->role == 'Student') {
+          return redirect()->route('home', app()->getLocale());
+        }
       }else{
         $this->addError('wrong_pass', 'You have entered an wrong password');
       }

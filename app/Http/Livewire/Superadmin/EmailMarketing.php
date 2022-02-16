@@ -3,12 +3,16 @@
 namespace App\Http\Livewire\Superadmin;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class EmailMarketing extends Component
 {
   # query string variables
-  protected $queryString = ['topic'];
-  public $topic;
+  protected $queryString = [
+    'topic',
+    'tabName'=>['except'=>''],
+  ];
+  public $topic, $tabName;
 
   /**
    * Set topic function
@@ -16,6 +20,7 @@ class EmailMarketing extends Component
   public function setTopic($topicName)
   {
     $this->topic = $topicName;
+    $this->tabName = '';
   }
   
   /**

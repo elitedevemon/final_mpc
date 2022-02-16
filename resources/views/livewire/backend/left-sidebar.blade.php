@@ -112,12 +112,9 @@
             <span class="side-menu__label">Lock Screen</span></a>
         </li>
         <li class="slide">
-            <a class="side-menu__item"  href="{{ route('logout', app()->getLocale()) }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            <a class="side-menu__item"  href="javascript:void(0);" wire:click='studentLogout'>
                 <i class="ion ion-log-out side-menu__icon"></i>
             <span class="side-menu__label">Logout</span></a>
-            <form id="logout-form" action="{{ route('logout', app()->getLocale()) }}" method="POST" class="d-none">
-                @csrf
-            </form>
         </li>
     </ul>
   </aside>

@@ -54,23 +54,43 @@
           </div>
           <div class="col-12 col-md-2 text-center text-md-end pt-md-2">
             @auth('web')
-              <div class="pt-2">
-                <div class="dropdown">
-                  <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    My Account
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="{{ route('home', app()->getLocale()) }}">Dashboard</a></li>
-                    <li><a class="dropdown-item" href="#">Notification &nbsp; <span class="badge bg-primary">1</span></a></li>
-                    <li><a class="dropdown-item" href="#">Messages &nbsp; <span class="badge bg-danger">1</span></a></li>
-                    <li><a class="dropdown-item text-primary" href="{{ route('logout', app()->getLocale()) }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-                      <form id="logout-form" action="{{ route('logout', app()->getLocale()) }}" method="POST" class="d-none">
-                        @csrf
-                      </form>
-                    </li>
-                  </ul>
+              @if(Auth::user()->role == 'Student')
+                <div class="pt-2">
+                  <div class="dropdown">
+                    <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                      My Account
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                      <li><a class="dropdown-item" href="{{ route('home', app()->getLocale()) }}">Dashboard</a></li>
+                      <li><a class="dropdown-item" href="#">Notification &nbsp; <span class="badge bg-primary">1</span></a></li>
+                      <li><a class="dropdown-item" href="#">Messages &nbsp; <span class="badge bg-danger">1</span></a></li>
+                      <li><a class="dropdown-item text-primary" href="{{ route('logout', app()->getLocale()) }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                        <form id="logout-form" action="{{ route('logout', app()->getLocale()) }}" method="POST" class="d-none">
+                          @csrf
+                        </form>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-              </div>
+              @else
+                <div class="pt-2">
+                  <div class="dropdown">
+                    <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                      My Account
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                      <li><a class="dropdown-item" href="{{ route('teacher.home', app()->getLocale()) }}">Dashboard</a></li>
+                      <li><a class="dropdown-item" href="#">Notification &nbsp; <span class="badge bg-primary">1</span></a></li>
+                      <li><a class="dropdown-item" href="#">Messages &nbsp; <span class="badge bg-danger">1</span></a></li>
+                      <li><a class="dropdown-item text-primary" href="{{ route('logout', app()->getLocale()) }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                        <form id="logout-form" action="{{ route('logout', app()->getLocale()) }}" method="POST" class="d-none">
+                          @csrf
+                        </form>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              @endif
             @endauth
             @auth('admin')
               <div class="pt-2">

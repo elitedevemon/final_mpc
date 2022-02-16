@@ -45,13 +45,47 @@ return [
             'auth_mode' => null,
         ],
 
-        'marketing' => [
+        'gearlaunch' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'smtp.gmail.com'),
+            'host' => env('GEARLAUNCH_HOST', 'smtp.mailgun.org'),
             'port' => env('MAIL_PORT', 587),
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => env('MAILMARKETING_USERNAME'),
-            'password' => env('MAILMARKETING_PASSWORD'),
+            'username' => env('GEARLAUNCH_USERNAME'),
+            'password' => env('GEARLAUNCH_PASSWORD'),
+            'from' => [
+                'address' => env('GEARLAUNCH_FROM_ADDRESS', 'hello@example.com'),
+                'name' => env('GEARLAUNCH_FROM_NAME', 'Example'),
+            ],
+            'timeout' => null,
+            'auth_mode' => null,
+        ],
+
+        'fiverr' => [
+            'transport' => 'smtp',
+            'host' => env('FIVERR_HOST', 'smtp.mailgun.org'),
+            'port' => env('MAIL_PORT', 587),
+            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+            'username' => env('FIVERR_USERNAME'),
+            'password' => env('FIVERR_PASSWORD'),
+            'from' => [
+                'address' => env('FIVERR_FROM_ADDRESS', 'hello@example.com'),
+                'name' => env('FIVERR_FROM_NAME', 'Example'),
+            ],
+            'timeout' => null,
+            'auth_mode' => null,
+        ],
+
+        'youtube' => [
+            'transport' => 'smtp',
+            'host' => env('YOUTUBE_HOST', 'smtp.mailgun.org'),
+            'port' => env('MAIL_PORT', 587),
+            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+            'username' => env('YOUTUBE_USERNAME'),
+            'password' => env('YOUTUBE_PASSWORD'),
+            'from' => [
+                'address' => env('YOUTUBE_FROM_ADDRESS', 'hello@example.com'),
+                'name' => env('YOUTUBE_FROM_NAME', 'Example'),
+            ],
             'timeout' => null,
             'auth_mode' => null,
         ],
@@ -105,8 +139,11 @@ return [
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
         'name' => env('MAIL_FROM_NAME', 'Example'),
+<<<<<<< HEAD
         // 'address' => env('MAILMARKETING_ADDRESS'),
         // 'name' => env('MAILMARKETING_FROM_NAME'),
+=======
+>>>>>>> origin/main
     ],
 
     /*

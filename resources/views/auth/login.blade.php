@@ -11,7 +11,7 @@
           <div class="signin-image">
               <figure class="d-none d-md-block"><img src="{{ asset('auth-form/images/signin-image.jpg') }}" alt="sing up image"></figure>
               <a href="{{ route('register', app()->getLocale()) }}" class="signup-image-link"><u>Create an account</u></a>
-              <a href="{{ route('contact', app()->getLocale()) }}" class="signup-image-link"><u>Forget Your Password?</u></a>
+              <a href="{{ route('reset.forgotten.password', app()->getLocale()) }}" class="signup-image-link"><u>Forget Your Password?</u></a>
           </div>
 
           <div class="signin-form">

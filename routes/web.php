@@ -23,6 +23,11 @@ use App\Http\Controllers\backend\NotificationController;
 use App\Http\Controllers\backend\ProfileController;
 use App\Http\Controllers\backend\ResultController;
 use App\Http\Controllers\backend\SettingsController;
+use App\Http\Controllers\backend\teacher\CalendarController as TeacherCalendarController;
+use App\Http\Controllers\backend\teacher\FaqsController as TeacherFaqsController;
+use App\Http\Controllers\backend\teacher\ForumController as TeacherForumController;
+use App\Http\Controllers\backend\teacher\HomeController as TeacherHomeController;
+use App\Http\Controllers\backend\teacher\SettingsController as TeacherSettingsController;
 use App\Http\Controllers\LockScreenController;
 use App\Http\Controllers\Socialite\GetInfo\FacebookController;
 use App\Http\Controllers\Socialite\GetInfo\GoogleController;
@@ -63,6 +68,7 @@ Route::prefix('{language}')->group(function () {
   Route::view('community', 'frontend.pages.community')->name('community');
   Route::view('privacy-policy', 'frontend.pages.privacy_policy')->name('privacy.policy');
   Route::view('terms-of-use', 'frontend.pages.terms_of_use')->name('terms.of.use');
+  Route::view('reset-password', 'auth.passwords.reset')->name('reset.forgotten.password');
 
   /**
    * Override routes
@@ -122,7 +128,7 @@ Route::prefix('{language}')->group(function () {
      * 
      * prefix /home
      */
-    Route::prefix('/home')->group(function () {
+    Route::prefix('/home')->middleware('checkStudent')->group(function () {
       Route::get('/', [HomeController::class, 'index'])->name('home');
       Route::get('profile-page', [ProfileController::class, 'index'])->name('show.profile.page');
       Route::get('chatting-page', [ChattingController::class, 'index'])->name('show.chatting.page');
@@ -201,6 +207,43 @@ Route::prefix('{language}')->group(function () {
           Route::get('/{slug}', [ForumController::class, 'viewPost'])->name('view.selected.post');
       });
     });
+
+    /**
+     * Teacher related routes
+     */
+    Route::prefix('teacher')->middleware('checkTeacher')->group(function () {
+        # teacher home
+        Route::get('/home', [TeacherHomeController::class, 'home'])->name('teacher.home');
+        
+        # settings route
+        Route::prefix('settings')->group(function () {
+            Route::get('/', [TeacherSettingsController::class, 'index'])->name('show.teacher.settings.page');
+        });
+
+        # calendar page routes
+        Route::prefix('/calender-page')->group(function () {
+          Route::get('/', [TeacherCalendarController::class, 'index'])->name('show.teacher.calendar.page');
+        });
+
+        # faq pages routes
+        Route::prefix('faqs')->group(function () {
+            Route::get('/', [TeacherFaqsController::class, 'index'])->name('show.teacher.faqs.page');
+            Route::get('/{faq_id}', [TeacherFaqsController::class, 'viewFaq'])->name('view.teacher.selected.faq');
+        });
+
+        # forum pages routes
+        Route::prefix('/blog')->group(function () {
+          Route::get('/', [TeacherForumController::class, 'index'])->name('show.teacher.blog.post');
+          Route::get('/{slug}', [TeacherForumController::class, 'viewPost'])->name('view.teacher.selected.post');
+        });
+    });
+
+    /**
+     * Coming soon page
+     */
+    Route::get('coming-soon', function () {
+      return view('backend.pages.coming_soon');
+    })->name('coming-soon');
   });
   
     /**
