@@ -12,7 +12,7 @@
               x-on:livewire-upload-error="isUploading = false"
               x-on:livewire-upload-progress="progress = $event.detail.progress"
             >
-              <textarea class="form-control br-br-0 br-bl-0" placeholder="Type your question here...." rows="5" wire:model="question"></textarea>
+              <textarea class="form-control br-br-0 br-bl-0" placeholder="Type your question here...." rows="5" wire:model.defer="question"></textarea>
               <div class="profile-share border border-light2 border-top-0">
                 {{-- <a href="javascript:void(0);" class="me-2" title="" data-bs-toggle="tooltip" data-placement="top" data-original-title="Audio"><i class="fe fe-mic fs-20"></i></a>
                 <a href="javascript:void(0);" class="me-2" title="" data-bs-toggle="tooltip" data-placement="top" data-original-title="Video"><i class="fe fe-video fs-20"></i></a> --}}
