@@ -20,10 +20,12 @@
                 <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#taskModal">Add New Task</button>
               </div>
               <a href="javascript:void(0);" wire:click="importantTask('all-task')" class="list-group-item list-group-item-action d-flex align-items-center mb-1">
-                <i class="fe fe-codepen fs-18 me-4 p-2 border-primary brround bg-primary-transparent text-primary"></i> All Tasks <span class="ms-auto badge bg-success">14</span>
+                <i class="fe fe-codepen fs-18 me-4 p-2 border-primary brround bg-primary-transparent text-primary"></i> All Tasks 
+                {{-- <span class="ms-auto badge bg-success">14</span> --}}
               </a>
               <a href="javascript:void(0);" wire:click="importantTask('important-task')" class="list-group-item list-group-item-action d-flex align-items-center mb-1">
-                <i class="fe fe-alert-octagon fs-18 me-4 p-2 border-warning brround bg-warning-transparent text-warning"></i> Important <span class="ms-auto badge bg-danger">3</span>
+                <i class="fe fe-alert-octagon fs-18 me-4 p-2 border-warning brround bg-warning-transparent text-warning"></i> Important 
+                {{-- <span class="ms-auto badge bg-danger">3</span> --}}
               </a>
               <a href="javascript:void(0);" wire:click="importantTask('trash-task')" class="list-group-item list-group-item-action d-flex align-items-center border-bottom-0">
                 <i class="fe fe-trash-2 fs-18 me-4 p-2 border-info brround bg-info-transparent text-info"></i> Trash

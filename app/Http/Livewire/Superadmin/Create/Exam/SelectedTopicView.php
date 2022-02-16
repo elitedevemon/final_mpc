@@ -56,6 +56,7 @@ class SelectedTopicView extends Component
     $question->fourth_answer = $this->lastAnswer;
     $question->correct_answer = $this->correctAnswer;
     $question->save();
+    $this->reset('question', 'correctAnswer', 'firstAnswer', 'secondAnswer', 'thirdAnswer', 'lastAnswer');
     $this->dispatchBrowserEvent('addQuestion');
   }
 

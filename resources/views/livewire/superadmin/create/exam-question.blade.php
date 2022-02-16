@@ -82,7 +82,7 @@
           <label for="date" class="mt-2">Enter exam date:</label>
           <input type="date" name="date" id="" class="form-control" wire:model.defer='examDate'>
           <label for="time" class="mt-2">Enter exam time:</label>
-          <input type="text" name="" id="time" class="form-control" wire:model.defer="examTime">
+          <input type="number" name="" id="time" class="form-control" wire:model.defer="examTime">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

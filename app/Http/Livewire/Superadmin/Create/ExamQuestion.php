@@ -98,6 +98,7 @@ class ExamQuestion extends Component
     $topic->date = $this->examDate;
     $topic->time = $this->examTime;
     $topic->save();
+    $this->reset('topicName', 'examTime', 'examDate');
     $this->dispatchBrowserEvent('addTopics');
   }
 

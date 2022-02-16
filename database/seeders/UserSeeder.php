@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Backend\UserEducationalInfo;
+use App\Models\Settings;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -43,6 +44,9 @@ class UserSeeder extends Seeder
           ];
           User::create($user);
           UserEducationalInfo::create([
+            'username' => $username[$i],
+          ]);
+          Settings::create([
             'username' => $username[$i],
           ]);
         }
