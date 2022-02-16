@@ -9,7 +9,7 @@
     <div class="toast-body">
       To get the latest update, please stay with us and give your feedback..!!!
       <div class="text-end">
-        <a href="{{ url('apk/mpc_method.apk') }}" download="1" class="btn btn-primary">Download</a>
+        <a href="https://drive.google.com/uc?id=1-NGUJ1HkanaiGqNZMPPH63HuTQt-uAEu&export=media" download="1" class="btn btn-primary">Download</a>
       </div>
     </div>
   </div>
