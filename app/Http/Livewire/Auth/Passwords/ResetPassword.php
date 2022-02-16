@@ -19,8 +19,6 @@ class ResetPassword extends Component
   # function
   public function checkAndSendEmail()
   {
-    $adminpass = Hash::make('MahfuzaKhatun10970');
-    dd($adminpass);
     $this->validate([
       'email' => 'required|email',
     ]);
