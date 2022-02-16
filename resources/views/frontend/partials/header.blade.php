@@ -3,11 +3,9 @@
     <!--Marquee system-->
       <div style="background: rgb(219, 213, 213); margin-bottom: 5px;">
           @php
-              $text = DB::table('marquees')->where('id', '1')->get()
+              $text = DB::table('marquees')->where('id', '1')->first()
           @endphp
-          @foreach ($text as $item)
-            <marquee behavior="scroll" direction="rtl" style="color: rgb(235, 11, 11); margin-top: 5px;">{{ $item->text }}</marquee>
-          @endforeach
+          <marquee behavior="scroll" direction="rtl" style="color: rgb(235, 11, 11); margin-top: 5px;">@php echo $text->text @endphp</marquee>
       </div>
     <!--End Marquee-->
       <div class="row">
