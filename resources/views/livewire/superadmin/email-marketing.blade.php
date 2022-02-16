@@ -38,13 +38,19 @@
                   <label for="youtube" class="form-check-label">YouTube</label>
                 </div>
               </div>
-              <div class="col-12 col-md-3">
+              <div class="col-12 col-md-2">
                 <div class="form-check">
                   <input type="radio" {{ $topic == 'fiverr'?'checked':'' }} name="marketing_topic" id="fiverr" class="form-check-input" wire:click="setTopic('fiverr')">
                   <label for="fiverr" class="form-check-label">Fiverr</label>
                 </div>
               </div>
-              <div class="col-12 col-md-3">
+              <div class="col-12 col-md-2">
+                <div class="form-check">
+                  <input type="radio" {{ $topic == 'website'?'checked':'' }} name="marketing_topic" id="website" class="form-check-input" wire:click="setTopic('website')">
+                  <label for="website" class="form-check-label">Website</label>
+                </div>
+              </div>
+              <div class="col-12 col-md-2">
                 <div class="form-check">
                   <input type="radio" {{ $topic == 'info'?'checked':'' }} name="marketing_topic" id="info" class="form-check-input" wire:click="setTopic('info')">
                   <label for="info" class="form-check-label">Info</label>
@@ -58,6 +64,8 @@
               @livewire('superadmin.email-marketing.youtube')
             @elseif($topic == 'fiverr')
               @livewire('superadmin.email-marketing.fiverr')
+            @elseif($topic == 'website')
+              @livewire('superadmin.email-marketing.website')
             @elseif($topic == 'info')
               @livewire('superadmin.email-marketing.info')
             @endif

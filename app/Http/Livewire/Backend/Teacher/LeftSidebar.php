@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Backend;
+namespace App\Http\Livewire\Backend\Teacher;
 
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -32,12 +32,6 @@ class LeftSidebar extends Component
     $this->modal_message = $modal_target;
   }
 
-  public function studentLogout()
-  {
-    Auth::logout();
-    return redirect()->route('login', app()->getLocale());
-  }
-
   /**
    * Render function
    *
@@ -45,6 +39,6 @@ class LeftSidebar extends Component
    */
   public function render()
   {
-    return view('livewire.backend.left-sidebar');
+      return view('livewire.backend.teacher.left-sidebar');
   }
 }

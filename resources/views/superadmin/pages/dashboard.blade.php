@@ -4,8 +4,10 @@
   @include('superadmin.partials.dashboard.partials.dashboard-styles')
 @endsection
 @section('superadmin-content')
-  @include('superadmin.partials.dashboard.dashboard')
+  @livewire('superadmin.dashboard')
 @endsection
 @section('superadmin-scripts')
   @include('superadmin.partials.dashboard.partials.dashboard-scripts')
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  @stack('js')
 @endsection
