@@ -24,6 +24,7 @@ use App\Http\Controllers\backend\ProfileController;
 use App\Http\Controllers\backend\ResultController;
 use App\Http\Controllers\backend\SettingsController;
 use App\Http\Controllers\backend\teacher\CalendarController as TeacherCalendarController;
+use App\Http\Controllers\backend\teacher\CreateBlogPost;
 use App\Http\Controllers\backend\teacher\FaqsController as TeacherFaqsController;
 use App\Http\Controllers\backend\teacher\ForumController as TeacherForumController;
 use App\Http\Controllers\backend\teacher\HomeController as TeacherHomeController;
@@ -154,6 +155,7 @@ Route::prefix('{language}')->group(function () {
       });
       Route::prefix('result')->group(function () {
           Route::get('/', [ResultController::class, 'index'])->name('show.result.page');
+          Route::get('not-published', [ResultController::class, 'notPublished'])->name('show.not-published.page');
       });
       /**
        * Contact routes
@@ -215,6 +217,10 @@ Route::prefix('{language}')->group(function () {
         # teacher home
         Route::get('/home', [TeacherHomeController::class, 'home'])->name('teacher.home');
         
+        # create blog
+        Route::get('blog-post', [CreateBlogPost::class, 'index'])->name('create.blog.post');
+        Route::get('drafted', [CreateBlogPost::class, 'drafted'])->name('show.drafted.post');
+
         # settings route
         Route::prefix('settings')->group(function () {
             Route::get('/', [TeacherSettingsController::class, 'index'])->name('show.teacher.settings.page');
@@ -292,13 +298,9 @@ Route::prefix('{language}')->group(function () {
       /**
        * Create related routes
        */
-      Route::prefix('create')->group(function(){
-        Route::get('blog-post', [BlogPost::class, 'index'])->name('create.blog.post');
-        Route::post('blog-post/save', [BlogPost::class, 'save'])->name('save.blog.post');
-        Route::get('drafted', [BlogPost::class, 'drafted'])->name('show.drafted.post');
-        Route::get('drafted/{slug}', [BlogPost::class, 'draftedView'])->name('show.selected.draft.post');
-        Route::post('drafted/save/{slug}', [BlogPost::class, 'saveDraftPost'])->name('save.draft.post');
+      Route::prefix('create')->group(function(){ 
         Route::get('exam-question', [ExamQuestionController::class, 'examQuestion'])->name('show.exam.question');
+        Route::get('blog-post', [BlogPost::class, 'index'])->name('superadmin.blog.post');
       });
 
       /**

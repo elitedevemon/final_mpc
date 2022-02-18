@@ -1,3 +1,3 @@
 <div>
-    @include('frontend.pages.welcome')
+  @include('frontend.pages.welcome')
 </div>

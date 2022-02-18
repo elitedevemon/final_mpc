@@ -33,7 +33,10 @@
                   </button>
 
                   <!--View result button-->
-                  <a class="btn btn-info {{ $question->getResult?'':'d-none' }}" href="{{ route('show.result.page', ['language'=>app()->getLocale(), 'resultId'=>$question->getResult?$question->getResult->id:'']) }}"  wire:loading.attr='disabled'>
+                  @php
+                    $resultPublished = App\Models\Superadmin\Exam\ExamTopic::where('id', $question->id)->where('publish_status', true)->first();
+                  @endphp
+                  <a class="btn btn-info {{ $question->getResult?'':'d-none' }}" href="{{ route($resultPublished?'show.result.page':'show.not-published.page', ['language'=>app()->getLocale(), 'resultId'=>$question->getResult?$question->getResult->id:'']) }}"  wire:loading.attr='disabled'>
                     <span>View Result <i class="fa fa-spinner fa-spin" wire:loading></i></span>
                   </a>
                 </td>

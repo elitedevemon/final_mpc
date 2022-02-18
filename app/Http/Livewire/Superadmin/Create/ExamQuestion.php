@@ -24,7 +24,7 @@ class ExamQuestion extends Component
    * Edit selected topic
    */
   # variables
-  public $editedName, $editedDate, $editedTime, $editedTopicId;
+  public $editedName, $editedDate, $editedTime, $editedTopicId, $editedExamPublishDate, $editedExamPublishTime;
 
   # function
   public function editTopicShow($topicId)
@@ -34,19 +34,25 @@ class ExamQuestion extends Component
     $this->editedDate = $editableTopic->date;
     $this->editedTime = $editableTopic->time;
     $this->editedTopicId = $editableTopic->id;
+    $this->editedExamPublishDate = date('Y-m-d', strtotime($editableTopic->publish_date));
+    $this->editedExamPublishTime = date('h:i a', strtotime($editableTopic->publish_date));
     $this->dispatchBrowserEvent('editTopics');
   }
+  # function
   public function editedTopicSave($topicId)
   {
     $this->validate([
       'editedName' => 'required',
       'editedDate' => 'required',
       'editedTime' => 'required',
+      'editedExamPublishDate' => 'required',
+      'editedExamPublishTime' => 'required'
     ]);
     $editedTopic = ExamTopic::find($topicId);
     $editedTopic->name = $this->editedName;
     $editedTopic->date = $this->editedDate;
     $editedTopic->time = $this->editedTime;
+    $editedTopic->publish_date = $this->editedExamPublishDate.' '.$this->editedExamPublishTime;
     $editedTopic->update();
     $this->dispatchBrowserEvent('editedTopics');
   }
@@ -70,6 +76,21 @@ class ExamQuestion extends Component
   }
 
   /**
+   * publish the exam result
+   */
+  public function publishResult($topicId)
+  {
+    $topic = ExamTopic::find($topicId);
+    if ($topic->publish_status == true) {
+      $topic->publish_status = false;
+      $topic->update();
+    }else{
+      $topic->publish_status = true;
+      $topic->update();
+    }
+  }
+
+  /**
    * Delete selected topic
    */
   public function deleteSelectedTopic($topicId)
@@ -81,7 +102,7 @@ class ExamQuestion extends Component
    * Save topics
    */
   # variables
-  public $topicName, $examTime, $examDate;
+  public $topicName, $examTime, $examDate, $examPublishDate, $examPublishTime;
 
   # function
   public function save()
@@ -90,15 +111,17 @@ class ExamQuestion extends Component
     $this->validate([
       'topicName' => 'required',
       'examTime' => 'required',
-      'examDate' => 'required'
+      'examDate' => 'required',
+      'examPublishDate' => 'required'
     ]);
 
     $topic = new ExamTopic();
     $topic->name = $this->topicName;
     $topic->date = $this->examDate;
     $topic->time = $this->examTime;
+    $topic->publish_date = $this->examPublishDate.' '.$this->examPublishTime;
     $topic->save();
-    $this->reset('topicName', 'examTime', 'examDate');
+    $this->reset('topicName', 'examTime', 'examDate', 'examPublishDate');
     $this->dispatchBrowserEvent('addTopics');
   }
 

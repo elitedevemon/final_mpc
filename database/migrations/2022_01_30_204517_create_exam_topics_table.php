@@ -17,8 +17,10 @@ class CreateExamTopicsTable extends Migration
             $table->id();
             $table->string('name');
             $table->date('date');
+            $table->dateTime('publish_date')->nullable();
             $table->integer('time');
             $table->boolean('status')->default(false);
+            $table->boolean('publish_status')->default(false); 
             $table->timestamps();
         });
     }

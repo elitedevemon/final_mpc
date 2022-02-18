@@ -28,9 +28,18 @@
 
         <!--Create blog-->
         <li class="slide">
-            <a class="side-menu__item" data-bs-toggle="{{ $toggle_name }}" data-bs-target="{{ $toggle_target }}" wire:click='modalId("create blog")' href="{{ Auth::user()->email_verified_at?route('show.calendar.page', ['language'=>app()->getLocale(), 'tab'=>'all-task']):'javescript:void(0);' }}">
+            <a class="side-menu__item" data-bs-toggle="{{ $toggle_name }}" data-bs-target="{{ $toggle_target }}" wire:click='modalId("create blog")' href="{{ Auth::user()->email_verified_at?route('create.blog.post', app()->getLocale()):'javescript:void(0);' }}">
                 <i class="fa fa-plus-circle side-menu__icon"></i>
             <span class="side-menu__label">Create Blog</span>
+            {{-- <span class="badge bg-info side-badge {{ Auth::user()->email_verified_at?'':'d-none' }}">11</span> --}}
+            <small class="text-danger text-sm {{ Auth::user()->email_verified_at?'d-none':'' }} side-badge">Disabled</small></a>
+        </li>
+
+        <!--Drafted blog-->
+        <li class="slide">
+            <a class="side-menu__item" data-bs-toggle="{{ $toggle_name }}" data-bs-target="{{ $toggle_target }}" wire:click='modalId("drafted blog")' href="{{ Auth::user()->email_verified_at?route('show.drafted.post', app()->getLocale()):'javescript:void(0);' }}">
+                <i class="fa fa-plus-circle side-menu__icon"></i>
+            <span class="side-menu__label">Drafted Blog</span>
             {{-- <span class="badge bg-info side-badge {{ Auth::user()->email_verified_at?'':'d-none' }}">11</span> --}}
             <small class="text-danger text-sm {{ Auth::user()->email_verified_at?'d-none':'' }} side-badge">Disabled</small></a>
         </li>

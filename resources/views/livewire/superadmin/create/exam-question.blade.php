@@ -38,8 +38,10 @@
                   <th>SI</th>
                   <th>Topic Name</th>
                   <th>Time</th>
-                  <th>Date</th>
+                  <th>Exam Date</th>
                   <th>Status</th>
+                  <th>Publish Date</th>
+                  <th>Publish Status</th>
                   <th>Action</th>
                 </thead>
                 <tbody class="text-center">
@@ -50,6 +52,8 @@
                       <td>{{ $topicItem->time }}</td>
                       <td>{{ date('d-m-Y', strtotime($topicItem->date)) }}</td>
                       <td><input type="checkbox" {{ $topicItem->status == true ?'checked':'' }} wire:click="publishTopic('{{ $topicItem->id }}')"></td>
+                      <td>{{ date('d-m-Y h:i a', strtotime($topicItem->publish_date)) }}</td>
+                      <td><input type="checkbox" {{ $topicItem->publish_status == true ?'checked':'' }} wire:click="publishResult('{{ $topicItem->id }}')"></td>
                       <td>
                         {{-- <button class="btn btn-primary">Add</button> --}}
                         <button class="btn btn-info" wire:click="editTopicShow('{{ $topicItem->id }}')" wire:loading.attr='disabled' wire:target="editTopicShow('{{ $topicItem->id }}')">
@@ -83,6 +87,15 @@
           <input type="date" name="date" id="" class="form-control" wire:model.defer='examDate'>
           <label for="time" class="mt-2">Enter exam time:</label>
           <input type="number" name="" id="time" class="form-control" wire:model.defer="examTime">
+          <label for="publish_date" class="mt-2">Enter exam publish date:</label>
+          <div class="row">
+            <div class="col-6">
+              <input type="date" name="publish_date" id="publish_date" class="form-control" wire:model.defer='examPublishDate'>
+            </div>
+            <div class="col-6">
+              <input type="time" name="publish_date" id="publish_date" class="form-control" wire:model.defer='examPublishTime'>
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -112,6 +125,15 @@
           <input type="date" name="date" id="" class="form-control @error('editedDate') is-invalid @enderror" wire:model="editedDate">
           <label for="time" class="mt-2">Enter exam time:</label>
           <input type="text" name="" id="time" class="form-control @error('editedTime') is-invalid @enderror" wire:model="editedTime">
+          <label for="publish_date" class="mt-2">Enter exam publish date:</label>
+          <div class="row">
+            <div class="col-6">
+              <input type="date" name="publish_date" id="publish_date" class="form-control" wire:model.defer='editedExamPublishDate'>
+            </div>
+            <div class="col-6">
+              <input type="time" name="publish_date" id="publish_date" class="form-control" wire:model.defer='editedExamPublishTime'>
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

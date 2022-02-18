@@ -24,4 +24,12 @@ class ResultController extends Controller
   {
     return view('backend.pages.result');
   }
+
+  /**
+   * If result not published yet
+   */
+  public function notPublished()
+  {
+    return view('backend.pages.not-published');
+  }
 }

@@ -1,9 +1,8 @@
 <div>
   <div class="app-content main-content">
     <div class="side-app">
-  
       @if ($resultId)
-        @livewire('backend.exam.view-result', ['resultId'=>$resultId])
+          @livewire('backend.exam.view-result', ['resultId'=>$resultId])
       @elseif(!$allResult->isEmpty())
         <!--Page header-->
         <div class="page-header">
@@ -16,6 +15,9 @@
         <div class="card">
           <div class="card-body">
             <div class="table-responsive-sm">
+              @error('notPublished')
+                <h5 class="text-center text-danger">{{ $message }}</h5>
+              @enderror
               <table class="table table-bordered text-nowrap text-center">
                 <thead>
                   <tr>

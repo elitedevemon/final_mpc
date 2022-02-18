@@ -10,8 +10,6 @@
   <link href="{{ asset('adminpanel/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
   <!-- App Css-->
   <link href="{{ asset('adminpanel/assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
-  <script src="{{ asset('adminpanel/ckeditor/ckeditor.js') }}"></script>
-  {{-- <script src="https://cdn.ckeditor.com/4.17.1/full/ckeditor.js"></script> --}}
   @livewireStyles()
 @endsection
 @section('superadmin-content')
@@ -29,9 +27,6 @@
   <script src="{{ asset('adminpanel/assets/libs/pace-js/pace.min.js') }}"></script>
 
   <script src="{{ asset('adminpanel/assets/js/app.js') }}"></script>
-  <!--Ckeditor text-->
-  <script>
-    CKEDITOR.replace( 'edited_text' );
-  </script>
   @livewireScripts()
+  @stack('js')
 @endsection

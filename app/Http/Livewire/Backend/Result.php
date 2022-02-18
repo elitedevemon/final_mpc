@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Backend;
 
 use App\Models\Backend\Exam\ExamResult;
+use App\Models\Superadmin\Exam\ExamTopic;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -16,7 +17,12 @@ class Result extends Component
    */
   public function viewResult($resultId)
   {
-    $this->resultId = $resultId;
+    $resultPublished = ExamResult::where('id', $resultId)->first();
+    if ($resultPublished->getTopic->publish_status == true) {
+      return $this->resultId = $resultId;
+    }else{
+      return $this->addError('notPublished', "This exam result isn't published yet.");
+    }
   }
 
   /**
