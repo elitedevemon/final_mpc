@@ -2,7 +2,6 @@
 @section('teacher-title', 'Teacher Dashboard')
 @section('teacher-master-styles')
   @include('backend.partials.dashboard.partials.dashboard-styles')
-  @livewireStyles
 @endsection
 @section('teacher-content')
       <!-- ============================================================== -->
@@ -13,5 +12,6 @@
 @endsection
 @section('teacher-master-scripts')
   @include('backend.partials.dashboard.partials.dashboard-scripts')
-  @livewireScripts
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+  @stack('js')
 @endsection

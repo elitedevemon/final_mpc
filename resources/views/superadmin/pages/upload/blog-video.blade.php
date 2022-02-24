@@ -27,5 +27,6 @@
   <script src="{{ asset('adminpanel/assets/libs/pace-js/pace.min.js') }}"></script>
 
   <script src="{{ asset('adminpanel/assets/js/app.js') }}"></script>
+  @stack('js')
   @livewireScripts()
 @endsection

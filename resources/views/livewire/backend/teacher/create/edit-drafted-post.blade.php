@@ -8,8 +8,16 @@
   <!--End Page header-->
 
   <!-- Main content here-->
-  @if (Session::has('succ_message'))
-    <div class="alert alert-success">{{ session()->get('succ_message') }}</div>
+  @if (Session::has('reloadPage'))
+    <div class="d-flex justify-content-center">
+      <div class="alert alert-info alert-dismissable fade show d-flex align-items-center w-50" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+        <div>
+          <strong>{{ session()->get('reloadPage') }}</strong>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">&times;</button>
+      </div>
+    </div>
   @endif
   <form wire:submit.prevent enctype="multipart/form-data">
     <div class="row">
@@ -26,11 +34,6 @@
     </div>
     {{-- <input type="submit" value="Save" name="save" class="btn btn-primary mt-2">
     <input type="submit" value="Draft" name="draft" class="btn btn-primary mt-2"> --}}
-
-    <!-- post button-->
-    <button class="btn btn-success mt-2" wire:loading.attr='disabled' wire:target='photo' wire:click='ckEditor'>Post <i class="fa fa-spinner fa-spin" wire:loading wire:target='ckEditor'></i></button>
-    {{-- Save as draft button --}}
-    <button class="btn btn-primary mt-2" wire:loading.attr='disabled' wire:target='photo' wire:click='saveDraft'>Save as draft <i class="fa fa-spinner fa-spin" wire:loading wire:target='saveDraft'></i></button>
 
 
     <!-- alert svg section-->
@@ -123,6 +126,12 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">&times;</button>
       </div>
     @enderror
+
+    <!-- post button-->
+    <button class="btn btn-success mt-2" wire:loading.attr='disabled' wire:target='photo' wire:click='ckEditor'>Post <i class="fa fa-spinner fa-spin" wire:loading wire:target='ckEditor'></i></button>
+    {{-- Save as draft button --}}
+    <button class="btn btn-primary mt-2" wire:loading.attr='disabled' wire:target='photo' wire:click='saveDraft'>Save as draft <i class="fa fa-spinner fa-spin" wire:loading wire:target='saveDraft'></i></button>
+
   </form>
 </div>
 
@@ -132,6 +141,11 @@
     editor.on('change', function(event){
         console.log(event.editor.getData())
         @this.set('blogText', event.editor.getData());
-    })
+    });
+    window.addEventListener('redirectoToDashboard', event=>{
+      setTimeout(function () {
+        window.location.href = '/en/teacher/home';
+      }, 2000);
+    });
   </script>
 @endpush

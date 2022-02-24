@@ -46,7 +46,7 @@
 
         <!--Upload video-->
         <li class="slide">
-            <a class="side-menu__item" data-bs-toggle="{{ $toggle_name }}" data-bs-target="{{ $toggle_target }}" wire:click='modalId("upload video")' href="{{ Auth::user()->email_verified_at?route('show.calendar.page', ['language'=>app()->getLocale(), 'tab'=>'all-task']):'javescript:void(0);' }}">
+            <a class="side-menu__item" data-bs-toggle="{{ $toggle_name }}" data-bs-target="{{ $toggle_target }}" wire:click='modalId("upload video")' href="{{ Auth::user()->email_verified_at?route('show.create-blog-video.page', app()->getLocale()):'javescript:void(0);' }}">
                 <i class="fa fa-cloud-upload side-menu__icon"></i>
             <span class="side-menu__label">Upload Video</span>
             {{-- <span class="badge bg-info side-badge {{ Auth::user()->email_verified_at?'':'d-none' }}">11</span> --}}

@@ -5,7 +5,7 @@
       <!--Page header-->
       <div class="page-header">
           <div class="page-leftheader">
-              <h4 class="page-title mb-0 text-primary">Create Blog Post</h4>
+              <h4 class="page-title mb-0 text-primary">Edit Blog Post</h4>
           </div>
       </div>
       <!--End Page header-->
@@ -139,7 +139,7 @@
         console.log(event.editor.getData())
         @this.set('blogText', event.editor.getData());
     });
-    window.addEventListener('postSaveSuccess', event=>{
+    window.addEventListener('redirectToDashboard', event=>{
       setTimeout(function () {    
           window.location.href = '/en/teacher/home'; 
       },2000);

@@ -20,10 +20,26 @@ class CreateBlogPost extends Controller
   }
 
   /**
+   * Edit blog post
+   */
+  public function editPost()
+  {
+    return view('backend.pages.teacher.create.edit-blog-post');
+  }
+
+  /**
    * Drafted post view
    */
   public function drafted()
   {
     return view('backend.pages.teacher.create.drafted-blog-post');
+  }
+
+  /**
+   * Show create blog video page
+   */
+  public function blogVideo()
+  {
+    return view('backend.pages.teacher.create.blog-video');
   }
 }

@@ -18,7 +18,6 @@ class CreatePostDraftsTable extends Migration
             $table->string('username');
             $table->string('title');
             $table->string('slug')->unique();
-            $table->string('cover_image')->nullable();
             $table->text('short_desc')->nullable();
             $table->text('text')->nullable();
             $table->timestamps();

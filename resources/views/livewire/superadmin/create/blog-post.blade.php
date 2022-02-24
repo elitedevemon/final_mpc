@@ -40,8 +40,11 @@
                         <td style="width: 25%">{{ Str::words($post->title, 7, '...') }}</td>
                         <td style="width: 45%">{{ Str::words($post->short_desc, 15, '...') }}</td>
                         <td style="width: 25%">
+                          {{-- view button --}}
                           <button class="btn btn-primary">View</button>
-                          <button class="btn btn-success" wire:click="approvePost('{{ $post->id }}')" wire:loading.attr='disabled' wire:target="approvePost('{{ $post->id }}')">Approve <i class="fa fa-spinner fa-spin" wire:loading wire:target="approvePost('{{ $post->id }}')"></i></button>
+                          {{-- approve button --}}
+                          <button class="btn btn-success" wire:click="approvePostModal('{{ $post->id }}')" wire:loading.attr='disabled' wire:target="approvePostModal('{{ $post->id }}')">Approve <i class="fa fa-spinner fa-spin" wire:loading wire:target="approvePostModal('{{ $post->id }}')"></i></button>
+                          {{-- Reject button --}}
                           <button type="button" class="btn btn-danger" wire:click="showRejectModal({{ $post->id }})" wire:loading.attr='disabled' wire:target="showRejectModal({{ $post->id }})">Reject <i class="fa fa-spinner fa-spin" wire:loading wire:target="showRejectModal({{ $post->id }})"></i></button>
                         </td>
                       </tr>
@@ -73,15 +76,34 @@
       </div>
     </div>
   </div>
+
+  {{-- Modal for approve post --}}
+  <div class="modal fade" wire:ignore.self id="approveBlogPost" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="approveBlogPostLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h4 class="text-center fw-bold">Are you sure, want to approve this post?</h4>
+          <p>You can check this post from <code>View</code> button. If this blog isn't obey the rules then you can reject this request from <code>Reject</code> button.</p>
+          <div class="text-center">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Deny</button>
+            <button type="button" class="btn btn-primary" wire:click="approvePost({{ $postId }})" wire:loading.attr='disabled'>Approve <i class="fa fa-spinner fa-spin" wire:loading wire:target='approvePost'></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 @push('js')
   <script>
-    window.addEventListener('showPostRejectModal', event => {
+    window.addEventListener('showRejectBlogPostModal', event => {
         $("#rejectBlogPost").modal('show');                
     });
-    window.addEventListener('closeRejectModal', event => {
-        $('#rejectBlogPost').modal('hide');
+    window.addEventListener('showApproveBlogPostModal', event => {
+        $("#approveBlogPost").modal('show');                
+    });
+    window.addEventListener('hideModal', event => {
+        $('#rejectBlogPost, #approveBlogPost').modal('hide');
     });
   </script>
 @endpush

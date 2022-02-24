@@ -15,8 +15,10 @@ class CreateYtVideosTable extends Migration
     {
         Schema::create('yt_videos', function (Blueprint $table) {
             $table->id();
+            $table->string('username');
             $table->string('title');
             $table->string('embed_code');
+            $table->string('permission')->default('in-process');
             $table->timestamps();
         });
     }

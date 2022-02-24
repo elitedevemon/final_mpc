@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Superadmin\Create;
 
 use App\Models\frontend\Post;
-use App\Models\Superadmin\Blog\BlogRejectMail;
+use App\Models\Superadmin\Blog\RejectionMail;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -14,12 +14,25 @@ class BlogPost extends Component
 
   /**
    * Approve blog post
+   * @param postId
+   * * public variable $postId
+   * * public function approvePostModal
    */
+  public $postId;
+  # show approve modal function
+  public function approvePostModal($postId)
+  {
+    $this->postId = $postId;
+    $this->dispatchBrowserEvent('showApproveBlogPostModal');
+  }
+
+  # approve post function
   public function approvePost($postId)
   {
     $post = Post::find($postId);
     $post->action = 'publish';
     $post->update();
+    $this->dispatchBrowserEvent('hideModal');
   }
 
   /**
@@ -29,7 +42,7 @@ class BlogPost extends Component
   public function showRejectModal($postId)
   {
     $this->postInfo = Post::find($postId);
-    $this->dispatchBrowserEvent('showPostRejectModal');
+    $this->dispatchBrowserEvent('showRejectBlogPostModal');
   }
 
   /**
@@ -47,15 +60,14 @@ class BlogPost extends Component
     $post = Post::find($postId);
     $post->action = 'reject';
     $post->update();
-    $this->sendRejectionMail($post->username, $postId);
-    $this->dispatchBrowserEvent('closeRejectModal');
+    $this->sendRejectionMail($postId);
+    $this->dispatchBrowserEvent('hideModal');
   }
 
   # send mail to teacher
-  public function sendRejectionMail($username, $postId)
+  public function sendRejectionMail($postId)
   {
-    $mail = new BlogRejectMail();
-    $mail->username = $username;
+    $mail = new RejectionMail();
     $mail->post_id = $postId;
     $mail->message = $this->rejectionMail;
     $mail->save();

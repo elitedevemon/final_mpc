@@ -39,12 +39,13 @@ class BlogPost extends Component
   {
     $this->validate([
       'blogText' => 'required',
-      'title' => 'required|unique:posts,title',
+      'title' => 'required|unique:posts,title|max:100',
       'photo' => 'required|image|max:2048',
-      'shortDescription' => 'required'
+      'shortDescription' => 'required|max:300'
     ], [
       'title.unique' => 'Already, this blog has been posted. Please see the Forum page',
-      'photo.image' => "You have to enter an image. Another file type won't be accepted"
+      'photo.image' => "You have to enter an image. Another file type won't be accepted",
+      'shortDescription.max' => "Short description shouldn't more than 300 characters"
     ]);
     $post = new Post();
     $post->username = Auth::user()->username;
@@ -56,6 +57,7 @@ class BlogPost extends Component
     $post->text = $this->blogText;
     $post->save();
     session()->flash('postSaved', 'Post has been saved successfuly. It is in process, will be published in short.');
+    $this->dispatchBrowserEvent('postSaveSuccess');
   }
 
   /**
@@ -69,18 +71,20 @@ class BlogPost extends Component
       return $this->addError('alreadyExist', "Already this blog has been saved in draft. Please check your 'Drafted Blog' page");
     }
     $this->validate([
-      'title' => 'required',
+      'title' => 'required|max:100',
+      'shortDescription' => 'max:300',
+    ], [
+      'shortDescription.max' => "Short description shouldn't be more than 300 characters"
     ]);
     $post = new PostDraft();
     $post->username = Auth::user()->username;
     $post->title = $this->title;
     $post->slug = Str::slug($this->title);
-    $this->saveBlogImage();
-    $post->cover_image = $this->url;
     $post->short_desc = $this->shortDescription;
     $post->text = $this->blogText;
     $post->save();
     session()->flash('postDrafted', 'Post has been drafted successfuly. You can edit and publish it easily');
+    $this->dispatchBrowserEvent('postSaveSuccess');
   }
 
   /**

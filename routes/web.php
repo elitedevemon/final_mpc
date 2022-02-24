@@ -219,7 +219,9 @@ Route::prefix('{language}')->group(function () {
         
         # create blog
         Route::get('blog-post', [CreateBlogPost::class, 'index'])->name('create.blog.post');
+        Route::get('edit/blog-post', [CreateBlogPost::class, 'editPost'])->name('teacher.edit.blog-post');
         Route::get('drafted', [CreateBlogPost::class, 'drafted'])->name('show.drafted.post');
+        Route::get('blog-video', [CreateBlogPost::class, 'blogVideo'])->name('show.create-blog-video.page');
 
         # settings route
         Route::prefix('settings')->group(function () {
