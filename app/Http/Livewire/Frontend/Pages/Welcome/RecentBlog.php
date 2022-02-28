@@ -9,7 +9,7 @@ use Livewire\WithPagination;
 class RecentBlog extends Component
 {
   use WithPagination;
-  
+
   /**
    * Render function
    * @var recentPosts
