@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title', 'Related Videos')
 @section('main-content')
-  @include('frontend.partials.header')
+@livewire('frontend.pages.welcome.header')
   @php
       $video_info = DB::table('yt_videos')->orderBy('id', 'DESC')->paginate('30');
       $category_info = DB::table('categories')->orderBy('id', 'DESC')->paginate(20);
@@ -62,5 +62,5 @@
         </div>
     </div>
   </div>
-  @include('frontend.partials.footer')
+  @livewire('frontend.pages.welcome.footer')
 @endsection

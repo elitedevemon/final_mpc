@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title', 'Latest Post')
 @section('main-content')
-@include('frontend.partials.header')
+@livewire('frontend.pages.welcome.header')
 @php
 $all_posts = DB::table('posts')->orderBy('id', 'DESC')->paginate(10);
 @endphp
@@ -28,5 +28,5 @@ $all_posts = DB::table('posts')->orderBy('id', 'DESC')->paginate(10);
     {{ $all_posts->links() }}
 </div>
 </div>
-@include('frontend.partials.footer')
+@livewire('frontend.pages.welcome.footer')
 @endsection

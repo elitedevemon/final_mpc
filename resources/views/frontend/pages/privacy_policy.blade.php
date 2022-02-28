@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title', 'Privacy Policy')
 @section('main-content')
-  @include('frontend.partials.header')
+@livewire('frontend.pages.welcome.header')
    <!--privacy policy page content-->
    <div style="padding: 23px; font-family: tahoma;">
     <h2 class="text-center" style="font-weight: bolder">Privacy Policy</h2>
@@ -57,5 +57,5 @@
     </div>
   </div>
   <!--privacy policy page content end-->
-@include('frontend.partials.footer')
+@livewire('frontend.pages.welcome.footer')
 @endsection

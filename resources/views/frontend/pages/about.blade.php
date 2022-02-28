@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title', 'About Us')
 @section('main-content')
-@include('frontend.partials.header')
+@livewire('frontend.pages.welcome.header')
 <div class="d-flex justify-content-center">
   <div class="col-11">
       <h2 class="text-center about_section_after_line py-3">Purpose and Objectives of Study</h2>
@@ -106,5 +106,5 @@
       </div>
   </div>
 </div>
-@include('frontend.partials.footer')
+@livewire('frontend.pages.welcome.footer')
 @endsection

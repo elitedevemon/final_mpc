@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title', 'Contact-Us')
 @section('main-content')
-  @include('frontend.partials.header')
+@livewire('frontend.pages.welcome.header')
   <div class="container contact-form-shadow my-2">
     <div class="row">
         @php
@@ -57,5 +57,5 @@
         </div>
     </div>
 </div>
-@include('frontend.partials.footer')
+@livewire('frontend.pages.welcome.footer')
 @endsection

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title', 'Terms of Use')
 @section('main-content')
-  @include('frontend.partials.header')
+@livewire('frontend.pages.welcome.header')
   <!--Terms of use page content-->
   <div style="padding: 23px; font-family: tahoma; font-size: 18px;">
     <h2 class="text-center" style="font-weight: bolder">Terms of Use</h2>
@@ -77,5 +77,5 @@
     <i>Last updated: 18/01/2022</i>
   </div>
   <!-- Terms of use page content end-->
-@include('frontend.partials.footer')
+@livewire('frontend.pages.welcome.footer')
 @endsection

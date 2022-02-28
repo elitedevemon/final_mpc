@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title', 'Our Services')
 @section('main-content')
-@include('frontend.partials.header')
+@livewire('frontend.pages.welcome.header')
 <div class="container py-4">
   <h3 class="text-center text-danger">Our Services:</h3>
   <div class="col-md-12 pt-3">
@@ -81,5 +81,5 @@
       </div>
   </div>
 </div>
-@include('frontend.partials.footer')
+@livewire('frontend.pages.welcome.footer')
 @endsection
