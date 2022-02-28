@@ -1,4 +1,5 @@
-<!--Carousel Area-->
+<div>
+  <!--Carousel Area-->
 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" style="margin-top: 0px; padding-top:0px;">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 2"></button>
@@ -25,3 +26,4 @@
   </button>
 </div>
 <!--End Carousel-->
+</div>

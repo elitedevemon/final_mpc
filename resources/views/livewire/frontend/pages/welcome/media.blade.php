@@ -1,4 +1,5 @@
-@php
+<div>
+  @php
     $media_photos = DB::table('media')->orderBy('id', 'DESC')->paginate(4)
 @endphp
 <div class="container-fluid mt-5">
@@ -9,4 +10,5 @@
       </div>
     @endforeach
   </div>
+</div>
 </div>

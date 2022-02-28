@@ -1,4 +1,5 @@
-<!--Start footer area-->
+<div>
+  <!--Start footer area-->
 <footer>
   <div class="container-fluid bg-dark text-light mt-md-1 overflow-hidden">
       <div class="container py-5">
@@ -87,3 +88,4 @@
       </div>
   </div>
   </footer>
+</div>

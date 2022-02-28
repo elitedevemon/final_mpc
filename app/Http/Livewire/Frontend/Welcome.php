@@ -12,6 +12,7 @@ class Welcome extends Component
    */
   public function render()
   {
-    return view('livewire.frontend.welcome');
+    return view('livewire.frontend.welcome')
+            ->layout('layouts.master');
   }
 }

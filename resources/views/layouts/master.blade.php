@@ -23,7 +23,7 @@
   @include('styles.bootstrap')
   @include('styles.fontawesome')
   <link rel="stylesheet" href="{{ url('assets/style.css') }}">
-  @yield('styles')
+  @livewireStyles()
 </head>
 <body>
   
@@ -34,17 +34,27 @@
   @include('scripts.jquery')
   @include('scripts.bootstrap-bundle')
   @include('scripts.fontawesome')
-  @include('frontend.partials.message') 
+
+  <!--Get any error message-->
+  @if (Session::has('err_message'))
+    <script>
+      swal("Sorry..!", "{!! Session::get('err_message') !!}", "error", {
+          button:"OK",
+      })
+    </script>
+  @endif 
   
+  <!--User Activity checker-->
   @if (Auth::check())
     <script src="{{ asset('assets/js/activitychecker.js') }}"></script> 
   @endif
   
+  <!--Download Website mobile app section-->
   <script>
     $(document).ready(function(){
         $('#liveToast').toast('show');
     })
   </script>
-  @yield('scripts')
+  @livewireScripts()
 </body>
 </html>

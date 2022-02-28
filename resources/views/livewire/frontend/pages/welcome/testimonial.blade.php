@@ -1,4 +1,5 @@
-@php
+<div>
+  @php
     $people_profile_info = DB::table('people_says')->orderBy('id', 'DESC')->get();
 @endphp
 <div class="container">
@@ -32,4 +33,5 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
+</div>
 </div>

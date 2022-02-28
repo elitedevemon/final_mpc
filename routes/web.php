@@ -34,6 +34,7 @@ use App\Http\Controllers\Socialite\GetInfo\FacebookController;
 use App\Http\Controllers\Socialite\GetInfo\GoogleController;
 use App\Http\Controllers\Socialite\GetInfo\LinkedinController;
 use App\Http\Controllers\TestController;
+use App\Http\Livewire\Frontend\Welcome;
 use App\Http\Livewire\LockScreen;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -60,7 +61,7 @@ Route::prefix('{language}')->group(function () {
   /**
    * View related URI
    */
-  Route::view('/', 'livewire.frontend.welcome')->name('welcome');
+  Route::get('/', Welcome::class)->name('welcome');
   Route::view('blog', 'livewire.frontend.blog')->name('blog');
   Route::view('videos', 'livewire.frontend.videos')->name('videos');
   Route::view('about', 'frontend.pages.about')->name('about');
