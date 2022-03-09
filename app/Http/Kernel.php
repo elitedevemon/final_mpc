@@ -70,6 +70,6 @@ class Kernel extends HttpKernel
         'superadminauthenticated' => \App\Http\Middleware\Superadmin\AlreadyAuthenticated::class,
         'sulockscreen' => \App\Http\Middleware\Superadmin\Lockscreen::class,
         'checkTeacher' => \App\Http\Middleware\CheckTeacher::class,
-        'checkStudent' => \App\Http\Middleware\CheckStudent::class,
+        'checkStudent' => \App\Http\Middleware\checkStudent::class,
     ];
 }
