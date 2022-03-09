@@ -36,10 +36,6 @@
         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
             <div class="row pb-2">
                 @foreach ($category_info as $c_info)
-                    @php
-                        $selected_category_info = DB::table('videos_information')->where('category', $c_info->category)->paginate(1);
-                        $selected_category_info2 = DB::table('videos_information')->where('category', $c_info->category)->get();
-                    @endphp
                     <div class="col-12 col-md-3 pt-3">
                         <a href="{{ $c_info->playlist_link }}" target="_blank">
                             <div class="playlist_section">

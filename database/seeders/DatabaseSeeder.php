@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\frontend\PeopleSay::factory(1)->create();
         \App\Models\frontend\Media::factory(7)->create();
         \App\Models\frontend\Categories::factory(8)->create();
-        \App\Models\frontend\VideosInformation::factory(20)->create();
+        //\App\Models\frontend\VideosInformation::factory(20)->create();
         $this->call(MarqueeSeeder::class);
         $this->call(ContactSeeder::class);
         $this->call(UserSeeder::class);

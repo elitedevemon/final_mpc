@@ -13,7 +13,7 @@
           <!--Logo Area-->
             <div class="col-12 col-md-2 text-center text-md-start"><a href="/"><img style="width: 80px" src="{{ url('logo/MPC.png') }}" alt="Murad Private Center"></a></div>
           <!--End Logo-->
-            <div class="col-12 col-md-8 row pt-2 pt-md-2">
+            <div class="col-12 col-md-7 row pt-2 pt-md-2">
               @php
                   $contacts = DB::table('contacts')->where('id', '1')->get()
               @endphp
@@ -53,7 +53,7 @@
                   </div>
                 @endforeach
             </div>
-            <div class="col-12 col-md-2 text-center text-md-end pt-md-2">
+            <div class="col-12 col-md-3 text-center text-md-end pt-md-2">
               @auth('web')
                 @if(Auth::user()->role == 'Student')
                   <div class="pt-2">
@@ -116,7 +116,10 @@
               @endauth
               @guest
                 <div class="pt-2">
-                  <a href="{{ route('login', app()->getLocale()) }}" class="btn btn-primary">Login</a> <a href="{{ route('register', app()->getLocale()) }}" class="btn btn-danger">Register</a>
+                  {{-- <a href="{{ route('login', app()->getLocale()) }}" class="btn btn-primary">Login</a> --}}
+                  {{-- <a href="{{ route('register', app()->getLocale()) }}" class="btn btn-danger">Register</a> --}}
+                  <button class="btn btn-primary" wire:click='loginPage' wire:loading.attr='disabled'>Login <i class="fa fa-spinner fa-spin" wire:loading wire:target='loginPage'></i></button>
+                  <button class="btn btn-success" wire:click='registerPage' wire:loading.attr='disabled'>Register <i class="fa fa-spinner fa-spin" wire:loading wire:target='registerPage'></i></button>
                 </div>
               @endguest
             </div>

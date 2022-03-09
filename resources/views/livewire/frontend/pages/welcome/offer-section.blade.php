@@ -10,7 +10,7 @@
           <div class="row">
             <div class="col-md-4 col-12">
               <div class="offer-icon mx-auto ms-md-0">
-                <i class="fab fa-speaker-deck" style="width: 40px; height: 40px; color: white;"></i>
+                <i class="fab fa-speaker-deck" style="font-size: 40px; color: white;"></i>
               </div>
             </div>
             <div class="col-md-8">
@@ -23,7 +23,7 @@
           <div class="row">
             <div class="col-md-4 col-12">
               <div class="offer-icon mx-auto ms-md-0">
-                <i class="fab fa-autoprefixer" style="width: 40px; height: 40px; color: white;"></i>
+                <i class="fab fa-autoprefixer" style="font-size: 40px; color: white;"></i>
               </div>
             </div>
             <div class="col-md-8">
@@ -38,7 +38,7 @@
           <div class="row">
             <div class="col-md-4 col-12">
               <div class="offer-icon mx-auto ms-md-0">
-                <i class="fas fa-diagnoses" style="width: 40px; height: 40px; color: white;"></i>
+                <i class="fas fa-diagnoses" style="font-size: 40px; color: white;"></i>
               </div>
             </div>
             <div class="col-md-8">
@@ -51,7 +51,7 @@
           <div class="row">
             <div class="col-md-4 col-12">
               <div class="offer-icon mx-auto ms-md-0">
-                <i class="fas fa-sitemap" style="width: 40px; height: 40px; color: white;"></i>
+                <i class="fas fa-sitemap" style="font-size: 40px; color: white;"></i>
               </div>
             </div>
             <div class="col-md-8">

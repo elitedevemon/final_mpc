@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -20,7 +20,7 @@
   <!-- Color Skin css -->
   <link id="theme" href="{{ asset('superadmin/assets/colors/color1.css') }}" rel="stylesheet" type="text/css"/>
 
-  <title>Login|MPC Method</title>
+  <title>Login | MPC Method</title>
 </head>
 <body class="h-100vh error-bg">
   <div class="register-3">
@@ -40,7 +40,9 @@
               <div class="row justify-content-center">
                 <div class="col-lg-6 col-xl-4 col-md-7 col-sm-12 col-xs-12 ">
                   <div class="text-center mb-5 mt-0">
-                    <img src="https://drive.google.com/uc?id=1H7kPBkQsmvA2mXGGeYBEf95UvuHse2Kg&export=media" class="" alt="MPC Method Logo" width="80" height="80">
+                    <a href="{{ route('welcome', app()->getLocale()) }}">
+                      <img src="https://drive.google.com/uc?id=1H7kPBkQsmvA2mXGGeYBEf95UvuHse2Kg&export=media" class="" alt="MPC Method Logo" width="80" height="80">
+                    </a>
                   </div>
                   <div class="card-group mb-0">
                     <div class="card bg-primary text-white br-7 p-2">
@@ -135,4 +137,4 @@
   <!-- Custom js-->
   <script src="{{ asset('superadmin/assets/js/custom.js') }}"></script>
 </body>
-</html>
+</html> --}}

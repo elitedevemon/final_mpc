@@ -9,52 +9,24 @@
   <!--End description meta tag-->
   <meta name="author" content="Mahfuz Ahmed Murad">
   <link rel="shortcut icon" href="{{ asset('logo/MPC.png') }}">
-  <!--Start meta keywords section-->
-  <meta name="keywords" content="<?php
-      $keywords = DB::table('tags')->get();
-      foreach ($keywords as $key ) {
-          $value = $key->tags;
-          echo $value.", ";
-      }
-  ?>">
-
-  <!--End meta keywords section-->
-  <title>@yield('title')</title>
-  @include('styles.bootstrap')
-  @include('styles.fontawesome')
-  <link rel="stylesheet" href="{{ url('assets/style.css') }}">
+  <title>{{ $title }}</title>
+  {{ $styles }}
+  @stack('css')
   @livewireStyles()
 </head>
 <body>
-  
-  @yield('main-content')
-  
-  @include('layouts.partials.session-timeout-message')
-  
-  @include('scripts.jquery')
-  @include('scripts.bootstrap-bundle')
-  @include('scripts.fontawesome')
 
-  <!--Get any error message-->
-  @if (Session::has('err_message'))
-    <script>
-      swal("Sorry..!", "{!! Session::get('err_message') !!}", "error", {
-          button:"OK",
-      })
-    </script>
-  @endif 
-  
-  <!--User Activity checker-->
-  @if (Auth::check())
-    <script src="{{ asset('assets/js/activitychecker.js') }}"></script> 
-  @endif
-  
-  <!--Download Website mobile app section-->
-  <script>
-    $(document).ready(function(){
-        $('#liveToast').toast('show');
-    })
-  </script>
+  <!-- GLOBAL-LOADER -->
+  <div id="global-loader">
+    <img src="{{ asset('superadmin/assets/images/svgs/loader.svg') }}" alt="loader">
+  </div>
+  <!-- End GLOBAL-LOADER -->
+
+  {{ $slot }}
+
+  {{ $sessionTimeOut }}
+  {{ $scripts }}
+  @stack('js')
   @livewireScripts()
 </body>
 </html>

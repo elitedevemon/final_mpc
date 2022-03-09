@@ -34,8 +34,11 @@ use App\Http\Controllers\Socialite\GetInfo\FacebookController;
 use App\Http\Controllers\Socialite\GetInfo\GoogleController;
 use App\Http\Controllers\Socialite\GetInfo\LinkedinController;
 use App\Http\Controllers\TestController;
+use App\Http\Livewire\Auth\Login;
+use App\Http\Livewire\Backend\Auth\Register;
 use App\Http\Livewire\Frontend\Welcome;
 use App\Http\Livewire\LockScreen;
+use App\Http\Livewire\Test;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
@@ -71,6 +74,7 @@ Route::prefix('{language}')->group(function () {
   Route::view('privacy-policy', 'frontend.pages.privacy_policy')->name('privacy.policy');
   Route::view('terms-of-use', 'frontend.pages.terms_of_use')->name('terms.of.use');
   Route::view('reset-password', 'auth.passwords.reset')->name('reset.forgotten.password');
+  Route::get('test-input', Test::class);
 
   /**
    * Override routes
@@ -111,6 +115,9 @@ Route::prefix('{language}')->group(function () {
   */
   
   Auth::routes();
+
+  Route::get('login', Login::class)->name('login')->middleware('guest');
+  Route::get('register', Register::class)->name('register')->middleware('guest');
 
   /**
    * Lock Screen routes for user
