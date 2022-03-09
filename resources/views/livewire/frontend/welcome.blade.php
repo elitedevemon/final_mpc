@@ -55,3 +55,10 @@
   @livewire('frontend.pages.welcome.media')
   @livewire('frontend.pages.welcome.footer')
 </div>
+@push('js')
+  <script>
+    $(document).ready(function(){
+      $('#liveToast').toast('show');
+    });
+  </script>
+@endpush
