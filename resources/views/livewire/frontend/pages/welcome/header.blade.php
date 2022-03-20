@@ -145,9 +145,9 @@
                         {{-- <li class="nav-item">
                           <a class="nav-link" href="{{ route('blog', app()->getLocale()) }}">Blog</a>
                         </li> --}}
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link {{ Route::is('videos')?'active':'' }}" href="{{ route('videos', app()->getLocale()) }}">Videos</a>
-                          </li>
+                        </li> --}}
                         <li class="nav-item">
                           <a class="nav-link {{ Route::is('contact')?'active':'' }}" href="{{ route('contact', app()->getLocale()) }}">Contact</a>
                         </li>
